@@ -1,0 +1,387 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+@import "~bootstrap/dist/css/bootstrap.css";
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+@import './three-dots.css';
+
+@import '~ngx-toastr/toastr';
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$aureal-rss-frontend-primary: mat-palette($mat-indigo);
+$aureal-rss-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$aureal-rss-frontend-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$aureal-rss-frontend-theme: mat-light-theme($aureal-rss-frontend-primary, $aureal-rss-frontend-accent, $aureal-rss-frontend-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($aureal-rss-frontend-theme);
+$custom-typography: mat-typography-config(
+  $font-family: "'NunitoSans', sans-serif"
+);
+@include mat-core($custom-typography);
+
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: "NunitoSans";
+    src: url("src/assets/fonts/NunitoSans-ExtraLight.ttf");
+    // src: url('src/assets/fonts/Gotham-Thin.woff') format('woff');
+    font-weight: 100;
+  }
+  @font-face {
+    font-family: "NunitoSans";
+    src: url("src/assets/fonts/NunitoSans-Light.ttf");
+    // src: url('src/assets/fonts/Gotham-Light.woff') format('woff');
+    font-weight: 300;
+  }
+  @font-face {
+    font-family: "NunitoSans";
+    src: url("src/assets/fonts/NunitoSans-Regular.ttf");
+    // src: url('src/assets/fonts/Gotham-Book.woff') format('woff');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: "NunitoSans";
+    src: url("src/assets/fonts/NunitoSans-Bold.ttf");
+    // src: url('src/assets/fonts/Gotham-Medium.woff') format('woff');
+    font-weight: 500;
+  }
+  
+  @font-face {
+    font-family: "NunitoSans";
+    src: url("src/assets/fonts/NunitoSans-Bold.ttf");
+    // src: url('src/assets/fonts/Gotham-Ultra.woff') format('woff');
+    font-weight: bold;
+  }
+  
+$font-family-base:"NunitoSans",
+sans-serif;
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~ngx-sharebuttons/themes/modern/modern-light-theme';
+// * {
+//     box-sizing: border-box;
+//     margin: 0;
+//     padding: 0;
+//     font-family: 'lato', 'arial', sans-serif;
+// }
+// $font-family-base:"Avenir", "Helvetica Neue",sans-serif;
+html, body { height: 100%;
+    //  font-size: 14px;
+     }
+body { margin: 0; font-family: "NunitoSans", sans-serif; color: var(--accent);}
+
+:root {
+    --primary: #3f67f6 !important;
+    --tertiary: #485473 !important;
+    --accent: #3a3a3a !important;
+    --accenttwo: #8d8d8d !important;
+}
+h1 {
+    font-size: 28px !important;
+    width: 100%;
+    /* color: #c2a63f; */
+    line-height: 1.22;
+    font-weight: 500;
+}
+h2 {
+    font-size: 22px !important;
+    width: 100%;
+    /* color: #c2a63f; */
+    line-height: 1.22;
+    font-weight: 400 !important;
+}
+h3 {
+    font-size: 18px !important;
+    font-weight: 300;
+}
+h4 {
+    font-size: 16px !important;
+    font-weight: 500;
+}
+h5,
+h6 {
+    font-size: 16px !important;
+    font-weight: 500;
+}
+p{
+    font-size: 16px !important;
+}
+
+.sp-section {
+    // padding: 100px 0;
+    // background: #171b27;
+    position: relative;
+    overflow-x: hidden;
+    @media (max-width: 767px) {
+        padding: 20px 0;
+    }
+}
+
+// .sp-section.dark3 {
+//     background: #171b27;  /* fallback for old browsers */
+//     background-image: linear-gradient(to top, #3f67f6, #2855bf, #1f428a, #1c2e56, #171b27);
+//     // background: -webkit-linear-gradient(to top, #2C5364, #203A43, #171b27);  /* Chrome 10-25, Safari 5.1-6 */
+//     // background: linear-gradient(to top, #2C5364, #203A43, #171b27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+//     // background-image: linear-gradient(74deg, #171b27 -68%, #060606 97%);
+// }
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 20px !important;
+        width: 100%;
+        /* color: #c2a63f; */
+        line-height: 1.22;
+        font-weight: 500;
+    }
+    h2 {
+        font-size: 18px !important;
+        line-height: 1.22;
+        font-weight: 400 !important;
+    }
+    h3 {
+        font-size: 18px !important;
+        font-weight: 300;
+    }
+    h4 {
+        font-size: 16px !important;
+        font-weight: 500;
+    }
+    h5,
+    h6 {
+        font-size: 14px !important;
+        font-weight: 500;
+    }
+    p{
+        font-size: 14px !important;
+    }
+}
+
+.container{
+    padding-top: 50px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-dialog-container {
+    background: #f3f3f3 !important;
+    @media (max-width: 576px) {
+        padding: 10px !important;
+    }
+}
+
+
+.mat-toolbar.mat-primary {
+    background: white;
+    color: var(--accent);
+}
+
+.the-player{
+    position: fixed;
+    width: 100%; 
+    height: 100px; 
+    bottom: 0;
+    background: rgba(17,17,17,0.5);
+    backdrop-filter: blur(12px);
+    color: white;
+    &.embedded{
+      position: static;
+      display: block;
+    }
+    .mat-toolbar.mat-primary {
+        background: inherit;
+        color: white;
+    }
+    .mat-slider-horizontal .mat-slider-wrapper {
+      background: white;
+    }
+}
+.mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label{
+    background: var(--primary);
+}
+
+.iti{
+    width: 100%;
+}
+
+.iti--allow-dropdown input, .iti--allow-dropdown input[type=text], .iti--allow-dropdown input[type=tel], .iti--separate-dial-code input, .iti--separate-dial-code input[type=text], .iti--separate-dial-code input[type=tel]{
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    background: inherit;
+    width: 100%;
+    &:focus{
+        outline: none;
+        border-bottom: 2px solid var(--primary);
+    }
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    height: 40px !important;
+    font-size: 14px !important;
+}
+
+@media (max-width: 599px){
+    .mat-toolbar-row, .mat-toolbar-single-row {
+        height: 20px !important;
+    }
+}
+
+.dropdown-menu-right {
+    right: 0 !important;
+    left: auto !important; 
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    // background-color: var(--primary);
+    color: white;
+    background-image: linear-gradient(to right, #52BFF9, #5F51F6);
+}
+
+.mat-flat-button.mat-primary[disabled], .mat-flat-button.mat-accent[disabled], .mat-flat-button.mat-warn[disabled], .mat-flat-button[disabled][disabled], .mat-raised-button.mat-primary[disabled], .mat-raised-button.mat-accent[disabled], .mat-raised-button.mat-warn[disabled], .mat-raised-button[disabled][disabled], .mat-fab.mat-primary[disabled], .mat-fab.mat-accent[disabled], .mat-fab.mat-warn[disabled], .mat-fab[disabled][disabled], .mat-mini-fab.mat-primary[disabled], .mat-mini-fab.mat-accent[disabled], .mat-mini-fab.mat-warn[disabled], .mat-mini-fab[disabled][disabled]{
+  background-image: none;
+}
+
+    /* loader */
+    .timeline-item {
+        background: #fff;
+        border-bottom: 1px solid var(--light);
+        border-radius: 3px;
+        padding: 12px;
+        margin-bottom: 25px;
+      }
+      @keyframes placeHolderShimmer {
+        0% {
+          background-position: -468px 0;
+        }
+        100% {
+          background-position: 468px 0;
+        }
+      }
+      .animated-background {
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f7f8;
+        background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+        background-size: 100% 80px;
+        height: 100px;
+        position: relative;
+      }
+    
+      .vertical-bottom {
+        width: 20px;
+        background: #fff;
+        height: 100px;
+        position: absolute;
+        bottom: 0;
+        left: 100px;
+        margin: auto;
+      }
+      .horizontal-bottom {
+        height: 20px;
+        background: #fff;
+        width: calc(100% - 100px);
+        position: absolute;
+        top: 40px;
+        right: 0;
+        margin: auto;
+      }
+
+/* Add application styles & imports to this file! */
+.replies {
+    border-top: 1px solid #c3c3c3;
+    padding: 5px;
+    border-radius: 2px;
+    display: block;
+      margin-left: 15px;
+  }
+  
+  .main{
+    display: flex;
+    
+  }
+  
+  .replies .left button:nth-child(1) {
+    transform: rotate(90deg)
+  }
+  
+  .replies .left button:last-child {
+    transform: rotate(90deg)
+  }
+  
+  .replies .left {
+    text-align: center;
+    margin: 2px;
+    padding: 1px;
+  }
+  .right {
+    padding: 2px;
+    width: 100%;
+  }
+  .detail {
+    padding: 2px
+  }
+  .user {
+    color: #6391fb;
+  }
+  .date {
+    font-size: 12px;
+  }
+  
+  .user+.date {
+    margin-left: 5px;
+    opacity: 0.6;
+  }
+  
+  button:focus {
+    outline: none !important;
+  }
+
+  .w100{
+    width: 100%;
+  }
+
+  .accenttwo{
+    color: var(--accenttwo);
+  }
+  .accent{
+    color: var(--accent);
+  }
+
+  .relative{
+    position: relative;
+  }
+
+  .pointer{
+    cursor: pointer;
+  }
+
+  .mat-chip-list-wrapper input.mat-input-element, .mat-chip-list-wrapper .mat-standard-chip{
+    min-width: fit-content !important;
+  }
+
+  .mat-chip-list-wrapper{
+    flex-wrap: inherit !important;
+    max-height: 3em !important;
+    overflow-x: auto !important;
+    overflow: hidden;
+  }

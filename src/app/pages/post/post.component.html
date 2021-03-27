@@ -1,0 +1,70 @@
+<div class="container">
+  <div *ngIf="showSubmitForm">
+    <div class="part">
+      <h2 class="the-text">Submit your Podcast</h2>
+      <div class="form-part">
+        <form [formGroup]="linkForm" (ngSubmit)="onSubmitLink(linkForm.value)" class="form" *ngIf="!isOtpFormShown">
+          <mat-form-field class="form-element">
+            <input matInput placeholder="RSS feed of your Podcast" formControlName="link">
+            <mat-error *ngIf="!linkForm.controls['link'].valid && linkForm.controls['link'].touched">
+              {{ getErrorLink(linkForm) }}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-element">
+            <button mat-raised-button color="primary" type="submit" class="button w100"
+              [disabled]="!linkForm.valid || isbuttonLoaderOn">Submit RSS Feed link <i class="fas fa-spinner fa-spin"
+                *ngIf="isbuttonLoaderOn" aria-hidden="true"></i></button>
+          </div>
+        </form>
+        <form [formGroup]="otpForm" (ngSubmit)="onSubmitOtp(otpForm.value)" class="form" *ngIf="isOtpFormShown">
+
+          <mat-form-field class="form-element">
+            <input matInput placeholder="OTP" formControlName="otp">
+            <mat-error *ngIf="!otpForm.controls['otp'].valid && otpForm.controls['otp'].touched">
+              {{ getErrorOtp(otpForm) }}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-element">
+            <button mat-raised-button color="primary" type="submit" class="button"
+              [disabled]="!otpForm.valid || isbuttonLoaderOn">Submit Otp <i class="fas fa-spinner fa-spin"
+                *ngIf="isbuttonLoaderOn" aria-hidden="true"></i></button>
+          </div>
+          <div class="form-element">
+            <h6 (click)="redirectToProfile()" class="no-account">Already added your Podcast. Check it here.</h6>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!showSubmitForm">
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="the-text">Your Podcasts</h2>
+      <div (click)="showSubmitForm = true">
+        <button mat-raised-button color="primary" type="submit" class="button">Submit New RSS Feed </button>
+      </div>
+    </div>
+    <div *ngFor="let podcast of podcasts; let index = index;" class="the-podcasts">
+      <h4>{{podcast.name}}</h4>
+      <table mat-table [dataSource]="dataSources[index]" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="text-truncate">Episode Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef> Duration </th>
+          <td mat-cell *matCellDef="let element"> {{formatDuration(element.duration)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.hive_status | titlecase}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+  </div>
+
+</div>

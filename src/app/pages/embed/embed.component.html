@@ -1,0 +1,28 @@
+<div class="container">
+    <h1 class="the-text">Badges & Embeds</h1>
+
+    <div *ngIf="!progress">
+        <h3 class="accenttwo">Add a custom badge or embed to your website for
+            <span class="accent">{{episodeData.name}}</span></h3>
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <h3>Badges</h3>
+
+            </div>
+            <div class="col-sm-12 col-md-8">
+                <div class="badge-section">
+                    <div class="badge-preview">
+                        <div [innerHTML]="getBadgeHtml(true)">
+
+                        </div>
+                    </div>
+                    <div class="badge-copy">
+                        <div class="truncate-overflow accenttwo" id="myInput">{{getBadgeHtml(false)}}</div>
+                        <button mat-raised-button color="primary" [copy-clipboard]="getBadgeHtml(false)">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

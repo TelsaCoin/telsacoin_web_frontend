@@ -1,0 +1,28 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over" class="sidenav-styles" *ngIf="!isEmbedPlayer">
+        <div class="logo">
+            <a (click)="navigateHome()">
+                <img src="./assets/aureal_logo.png">
+            </a>
+            <i class="fas fa-times" aria-hidden="true" (click)="closeAllSidenav()"></i>
+        </div>
+        <div class="each-tab">
+            <a (click)="navigateHome()">
+                Home
+            </a>
+            <a href="https://medium.com/aureal">
+                Blog
+            </a>
+        </div>
+        <div class="each-tab">
+
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header [sidenav]="usuarioMenu" *ngIf="!isEmbedPlayer"></app-header>
+        <router-outlet></router-outlet>
+        <app-player class="the-player" *ngIf="playingEpisode && !isEmbedPlayer" [toPlayData]="playingEpisode">
+        </app-player>
+        <app-footer *ngIf="!isEmbedPlayer"></app-footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

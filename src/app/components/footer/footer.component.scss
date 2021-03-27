@@ -1,0 +1,47 @@
+.logo {
+  height: 70px;
+  // margin: 65px;
+  padding: 20px 0;
+  @media (max-width: 767px) {
+    height: 50px;
+    margin: 15px;
+  }
+  a {
+    height: inherit;
+    img {
+      // width: %;
+      height: 100%;
+    }
+  }
+}
+
+.social-logos {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 30px;
+}
+
+.logo-container {
+  text-align: right;
+  @media (max-width: 767px) {
+    text-align: left;
+  }
+}
+
+.container {
+  padding: 20px 0;
+  margin-top: 200px;
+  @media (max-width: 767px) {
+    margin-top: 50px;
+  }
+}

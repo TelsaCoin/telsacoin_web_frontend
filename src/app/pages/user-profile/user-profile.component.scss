@@ -1,0 +1,136 @@
+.userprofile-section {
+  width: 100%;
+  background: white;
+  border: 1px solid var(--light);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: initial;
+  padding: 20px;
+  margin-bottom: 50px;
+  .user-image {
+    position: relative;
+    width: 100px;
+    .user-image-avatar {
+      font: 300 44px/66px Roboto, roboto, "Helvetica Neue", sans-serif;
+      color: white;
+      text-transform: uppercase;
+      background-image: linear-gradient(to right, #52bff9, #5f51f6);
+      // background: linear-gradient(#694ed6, #c137a2, #e40046);
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      margin: 4px;
+      -o-object-fit: cover;
+      object-fit: cover;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-box-align: center;
+      align-items: center;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+    }
+    img {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+    }
+    .edit-icon {
+      cursor: pointer;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 27px;
+      height: 27px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 18px;
+      padding: 3px;
+      .mat-icon {
+        height: 20px;
+        width: 20px;
+        font-size: 20px;
+      }
+    }
+  }
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 100px);
+  }
+  .the-form {
+    // margin-left: 10px;
+    width: calc(100% - 100px);
+  }
+}
+
+.the-episodes {
+  position: relative;
+  display: flex;
+  background: white;
+  &:hover {
+    background: #f9f9f9;
+  }
+  .status {
+    // position: absolute;
+    // top: 10px;
+    // right: 10px;
+    padding: 5px;
+    color: var(--accenttwo);
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 4px;
+    border-style: dotted;
+  }
+}
+
+.edit-all-icon {
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-element {
+  padding: 5px 0px 0px 2px;
+  width: 100%;
+  .button {
+    width: 100%;
+  }
+}
+
+.w100 {
+  width: 100%;
+}
+
+.community-card {
+  padding: 20px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--light);
+  &:hover {
+    background: #f9f9f9;
+    cursor: pointer;
+  }
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    margin-right: 15px;
+  }
+  .name {
+    font-size: 14px !important;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  .author {
+    font-size: 14px !important;
+    margin-bottom: 5px;
+  }
+}

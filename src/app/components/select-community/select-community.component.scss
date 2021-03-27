@@ -1,0 +1,14 @@
+.selected-pills {
+  background: white;
+  border-radius: 20px;
+  padding: 0px 0 0px 20px;
+  margin-right: 20px;
+}
+
+.no-account {
+  margin-top: 20px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}

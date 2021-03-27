@@ -1,0 +1,22 @@
+<h2 class="the-text">Create Community</h2>
+<form [formGroup]="createCommunityForm" (ngSubmit)="onSubmitLink(createCommunityForm.value)" class="form">
+  <mat-form-field class="form-element w100">
+    <input matInput placeholder="Community Name" formControlName="community_name">
+    <mat-error
+      *ngIf="!createCommunityForm.controls['community_name'].valid && createCommunityForm.controls['community_name'].touched">
+      {{ getErrorCommunityName(createCommunityForm) }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-element w100">
+    <textarea matInput placeholder="Community Description" formControlName="description"></textarea>
+    <mat-error
+      *ngIf="!createCommunityForm.controls['description'].valid && createCommunityForm.controls['description'].touched">
+      {{ getErrorCommunityDescription(createCommunityForm) }}
+    </mat-error>
+  </mat-form-field>
+  <div class="form-element">
+    <button mat-raised-button color="primary" type="submit" class="button w100"
+      [disabled]="!createCommunityForm.valid || isbuttonLoaderOn">Create <i class="fas fa-spinner fa-spin"
+        *ngIf="isbuttonLoaderOn" aria-hidden="true"></i></button>
+  </div>
+</form>

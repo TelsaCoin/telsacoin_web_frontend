@@ -1,0 +1,54 @@
+.media-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  .time-slider {
+    width: 100% !important;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .media-action-bar {
+    width: 100%;
+    padding: 2rem 1rem;
+    justify-content: center;
+    @media (max-width: 576px) {
+      padding: 1.5rem;
+      justify-content: center !important;
+    }
+    .mat-icon {
+      height: 30px !important;
+      width: 30px !important;
+      font-size: 30px !important;
+    }
+  }
+}
+
+.upcoming-card {
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  // border-bottom: 1px solid var(--light);
+  .desc {
+    margin-left: 20px;
+  }
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+  }
+  .name {
+    font-size: 13px !important;
+    font-weight: 500;
+    line-height: 1em;
+    width: 250px;
+    margin-bottom: 5px;
+  }
+  .author {
+    font-size: 13px !important;
+    line-height: 1em;
+    font-weight: 400;
+    // color: var(--accenttwo);[2:13 PM, 1/19/2021] Shubham: #52BFF9 #5F51F6
+    width: 250px;
+  }
+}

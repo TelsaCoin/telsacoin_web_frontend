@@ -1,0 +1,30 @@
+.truncate-overflow {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+.badge-copy {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid var(--light);
+  margin-top: 20px;
+  padding: 20px;
+  .button {
+    height: 100% !important;
+  }
+}
+
+.badge-preview {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  padding: 20px;
+  border: 1px solid var(--light);
+}

@@ -1,0 +1,23 @@
+<div class="replies">
+	<div class="main">
+		<div class="left">
+			<div>{{comment.votes}}</div>
+		</div>
+		<div class="right">
+			<div class="detail">
+				<span class="user">{{comment.author}}</span>
+				<span class="date">{{comment.createdAt | dateAgo }}</span>
+			</div>
+			<div class="comment">
+				<p style="margin-bottom: 5px;">{{comment.text}}</p>
+			</div>
+			<a (click)="replyClick()" class="the-but-reply">reply</a>
+			<i class="fa fa-chevron-circle-up" aria-hidden="true" (click)="upvoteComment(comment.permlink, comment.id)"
+				*ngIf="!isUpvotingComment"></i>
+			<i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="isUpvotingComment"></i>
+			<app-comment-box (add)="onAdd($event, comment.id)" *ngIf="isEditing" [isLoading]="isAddingComment">
+			</app-comment-box>
+		</div>
+	</div>
+	<app-comment *ngFor="let c of comment.comments" [comment]="c"></app-comment>
+</div>
