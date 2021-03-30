@@ -91,6 +91,12 @@ export class PodcastCardComponent implements OnInit {
     });
   }
 
+  tipAuthor(episodeData){
+    if(episodeData.author_hiveusername){
+      window.open('https://buymeberri.es/@'+episodeData.author_hiveusername, "_blank")
+      // window.location(episodeData.author_hiveusername);
+    }
+  }
   openHiveAuthDialog(autoCheck: Boolean): void {
     this.dialog.open(HiveAuthComponent, {
       width: '400px',

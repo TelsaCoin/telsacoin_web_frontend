@@ -27,10 +27,13 @@
                 </div>
                 <div class="views">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <p>{{episodeData.createdAt | date: 'dd MMM yyyy, hh:mm a'}}</p>
+                    <p>{{episodeData.published_at | date: 'dd MMM yyyy, hh:mm a'}}</p>
                 </div>
                 <div class="views" (click)="socialShare('episode', episodeData)">
                     <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </div>
+                <div class="views" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">
+                    <i class="fa fa-gift" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
