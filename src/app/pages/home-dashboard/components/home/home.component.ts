@@ -22,8 +22,10 @@ export class HomeComponent implements OnInit {
   scrollUpDistance = 2;
   //paginate
   page = 0;
+  pageHive = 0;
   pageSize = 10;
   loadingMoreEpisodes = false;
+  loadingMoreHiveEpisodes = false;
   loadingUpcomingPodcasts = true;
   categories = [];
   selectedCategory = null;
@@ -121,6 +123,26 @@ export class HomeComponent implements OnInit {
         console.log(res);
         this.loadingMoreEpisodes = false;
         this.browseEpisodes = this.browseEpisodes.concat(res.EpisodeResult);
+      });
+    }
+  }
+
+  onScrollDownHive() {
+    console.log('here')
+    this.pageHive += 1;
+    this.loadingMoreHiveEpisodes = true;
+    // this.getEpisodes();
+    if (this.selectedCategory && this.selectedCategory.id) {
+      this.homeDashboardService.categoryBasedEpisodes(this.pageHive, this.pageSize, this.selectedCategory.id.toString()).subscribe((res: any) => {
+        console.log(res);
+        this.loadingMoreHiveEpisodes = false;
+        this.browseHiveEpisodes = this.browseHiveEpisodes.concat(res.EpisodeList);
+      });
+    } else {
+      this.homeDashboardService.browseHiveEpisodes(this.pageHive, this.pageSize).subscribe((res: any) => {
+        console.log(res);
+        this.loadingMoreHiveEpisodes = false;
+        this.browseHiveEpisodes = this.browseHiveEpisodes.concat(res.EpisodeResult);
       });
     }
   }
