@@ -81,14 +81,15 @@ export class PodcastCardComponent implements OnInit {
   }
 
   openDialog(data): void {
-    this.dialog.open(EpisodeDetailsComponent, {
-      width: '90vw',
-      height: '90vh',
-      maxWidth: '90vw',
-      maxHeight: '90vh',
-      hasBackdrop: true,
-      data: data
-    });
+    this.router.navigateByUrl('episode/'+data.id);
+    // this.dialog.open(EpisodeDetailsComponent, {
+    //   width: '90vw',
+    //   height: '90vh',
+    //   maxWidth: '90vw',
+    //   maxHeight: '90vh',
+    //   hasBackdrop: true,
+    //   data: data
+    // });
   }
 
   tipAuthor(episodeData){

@@ -9,6 +9,7 @@ import { PostComponent } from './pages/post/post.component';
 import { SearchComponent } from './pages/search/search.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { EmbedComponent } from './pages/embed/embed.component';
+import { EpisodeDetailsComponent } from 'src/app/pages/home-dashboard/components/episode-details/episode-details.component';
 
 const routes: Routes = [
   { path: "", loadChildren: './pages/home-dashboard/home-dashboard.module#HomeDashboardModule' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: "search/:query", component: SearchComponent },
   { path: "profile", component: UserProfileComponent },
   { path: "embed/:episode_id", component: EmbedComponent },
+  { path: "episode/:episode_id", component: EpisodeDetailsComponent },
 ];
 
 @NgModule({
