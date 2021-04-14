@@ -1,0 +1,15 @@
+<p>discover works!</p>
+<div class="container">
+	<div class="sliders">
+		<ng-container *ngFor="let podcast of featuredPodcasts; let i = index">
+			<div class="slider" *ngIf="current == i" @fade>
+                <img class="img" [src]="podcast.image">
+                <div class="banner-content">
+                    <h6>PODCAST</h6>
+                    <h1>{{podcast.name}}</h1>
+                    <h2>{{podcast.author}}</h2>
+                </div>
+			</div>
+		</ng-container>
+	</div>
+</div>

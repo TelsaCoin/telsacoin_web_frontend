@@ -18,11 +18,11 @@
 
         </div>
     </mat-sidenav>
-    <mat-sidenav-content>
-        <app-header [sidenav]="usuarioMenu" *ngIf="!isEmbedPlayer"></app-header>
+    <mat-sidenav-content *ngIf="usuarioMenu">
+        <!-- <app-header [sidenav]="usuarioMenu" *ngIf="!isEmbedPlayer"></app-header> -->
         <router-outlet></router-outlet>
         <app-player class="the-player" *ngIf="playingEpisode && !isEmbedPlayer" [toPlayData]="playingEpisode">
         </app-player>
-        <app-footer *ngIf="!isEmbedPlayer"></app-footer>
+        <!-- <app-footer *ngIf="!isEmbedPlayer"></app-footer> -->
     </mat-sidenav-content>
 </mat-sidenav-container>

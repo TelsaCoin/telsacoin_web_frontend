@@ -131,4 +131,11 @@ export class HomeDashboardService {
     return this.api.post(this.apiUrl + '/public/follow', body);
   }
 
+  getFeaturedPodcasts(userId) {
+    if(userId){
+      return this.api.get(this.apiUrl + '/public/featured?user_id=' + userId );
+    }else{
+      return this.api.get(this.apiUrl + '/public/featured');
+    }
+  }
 }
