@@ -385,3 +385,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow-x: auto !important;
     overflow: hidden;
   }
+
+.card{
+  // padding: 30px;
+  // margin: 20px;
+  border: none;
+  background: linear-gradient(to bottom, #E8EAF6, #ffffff);
+  border-radius: 0;
+}
+
+.mat-drawer-content {
+  background-color: #E8EAF6;
+}

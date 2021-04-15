@@ -16,13 +16,41 @@ import { trigger, transition, animate, style } from '@angular/animations'
 export class DiscoverComponent implements OnInit {
   featuredPodcasts : any = [];
   current = 0;
+  currentTab = 0;
+  tabsSection = [
+    {
+      name : 'Trending on Hive',
+      data : [],
+      isLoaded: false
+    },
+    {
+      name : 'Newly Released',
+      data : [],
+      isLoaded: false
+    },
+    {
+      name : 'Recently Played',
+      data : [],
+      isLoaded: false
+    },
+    {
+      name : 'Popular & Trending',
+      data : [],
+      isLoaded: false
+    },
+    {
+      name : 'Recommended for you',
+      data : [],
+      isLoaded: false
+    }
+  ]
   constructor(
     private homeDashboardService: HomeDashboardService
   ) { }
 
   ngOnInit(): void {
     this.getFeaturedPodcasts();
-
+    this.getHiveEpisodes();
   }
 
   getFeaturedPodcasts(){
@@ -32,6 +60,16 @@ export class DiscoverComponent implements OnInit {
         setInterval(() => {
           this.current = ++this.current % this.featuredPodcasts.length;
         }, 3000);
+      }
+    })
+  }
+
+  getHiveEpisodes(){
+    this.tabsSection[0].isLoaded = false;
+    this.homeDashboardService.browseHiveEpisodes(0, 10).subscribe((res:any) => {
+      this.tabsSection[0].isLoaded = true;
+      if(res.EpisodeResult){
+        this.tabsSection[0].data = res.EpisodeResult;
       }
     })
   }

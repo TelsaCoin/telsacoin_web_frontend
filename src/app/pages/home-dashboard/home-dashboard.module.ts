@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { DiscoverComponent } from './pages/discover/discover.component';
 import { HomeDashboardComponent } from './home-dashboard.component';
 import { FavoriteComponent } from './pages/favorite/favorite.component';
+import { EpisodeCardComponent } from './components/episode-card/episode-card.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { FavoriteComponent } from './pages/favorite/favorite.component';
     PodcastCardComponent, 
     EpisodeDetailsComponent, 
     CommentComponent, 
-    CommentBoxComponent, DiscoverComponent, HomeDashboardComponent, FavoriteComponent, 
+    CommentBoxComponent, DiscoverComponent, HomeDashboardComponent, FavoriteComponent, EpisodeCardComponent, 
   ],
   imports: [
     CommonModule,
