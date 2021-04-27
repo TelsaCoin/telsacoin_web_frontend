@@ -30,6 +30,9 @@ import { MatTableModule } from'@angular/material/table';
 import { MatListModule } from'@angular/material/list';
 import { SocialShareComponent } from 'src/app/components/social-share/social-share.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommentComponent } from 'src/app/components/comment/comment.component';
+import { CommentBoxComponent } from 'src/app/components/comment-box/comment-box.component';
+import { LoaderComponent } from 'src/app/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MinuteSecondPipe,
     AuthComponent,
     PlayerComponent,
-    SocialShareComponent
+    SocialShareComponent,
+    CommentComponent,
+    CommentBoxComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -114,6 +120,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatListModule,
+    CommentComponent,
+    CommentBoxComponent,
+    LoaderComponent
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

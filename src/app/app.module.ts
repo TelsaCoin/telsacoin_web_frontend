@@ -3,19 +3,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PodcastProfileComponent } from './pages/podcast-profile/podcast-profile.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
-
-import { HomeDashboardModule } from 'src/app/pages/home-dashboard/home-dashboard.module';
-
 import { AuthInterceptorService } from 'src/app/services/auth-interceptor.service';
 import { HiveTokenComponent } from './pages/hive-token/hive-token.component';
-
 import { PostComponent } from './pages/post/post.component';
-// import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { HiveAuthComponent } from './components/hive-auth/hive-auth.component';
 import { SearchComponent } from './pages/search/search.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
@@ -27,7 +21,6 @@ import { SelectCommunityComponent } from './components/select-community/select-c
 import { CreateCommunityComponent } from './components/create-community/create-community.component';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';// './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
-
 import { HiveTokenRegisterComponent } from './pages/hive-token-register/hive-token-register.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
@@ -37,6 +30,12 @@ import {
 const googleLoginOptions = {
   scope: 'profile email'
 };
+import { EpisodeListCardComponent } from './components/episode-list-card/episode-list-card.component';
+import { EpisodeCardComponent } from './components/episode-card/episode-card.component';
+import { PodcastCardComponent } from './components/podcast-card/podcast-card.component';
+import { DiscoverComponent } from './pages/discover/discover.component';
+import { FavoriteComponent } from './pages/favorite/favorite.component';
+import { EpisodeDetailsComponent } from './pages/episode-details/episode-details.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +43,6 @@ const googleLoginOptions = {
     PodcastProfileComponent,
     HeaderComponent,
     FooterComponent,
-
     HiveTokenComponent,
     PostComponent,
     HiveAuthComponent,
@@ -56,13 +54,18 @@ const googleLoginOptions = {
     CreateCommunityComponent,
     ConfirmationDialogComponent,
     HiveTokenRegisterComponent,
+    EpisodeListCardComponent,
+    EpisodeCardComponent,
+    PodcastCardComponent,
+    DiscoverComponent,
+    FavoriteComponent,
+    EpisodeDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HomeDashboardModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule,
     SocialLoginModule,

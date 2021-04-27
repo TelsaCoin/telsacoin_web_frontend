@@ -1,0 +1,7 @@
+<div class="podcast-card d-flex flex-column">
+    <img class="img" [src]="podcastData.image">
+    <div class="content">
+        <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openPodcast(podcastData)">{{podcastData.name}}</span>
+        <span class="author text-truncate accenttwo mb-1">{{podcastData.author}}</span>
+    </div>
+</div>

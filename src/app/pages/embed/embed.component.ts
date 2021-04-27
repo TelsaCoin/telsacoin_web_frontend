@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { HomeDashboardService } from "src/app/pages/home-dashboard/home-dashboard.service";
+import { CommonService } from 'src/app/services/common.service';
 import { DomSanitizer } from "@angular/platform-browser";
 @Component({
   selector: "app-embed",
@@ -13,7 +13,7 @@ export class EmbedComponent implements OnInit {
   episodeData;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private homeDashboardService: HomeDashboardService,
+    private commonService : CommonService,
     private domSanitizer: DomSanitizer
   ) { }
 
@@ -21,14 +21,14 @@ export class EmbedComponent implements OnInit {
     this.progress = true;
     this.activatedRoute.paramMap.subscribe((paramMap) => {
       this.episodeId = paramMap.get("episode_id");
-      this.homeDashboardService
+      this.commonService
         .getEpisode(this.episodeId)
         .subscribe((res: any) => {
           console.log(res);
           this.progress = false;
           this.episodeData = res.episode;
         });
-      this.homeDashboardService.getBadge(this.episodeId).subscribe((res: any) => {
+      this.commonService.getBadge(this.episodeId).subscribe((res: any) => {
         console.log(res);
       })
     });

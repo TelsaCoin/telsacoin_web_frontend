@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HomeDashboardService } from 'src/app/pages/home-dashboard/home-dashboard.service';
+import {CommonService} from 'src/app/services/common.service';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { PlayerService } from 'src/app/services/player.service';
@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit {
   page = 0;
   pageSize = 10;
 
-  constructor(public playerService: PlayerService, private activatedRoute: ActivatedRoute, private homeDashboardService: HomeDashboardService, private router: Router) { }
+  constructor(public playerService: PlayerService, private activatedRoute: ActivatedRoute, private commonService : CommonService, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit {
 
   getSearchResults() {
     this.isLoading = true;
-    this.homeDashboardService.search(this.searchQuery, this.page, this.pageSize).subscribe((res: any) => {
+    this.commonService.search(this.searchQuery, this.page, this.pageSize).subscribe((res: any) => {
       this.isLoading = false;
       console.log(res);
       this.searchResults.PodcastList = this.searchResults.PodcastList.concat(res.PodcastList);

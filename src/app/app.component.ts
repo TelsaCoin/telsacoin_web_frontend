@@ -6,7 +6,7 @@ import { SwUpdate } from '@angular/service-worker';
 
 import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
-import {HomeDashboardService} from 'src/app/pages/home-dashboard/home-dashboard.service';
+import {CommonService} from 'src/app/services/common.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -16,14 +16,39 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AppComponent implements OnInit {
   
+  appMode = 'side';
+  isSidebarOpened = true;
+
   title = 'Aureal - Podcast Rating Platform';
   playingEpisode;
   currentModule;
   isEmbedPlayer: Boolean = false;
   @ViewChild("sidenav", { static: false }) usuarioMenu: MatSidenav;
 
+  routes = [
+    {
+      route : '',
+      name : 'Discover',
+      icon : 'explore'
+    },
+    {
+      route : 'favorite',
+      name : 'Favorite',
+      icon : 'favorite'
+    },
+    {
+      route : 'search',
+      name : 'Search',
+      icon : 'search'
+    }
+  ]
+
   constructor(public playerService: PlayerService, public router: Router, private update: SwUpdate, 
-    private authService: SocialAuthService, private homeDashboardService : HomeDashboardService, private toastr: ToastrService) {
+    private authService: SocialAuthService, public commonService : CommonService, private toastr: ToastrService) {
+    if(this.commonService.isMobile()){
+      this.appMode = 'over';
+      this.isSidebarOpened = false;
+    }
 
     this.currentModule = this.playerService.getCurrentModule();
     this.updateClient();
@@ -45,7 +70,7 @@ export class AppComponent implements OnInit {
         let body = new FormData;
         body.append('identifier', user.idToken);
         body.append('loginType', 'google');
-        this.homeDashboardService.userAuth(body).subscribe((res:any) => {
+        this.commonService.userAuth(body).subscribe((res:any) => {
           localStorage.setItem('userId',res.userData.id);
           localStorage.setItem('userName',res.userData.username);
           localStorage.setItem('token',res.userData.token);
@@ -74,6 +99,14 @@ export class AppComponent implements OnInit {
   
       }
     });  
+  }
+
+  navigateTo(route){
+    this.router.navigateByUrl(route);
+  }
+
+  isActive(route){
+    return window.location.pathname == ('/' + route)
   }
 
   updateClient() {

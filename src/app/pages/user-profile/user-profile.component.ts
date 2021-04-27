@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from "@angular/material/dialog";
 import { SelectCommunityComponent } from 'src/app/components/select-community/select-community.component';// 'src/app/components/select-community/select-community.component';
-import { HomeDashboardService } from 'src/app/pages/home-dashboard/home-dashboard.service';
+import {CommonService} from 'src/app/services/common.service';
 import { Observable, forkJoin } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
 
@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
   isProfileFormOpen: Boolean = false;
   index = 0;
   unclaimedText = '';
-  constructor(private userDetailsService: UserDetailsService, public rssFeedDetailsService: RssFeedDetailsService, private toastr: ToastrService, private router: Router, public dialog: MatDialog, private homeDashboardService: HomeDashboardService, private confirmationDialogService: ConfirmationDialogService) { }
+  constructor(private userDetailsService: UserDetailsService, public rssFeedDetailsService: RssFeedDetailsService, private toastr: ToastrService, private router: Router, public dialog: MatDialog, private commonService : CommonService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
     this.profileForm = new FormGroup({
@@ -84,7 +84,7 @@ export class UserProfileComponent implements OnInit {
         console.log('User confirmed:', confirmed);
         let body1 = new FormData;
         body1.append('episode_id', episode.id);
-        this.homeDashboardService.manualHivePublish(body1).subscribe((res: any) => {
+        this.commonService.manualHivePublish(body1).subscribe((res: any) => {
           if (res.msg) {
             this.toastr.error(res.msg);
 
@@ -97,9 +97,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   getCommunityData() {
-    let getAllCommunity = this.homeDashboardService.getAllCommunity();
-    let getFollowedCommunity = this.homeDashboardService.getFollowedCommunity(localStorage.getItem('userId'));
-    let getCreatedCommunity = this.homeDashboardService.getCreatedCommunity(localStorage.getItem('userId'));
+    let getAllCommunity = this.commonService.getAllCommunity();
+    let getFollowedCommunity = this.commonService.getFollowedCommunity(localStorage.getItem('userId'));
+    let getCreatedCommunity = this.commonService.getCreatedCommunity(localStorage.getItem('userId'));
     this.isCommunityLoaded = false;
     forkJoin([getAllCommunity, getFollowedCommunity, getCreatedCommunity]).subscribe((results: any) => {
       this.isCommunityLoaded = true;
@@ -113,7 +113,7 @@ export class UserProfileComponent implements OnInit {
     let body1 = new FormData;
     body1.append('community_id', community.id);
     body1.append('user_id', localStorage.getItem('userId'));
-    this.homeDashboardService.subscribeCommunity(body1).subscribe((res: any) => {
+    this.commonService.subscribeCommunity(body1).subscribe((res: any) => {
       if (res.msg) {
         this.toastr.error(res.msg);
       } else {

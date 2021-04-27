@@ -68,8 +68,8 @@
                 <h1>Shared Episode</h1>
                 <div class="outside-episode-container" *ngIf="!sharedEpisodeLoading">
                     <div class="inside-episode-container" (click)="playEpisode(sharedEpisode);">
-                        <app-podcast-card [episodeData]="sharedEpisode"
-                            showUpvote="{{sharedEpisode?.permlink ? true:false}}"></app-podcast-card>
+                        <app-episode-list-card [episodeData]="sharedEpisode"
+                            showUpvote="{{sharedEpisode?.permlink ? true:false}}"></app-episode-list-card>
                     </div>
                 </div>
                 <div class="outside-episode-container" *ngIf="sharedEpisodeLoading">
@@ -93,8 +93,8 @@
                     <div class="inside-episode-container"
                         *ngFor="let episodeData of podcastData.Episodes; let episodeIndex = index;"
                         (click)="playEpisode(episodeData);">
-                        <app-podcast-card [episodeData]="episodeData"
-                            showUpvote="{{episodeData?.permlink ? true:false}}"></app-podcast-card>
+                        <app-episode-list-card [episodeData]="episodeData"
+                            showUpvote="{{episodeData?.permlink ? true:false}}"></app-episode-list-card>
                         <!-- <div class="podcast-card">
                             <div class="itemsContainer">
                                 <img [src]="episodeData.image">

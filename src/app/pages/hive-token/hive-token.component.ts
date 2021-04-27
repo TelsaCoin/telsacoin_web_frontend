@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment_ from 'moment';
 const moment = moment_;
-import {HomeDashboardService} from 'src/app/pages/home-dashboard/home-dashboard.service';
+import {CommonService} from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-hive-token',
@@ -14,7 +14,7 @@ import {HomeDashboardService} from 'src/app/pages/home-dashboard/home-dashboard.
 export class HiveTokenComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public router: Router,
-    private homeDashboardService : HomeDashboardService, public authService: AuthService, private toastr: ToastrService) { }
+    private commonService : CommonService, public authService: AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // console.log(this.route.snapshot.queryParamMap.get("access_token"));
@@ -27,7 +27,7 @@ export class HiveTokenComponent implements OnInit {
       let body = new FormData;
       body.append('identifier', this.route.snapshot.queryParamMap.get("code"));
       body.append('loginType', 'hive');
-      this.homeDashboardService.userAuth(body).subscribe((res:any) => {
+      this.commonService.userAuth(body).subscribe((res:any) => {
           localStorage.setItem('access_token',res.userData.hiveAccessToken);
           localStorage.setItem('userId',res.userData.id);
           localStorage.setItem('userName',res.userData.username);

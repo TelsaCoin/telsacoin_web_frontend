@@ -61,8 +61,8 @@
                 <div>
                     <div *ngFor="let podcast of podcasts; let podcastIndex = index;">
                         <div *ngFor="let episode of podcast.Episodes; let episodeIndex = index;" class="the-episodes">
-                            <app-podcast-card [episodeData]="episode" showUpvote="false" class="w100">
-                            </app-podcast-card>
+                            <app-episode-list-card [episodeData]="episode" showUpvote="false" class="w100">
+                            </app-episode-list-card>
                             <div class="d-flex flex-column justify-content-around" style="padding-right: 20px;">
                                 <div class="status" (click)="triggerHive(episode)">
                                     {{episode.hive_status == 'invalid' ? 'Not published' : episode.hive_status}}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { HomeDashboardService } from 'src/app/pages/home-dashboard/home-dashboard.service';
+import {CommonService} from 'src/app/services/common.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment_ from 'moment';
@@ -13,7 +13,7 @@ const moment = moment_;
 })
 export class HiveTokenRegisterComponent implements OnInit {
   constructor(private route: ActivatedRoute, public router: Router,
-    private homeDashboardService: HomeDashboardService, public authService: AuthService, private toastr: ToastrService) { }
+    private commonService : CommonService, public authService: AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if (this.route.snapshot.queryParamMap.get("code")) {

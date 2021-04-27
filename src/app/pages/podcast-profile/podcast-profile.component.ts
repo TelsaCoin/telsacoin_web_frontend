@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PlayerService } from 'src/app/services/player.service';
 import * as moment_ from 'moment';
 const moment = moment_;
-import { HomeDashboardService } from 'src/app/pages/home-dashboard/home-dashboard.service';
+import {CommonService} from 'src/app/services/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from "@angular/material/dialog";
@@ -12,7 +12,7 @@ import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.compon
 import { SocialShareComponent } from 'src/app/components/social-share/social-share.component';
 
 @Component({
-  selector: 'app-podcast-profile',
+  selector: 'app-episode-list-card-profile',
   templateUrl: './podcast-profile.component.html',
   styleUrls: ['./podcast-profile.component.scss']
 })
@@ -35,7 +35,7 @@ export class PodcastProfileComponent implements OnInit {
   sharedEpisodeLoading: Boolean = false;
   constructor(public rssFeedDetailsService: RssFeedDetailsService,
     public activatedRoute: ActivatedRoute, public playerService: PlayerService,
-    private homeDashboardService: HomeDashboardService,
+    private commonService : CommonService,
     private toastr: ToastrService,
     public authService: AuthService,
     public dialog: MatDialog,
@@ -58,7 +58,7 @@ export class PodcastProfileComponent implements OnInit {
       const episode_id = this.activatedRoute.snapshot.queryParamMap.get("episode_id");
       // this.sharedEpisode['id'] = episode_id;
       this.sharedEpisodeLoading = true;
-      this.homeDashboardService
+      this.commonService
         .getEpisode(episode_id)
         .subscribe((res: any) => {
           console.log(res);
@@ -86,7 +86,7 @@ export class PodcastProfileComponent implements OnInit {
       if (this.authService.isAuthenticated()) {
         body.append('user_id', localStorage.getItem('userId'));
         body.append('podcast_id', this.podcastData.id);
-        this.homeDashboardService.followPodcast(body).subscribe((res: any) => {
+        this.commonService.followPodcast(body).subscribe((res: any) => {
           this.podcastData.follows = true;
           // if(res.msg){
           //   this.toastr.error('Something went wrong');
@@ -97,8 +97,6 @@ export class PodcastProfileComponent implements OnInit {
         this.openHiveAuthDialog(false);
       }
     }
-
-
   }
 
   onScrollDown() {

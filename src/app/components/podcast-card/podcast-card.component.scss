@@ -1,0 +1,28 @@
+.podcast-card{
+    background: white;
+    display: flex;
+    // margin-right: 20px;
+    padding: 15px;
+    width: inherit;
+    border-radius: 8px;
+    background: #F0F3F9;
+    .img{
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    
+    .content{
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        .podcast_name{
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .author{
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+}
