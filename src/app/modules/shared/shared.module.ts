@@ -34,6 +34,8 @@ import { CommentComponent } from 'src/app/components/comment/comment.component';
 import { CommentBoxComponent } from 'src/app/components/comment-box/comment-box.component';
 import { LoaderComponent } from 'src/app/components/loader/loader.component';
 
+import { CarouselComponent } from 'src/app/components/carousel/carousel.component';
+
 @NgModule({
   declarations: [
     DateAgoPipe, 
@@ -44,7 +46,8 @@ import { LoaderComponent } from 'src/app/components/loader/loader.component';
     SocialShareComponent,
     CommentComponent,
     CommentBoxComponent,
-    LoaderComponent
+    LoaderComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -122,7 +125,8 @@ import { LoaderComponent } from 'src/app/components/loader/loader.component';
     MatListModule,
     CommentComponent,
     CommentBoxComponent,
-    LoaderComponent
+    LoaderComponent,
+    CarouselComponent
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

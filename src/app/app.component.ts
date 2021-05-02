@@ -8,6 +8,8 @@ import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import {CommonService} from 'src/app/services/common.service';
 import { ToastrService } from 'ngx-toastr';
+import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-root',
@@ -41,10 +43,17 @@ export class AppComponent implements OnInit {
       name : 'Search',
       icon : 'search'
     }
-  ]
+  ];
 
-  constructor(public playerService: PlayerService, public router: Router, private update: SwUpdate, 
-    private authService: SocialAuthService, public commonService : CommonService, private toastr: ToastrService) {
+  constructor(
+    public playerService: PlayerService,
+    public router: Router,
+    private update: SwUpdate, 
+    private authService: SocialAuthService,
+    public commonService : CommonService,
+    private toastr: ToastrService,
+    public dialog: MatDialog
+    ) {
     if(this.commonService.isMobile()){
       this.appMode = 'over';
       this.isSidebarOpened = false;
@@ -140,7 +149,15 @@ export class AppComponent implements OnInit {
     this.usuarioMenu.close();
   }
 
-
+  openAuth(): void {
+    this.dialog.open(HiveAuthComponent, {
+      width: '800px',
+      // height:  '350px',
+      maxWidth: '95vw',
+      hasBackdrop: true,
+      data: { autoCheck: false }
+    });
+  }
 
 
 }

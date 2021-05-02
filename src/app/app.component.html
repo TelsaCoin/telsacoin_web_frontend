@@ -45,6 +45,15 @@
           <span>{{ item.name }}</span>
         </div>
       </div>
+      <div class="tabs">
+        <div
+          class="each-tab"
+          (click)="openAuth()"
+        >
+          <mat-icon>how_to_reg</mat-icon>
+          <span>Login/Signup</span>
+        </div>
+      </div>
     </mat-drawer>
     <mat-drawer-content>
       <router-outlet></router-outlet>

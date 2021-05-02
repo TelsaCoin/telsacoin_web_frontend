@@ -12,6 +12,7 @@ import { EmbedComponent } from './pages/embed/embed.component';
 import { EpisodeDetailsComponent } from './pages/episode-details/episode-details.component';
 import { DiscoverComponent } from './pages/discover/discover.component';
 import { FavoriteComponent } from './pages/favorite/favorite.component';
+import { HiveonboardComponent } from './pages/hiveonboard/hiveonboard.component';
 
 const routes: Routes = [
   // { path: "", loadChildren: './pages/home-dashboard/home-dashboard.module#HomeDashboardModule' },
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: '', component: DiscoverComponent },
   { path: 'favorite', component: FavoriteComponent },
   // { path: '', component: HomeComponent },
-  { path: 'episode/:episode_id', component: EpisodeDetailsComponent }
+  { path: 'episode/:episode_id', component: EpisodeDetailsComponent },
+  { path: 'hive-onboarding', component: HiveonboardComponent },
 ];
 
 @NgModule({

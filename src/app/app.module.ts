@@ -36,6 +36,7 @@ import { PodcastCardComponent } from './components/podcast-card/podcast-card.com
 import { DiscoverComponent } from './pages/discover/discover.component';
 import { FavoriteComponent } from './pages/favorite/favorite.component';
 import { EpisodeDetailsComponent } from './pages/episode-details/episode-details.component';
+import { HiveonboardComponent } from './pages/hiveonboard/hiveonboard.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { EpisodeDetailsComponent } from './pages/episode-details/episode-details
     DiscoverComponent,
     FavoriteComponent,
     EpisodeDetailsComponent,
+    HiveonboardComponent,
   ],
   imports: [
     BrowserModule,
