@@ -1,5 +1,11 @@
 <div class="podcast-card d-flex flex-column">
     <img class="img" [src]="podcastData.image">
+    <button class="control prev">
+        <div class="isode">
+          <mat-icon mat-list-icon class="left" style="font-size: 30px; height: 30px; width: 30px;">play_arrow</mat-icon>
+          <!-- <span class="icon icon-play left"></span> -->
+        </div>
+    </button>
     <div class="content">
         <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openPodcast(podcastData)">{{podcastData.name}}</span>
         <span class="author text-truncate accenttwo mb-1">{{podcastData.author}}</span>

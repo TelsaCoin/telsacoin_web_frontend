@@ -1,37 +1,10 @@
-<!-- <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="over" class="sidenav-styles" *ngIf="!isEmbedPlayer">
-        <div class="logo">
-            <a (click)="navigateHome()">
-                <img src="./assets/aureal_logo.png">
-            </a>
-            <i class="fas fa-times" aria-hidden="true" (click)="closeAllSidenav()"></i>
-        </div>
-        <div class="each-tab">
-            <a (click)="navigateHome()">
-                Home
-            </a>
-            <a href="https://medium.com/aureal">
-                Blog
-            </a>
-        </div>
-        <div class="each-tab">
-
-        </div>
-    </mat-sidenav>
-    <mat-sidenav-content *ngIf="usuarioMenu" [ngClass]="{'is-player-open' : playingEpisode && !isEmbedPlayer}">
-        <app-header [sidenav]="usuarioMenu" *ngIf="!isEmbedPlayer"></app-header>
-        <router-outlet></router-outlet>
-        <app-player class="the-player" *ngIf="playingEpisode && !isEmbedPlayer" [toPlayData]="playingEpisode">
-        </app-player>
-        <app-footer *ngIf="!isEmbedPlayer"></app-footer>
-    </mat-sidenav-content>
-</mat-sidenav-container> -->
-
 <mat-drawer-container>
-    <mat-drawer [mode]="appMode" [opened]="isSidebarOpened" class="sidebar-container">
-      <div class="logo">
+    <mat-drawer autosize [mode]="appMode" [opened]="isSidebarOpened" class="sidebar-container" [ngClass]="{'expanded' : isSidebarExpanded}"
+     #sidenav>
+      <div class="logo" [@fadeAnimation]="isSidebarExpanded">
         <a>
-          <img src="./assets/aureal_logo.png" />
+          <img src="./assets/aureal_full_dark.png" [ngClass]="{'expanded' : isSidebarExpanded}" style="padding: 0 40px;"/>
+          <img src="./assets/launch_icon.png" [ngClass]="{'expanded' : !isSidebarExpanded}" style="padding: 0 15px;"/>
         </a>
       </div>
       <div class="tabs">
@@ -41,22 +14,15 @@
           [class.active]="isActive(item.route)"
           (click)="navigateTo(item.route)"
         >
-          <mat-icon>{{ item.icon }}</mat-icon>
-          <span>{{ item.name }}</span>
-        </div>
-      </div>
-      <div class="tabs">
-        <div
-          class="each-tab"
-          (click)="openAuth()"
-        >
-          <mat-icon>how_to_reg</mat-icon>
-          <span>Login/Signup</span>
+          <span [class]="item.icon">
+          </span>
+          <span class="name">{{ item.name }}</span>
         </div>
       </div>
     </mat-drawer>
-    <mat-drawer-content>
-      <router-outlet></router-outlet>
+    <mat-drawer-content #content [ngClass]="{'expanded' : isSidebarExpanded}">
+      <app-header style="position: fixed; width: calc(100% - 100px); z-index: 2;"></app-header>
+      <router-outlet style="margin-top: 70px; display: block; z-index: 1;"></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
   

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
@@ -11,7 +12,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HiveAuthComponent implements OnInit {
   autoCheck: Boolean = false;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public authService: AuthService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+     public authService: AuthService,
+     public router: Router) {
     console.log(data);
     this.autoCheck = data.autoCheck;
   }
@@ -29,5 +32,9 @@ export class HiveAuthComponent implements OnInit {
       redirectUrl += '-register';
     }
     window.open('https://hivesigner.com/oauth2/authorize?client_id=aureal&response_type=code&redirect_uri=' + redirectUrl + '&scope=vote,comment,comment_option,custom_json', '_self');
+  }
+
+  routeto(url){
+    this.router.navigateByUrl(url);
   }
 }

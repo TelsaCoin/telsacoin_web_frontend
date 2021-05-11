@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PlayerService } from 'src/app/services/player.service';
 import { MatSidenav } from "@angular/material/sidenav";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -10,40 +10,54 @@ import {CommonService} from 'src/app/services/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { MatDialog } from "@angular/material/dialog";
+import {
+  trigger,
+  animate,
+  transition,
+  style,
+  query
+} from '@angular/animations';
+import { appConstants } from './app.constants';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fadeAnimation', [
+      transition('* => *', [
+        query(
+          ':enter',
+          [style({ opacity: 0 })],
+          { optional: true }
+        ),
+        query(
+          ':leave',
+          [style({ opacity: 1 }), animate('0.5s', style({ opacity: 0 }))],
+          { optional: true }
+        ),
+        query(
+          ':enter',
+          [style({ opacity: 0 }), animate('0.5s', style({ opacity: 1 }))],
+          { optional: true }
+        )
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
   
   appMode = 'side';
   isSidebarOpened = true;
-
+  isSidebarExpanded = false;
   title = 'Aureal - Podcast Rating Platform';
   playingEpisode;
   currentModule;
   isEmbedPlayer: Boolean = false;
-  @ViewChild("sidenav", { static: false }) usuarioMenu: MatSidenav;
+  @ViewChild("sidenav") usuarioMenu: MatSidenav;
+  @ViewChild("content") content: ElementRef;
 
-  routes = [
-    {
-      route : '',
-      name : 'Discover',
-      icon : 'explore'
-    },
-    {
-      route : 'favorite',
-      name : 'Favorite',
-      icon : 'favorite'
-    },
-    {
-      route : 'search',
-      name : 'Search',
-      icon : 'search'
-    }
-  ];
+  routes = appConstants.routes;
 
   constructor(
     public playerService: PlayerService,
@@ -159,5 +173,13 @@ export class AppComponent implements OnInit {
     });
   }
 
+  // openSidebar(){
+  //   this.isSidebarExpanded = true;
+  //   this.content.nativeElement.style.marginLeft = '250px';
+  // }
 
+  // closeSidebar(){
+  //   this.isSidebarExpanded = false;
+  //   this.content.nativeElement.style.marginLeft = '100px';
+  // }
 }

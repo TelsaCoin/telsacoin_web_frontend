@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { UserDetailsService } from 'src/app/services/user-details.service';
+import { appConstants } from 'src/app/app.constants';
+import { ThemeService } from 'src/app/services/theme.service';
 
 
 @Component({
@@ -19,8 +21,16 @@ export class HeaderComponent implements OnInit {
 
   toggleSearch: boolean = false;
   searchText = '';
+  routes = appConstants.routes;
 
-  constructor(public authService: AuthService, private route: ActivatedRoute, public router: Router, public dialog: MatDialog, public userDetailsService: UserDetailsService) { }
+  constructor(
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    public router: Router,
+    public dialog: MatDialog,
+    public userDetailsService: UserDetailsService,
+    private themeService: ThemeService
+    ) { }
 
   ngOnInit(): void {
     let a = parseInt((moment().unix()).toString()) + 68400;
@@ -88,5 +98,21 @@ export class HeaderComponent implements OnInit {
 
   goToProfile() {
     this.router.navigateByUrl('/profile');
+  }
+
+  navigateTo(route){
+    this.router.navigateByUrl(route);
+  }
+
+  isActive(route){
+    return window.location.pathname == ('/' + route)
+  }
+
+  toggleTheme(isDark){
+    this.themeService.theme = isDark ? 'dark' : null;
+  }
+
+  get dark() {
+    return this.themeService.theme === 'dark';
   }
 }

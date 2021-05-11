@@ -1,27 +1,66 @@
 .podcast-card{
-    background: white;
+    // background: white;
+    border: 1px solid var(--primary-border);
     display: flex;
     // margin-right: 20px;
     padding: 15px;
     width: inherit;
     border-radius: 8px;
-    background: #F0F3F9;
+    position: relative;
     .img{
-        width: 100%;
+        width: 80%;
         height: auto;
         border-radius: 10px;
     }
-    
+    .control {
+        border: none;
+        background-color: var(--theme-background);
+        border-radius: 37px;
+        outline: 0;
+        position: absolute;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 1em;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        height: 50px;
+        width: 50px;
+      
+        .isode{
+            background: var(--primary);
+            height: 40px;
+            width: 40px;
+            border-radius: 37px;
+            right: 4px;
+            padding: 5px;
+            position: absolute;
+        }
+        &:hover,
+        &:focus {
+          opacity: 1;
+        }
+      
+        &.prev {
+            right: 20px;
+            top: 52%;
+        }
+    }
     .content{
         margin-top: 5px;
         display: flex;
         flex-direction: column;
         .podcast_name{
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
         }
         .author{
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 400;
         }
     }
