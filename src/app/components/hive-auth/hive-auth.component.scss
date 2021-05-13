@@ -82,6 +82,13 @@
   padding: 10px 15px;
   width: 200px;
   color: var(--accent);
+  position: relative;
+  .icon{
+    position: absolute;
+    left: 10px;
+    font-size: 18px;
+    top: 11px;
+  }
   &.red{
     color: #E8E8E8;
     background: #E31337;

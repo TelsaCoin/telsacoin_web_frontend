@@ -168,9 +168,17 @@ export class CommonService {
 
   getFeaturedPodcasts(userId, page, pageSize) {
     if(userId){
-      return this.api.get(this.apiUrl + '/public/featured?user_id=' + userId + '?page=' + page + '&pageSize=' + pageSize );
+      return this.api.get(this.apiUrl + '/public/featured?user_id=' + userId + '&page=' + page + '&pageSize=' + pageSize );
     }else{
       return this.api.get(this.apiUrl + '/public/featured?page=' + page + '&pageSize=' + pageSize);
+    }
+  }
+
+  getPodcastEpisodes(userId, podcastId, page, pageSize) {
+    if(userId){
+      return this.api.get(this.apiUrl + '/public/episode?user_id=' + userId + '&podcast_id=' + podcastId + '&page=' + page + '&pageSize=' + pageSize );
+    }else{
+      return this.api.get(this.apiUrl + '/public/episode?podcast_id=' + podcastId + '&page=' + page + '&pageSize=' + pageSize);
     }
   }
 }

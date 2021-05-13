@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { ActivatedRoute, Router } from "@angular/router";
+import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
+import { MatDialog } from "@angular/material/dialog";
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-post',
@@ -18,22 +21,34 @@ export class PostComponent implements OnInit {
 
   isbuttonLoaderOn: Boolean = false;
   isOtpFormShown: Boolean = false;
-
-
+  searchText = '';
+  step: Number = 0;
+  rssMailId = '';
   showSubmitForm: Boolean = true;
   displayedColumns = ['name', 'duration', 'status'];
   dataSources = [];
-  podcasts = [];
-  constructor(public authService: AuthService, public rssFeedDetailsService: RssFeedDetailsService, private toastr: ToastrService, public router: Router) { }
+  podcast;
+  episodes = [];
+  episodesLoading: Boolean = false;
+  page = 0;
+  pageSize = 1;
+  viewMoreDescription:Boolean = false;
+  constructor(
+    public authService: AuthService,
+    public rssFeedDetailsService: RssFeedDetailsService,
+    private toastr: ToastrService,
+    public router: Router,
+    public dialog: MatDialog,
+    private commonService: CommonService,
+    ) { }
 
   ngOnInit(): void {
     this.linkForm = new FormGroup({
-      'link': new FormControl('', [Validators.required]),
+      'link': new FormControl('', [Validators.required, this.checkLink]),
     });
     this.otpForm = new FormGroup({
       'otp': new FormControl('', [Validators.required, this.checkOtp]),
     });
-
   }
 
   checkLink(control) {
@@ -51,16 +66,16 @@ export class PostComponent implements OnInit {
   getErrorLink(form) {
     return form.get('link').hasError('required') ? 'Link is required' :
       form.get('link').hasError('requirements') ? 'Link is not valid' : '';
-    // return form.get('link').hasError('required') ? 'Field is required' : '';
   }
 
   getErrorOtp(form) {
-    // return form.get('password').hasError('required') ? 'Field is required' : '';
     return form.get('otp').hasError('required') ? 'OTP is required' :
       form.get('otp').hasError('requirements') ? 'OTP needs to be at least 6 digits and all numeric' : '';
   }
 
-  onSubmitLink(data) {
+  onSubmitLink() {
+    this.rssMailId = '';
+    let data = this.linkForm.value;
     let body = new FormData;
     body.append('url', data.link);
     body.append('user_id', localStorage.getItem('userId'));
@@ -71,14 +86,16 @@ export class PostComponent implements OnInit {
         this.toastr.error(res.msg);
       } else {
         this.isOtpFormShown = true;
+        this.rssMailId = res.email;
         this.toastr.success("Feed validated");
+        this.step = 2;
         console.log('here');
       }
     });
   }
 
-  onSubmitOtp(data) {
-    console.log(data);
+  onSubmitOtp() {
+    let data = this.otpForm.value;
     let body = new FormData;
     body.append('user_id', localStorage.getItem('userId'));
     body.append('otp', data.otp);
@@ -87,14 +104,16 @@ export class PostComponent implements OnInit {
     this.isbuttonLoaderOn = true;
 
     this.rssFeedDetailsService.verifyOtpAndCreateRSS(body).subscribe((res: any) => {
-      this.isbuttonLoaderOn = false;
       if (res.msg) {
         this.toastr.error(res.msg);
+        this.isbuttonLoaderOn = false;
       } else {
-        this.toastr.success('Getting your podcast live...');
-        setTimeout(() => {
-          this.router.navigateByUrl('/profile');
-        }, 3000);
+        this.rssFeedDetailsService.getSubmittedRssFeeds().subscribe((res:any) => {
+          this.isbuttonLoaderOn = false;
+          this.podcast = res.podcasts[0];
+          this.step = 3;
+          this.getPodcastEpisodes(this.podcast.id);
+        })
       }
     })
   }
@@ -107,4 +126,53 @@ export class PostComponent implements OnInit {
     this.router.navigateByUrl('/profile');
   }
 
+  getStarted(){
+   if(this.authService.isAuthenticated() && this.authService.isHiveConnected()){
+     this.step = 1;
+   }else{
+    this.openAuth();
+   }
+  }
+
+  openAuth(): void {
+    this.dialog.open(HiveAuthComponent, {
+      width: '800px',
+      // height:  '350px',
+      maxWidth: '95vw',
+      hasBackdrop: true,
+      data: { autoCheck: false }
+    });
+  }
+
+  getPodcastEpisodes(podcast_id) { 
+    this.episodesLoading = true;
+    this.commonService.getPodcastEpisodes(localStorage.getItem('userId'), podcast_id, this.page, this.pageSize).subscribe((res:any)=>{
+      this.episodes = res.episodes.map(episode=> Object.assign(episode,{publishing : false}));
+      this.episodesLoading = false;
+    })
+  }
+
+  showMoreEpisodes(){
+    this.page += 1;
+    this.episodesLoading = true;
+    this.commonService.getPodcastEpisodes(localStorage.getItem('userId'), this.podcast.id, this.page, this.pageSize).subscribe((res:any)=>{
+      this.episodes = [...this.episodes, ...res.episodes.map(episode=> Object.assign(episode,{publishing : false}))];
+      this.episodesLoading = false;
+    })
+  }
+
+  publishEpisode(episode) {
+      episode.publishing = true;
+      let body1 = new FormData;
+      body1.append('episode_id', episode.id);
+      this.commonService.manualHivePublish(body1).subscribe((res: any) => {
+        episode.publishing = false;
+        if (res.msg) {
+          this.toastr.error(res.msg);
+        } else {
+          episode.hive_status = 'done';
+          // this.addToSelectedCommunity(community);
+        }
+      });
+  }
 }

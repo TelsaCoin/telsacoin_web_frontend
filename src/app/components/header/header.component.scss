@@ -13,27 +13,7 @@
       font-size: 20px;
     }
   }
-  .search-container{
-    position: relative;
-    margin: 0 15px;
-    .icon{
-      position: absolute;
-      right: 10px;
-      top: 5px;
-      cursor: pointer;
-    }
-    input{
-      border-radius: 20px;
-      border: 0.5px solid var(--primary-border);
-      background: inherit;
-      padding: 5px 15px;
-      font-size: 14px;
-      width: 300px;
-      &:focus{
-        outline: none;
-      }
-    }
-  }
+
   .logo {
     // width: 180px;
     height: 55px;

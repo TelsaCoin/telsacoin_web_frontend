@@ -36,9 +36,9 @@ export class HeaderComponent implements OnInit {
     let a = parseInt((moment().unix()).toString()) + 68400;
     let b = moment().unix();
     console.log(a - b);
-    if (!this.authService.isHiveConnected() && this.authService.isAuthenticated()) {
-      this.openHiveAuthDialog(true);
-    }
+    // if (!this.authService.isHiveConnected() && this.authService.isAuthenticated()) {
+    //   this.openHiveAuthDialog(true);
+    // }
     if (!this.userDetailsService.UserDetails && this.authService.isAuthenticated()) {
       this.userDetailsService.getUserDetails(localStorage.getItem('userId')).then((res: any) => {
         console.log(res);
@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit {
 
   openHiveAuthDialog(autoCheck: Boolean): void {
     this.dialog.open(HiveAuthComponent, {
-      width: '400px',
+      width: '800px',
       // height:  '350px',
       maxWidth: '95vw',
       hasBackdrop: true,
