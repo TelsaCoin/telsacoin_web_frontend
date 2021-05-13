@@ -49,8 +49,9 @@ export class PodcastProfileComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.podcastId = paramMap.get('podcast_id');
       this.rssFeedDetailsService.getRssFeedDetails(paramMap.get('podcast_id'), this.page, this.pageSize).then(res => {
-        this.podcastData = res['podcasts'][0]; //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
+        this.podcastData = res['podcast']; //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
         document.title = this.podcastData.name;
+        this.getEpisodes();
         this.progress = false;
       })
     });
@@ -67,6 +68,7 @@ export class PodcastProfileComponent implements OnInit {
         });
     }
 
+
     // console.log(this.route.snapshot.queryParamMap.get("expires_in"));
 
     // this.activatedRoute.paramMap.subscribe((paramMap) => {
@@ -78,6 +80,12 @@ export class PodcastProfileComponent implements OnInit {
 
     //   })    
     // });
+  }
+
+  getEpisodes(){
+    this.rssFeedDetailsService.getPodcastEpisodes(this.podcastData.id,this.page, this.pageSize).then((res:any) =>{
+      this.podcastData['Episodes'] = res.episodes;
+    })
   }
 
   followPodcast(ifFollows) {
@@ -106,8 +114,8 @@ export class PodcastProfileComponent implements OnInit {
     this.categoryBasedPodcastsLoading = true;
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.podcastId = paramMap.get('podcast_id');
-      this.rssFeedDetailsService.getRssFeedDetails(paramMap.get('podcast_id'), this.page, this.pageSize).then(res => {
-        this.podcastData.Episodes = this.podcastData.Episodes.concat(res['podcasts'][0].Episodes); //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
+      this.rssFeedDetailsService.getPodcastEpisodes(paramMap.get('podcast_id'), this.page, this.pageSize).then((res:any) => {
+        this.podcastData.Episodes = this.podcastData.Episodes.concat(res.episodes); //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
         this.categoryBasedPodcastsLoading = false;
       })
     });

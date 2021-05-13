@@ -15,6 +15,10 @@ export class RssFeedDetailsService {
     return this.api.get(this.apiUrl + '/public/podcast?podcast_id=' + id + '&user_id=' + localStorage.getItem('userId') + '&page=' + page + '&pageSize=' + pageSize).toPromise();
   }
 
+  getPodcastEpisodes(id, page, pageSize) {
+    return this.api.get(this.apiUrl + '/public/episode?podcast_id=' + id + '&user_id=' + localStorage.getItem('userId') + '&page=' + page + '&pageSize=' + pageSize).toPromise();
+  }
+
   validateRssFeed(body) {
     return this.api.post(this.apiUrl + '/private/sendOTPMailVerify', body);
   }
