@@ -23,6 +23,8 @@
     <mat-drawer-content #content [ngClass]="{'expanded' : isSidebarExpanded}">
       <app-header style="position: fixed; width: calc(100% - 100px); z-index: 2;"></app-header>
       <router-outlet style="margin-top: 70px; display: block; z-index: 1;"></router-outlet>
+      <app-player class="the-player" *ngIf="playingEpisode && !isEmbedPlayer" [ngClass]="{'dark' : dark}" [toPlayData]="playingEpisode">
+      </app-player>
     </mat-drawer-content>
 </mat-drawer-container>
   

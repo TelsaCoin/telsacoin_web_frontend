@@ -204,23 +204,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .the-player{
     position: fixed;
-    width: 100%; 
+    width: calc(100% - 120px); 
     height: 100px; 
     z-index: 1;
     bottom: 0;
-    background: rgba(17,17,17,0.5);
+    background: rgba(17,17,17,0.4);
+    &.dark{
+      background: rgba(58, 58, 58,0.4);
+    }
+    border-radius: 10px;
+    margin: 10px;
     backdrop-filter: blur(12px);
-    color: white;
+    color: #FFFFFF;
     &.embedded{
       position: static;
       display: block;
     }
     .mat-toolbar.mat-primary {
         background: inherit;
-        color: white;
+        color: #FFFFFF;
     }
     .mat-slider-horizontal .mat-slider-wrapper {
-      background: white;
+      background: #FFFFFF;
     }
 }
 .mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label{

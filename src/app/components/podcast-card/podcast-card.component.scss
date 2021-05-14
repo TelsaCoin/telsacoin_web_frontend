@@ -5,56 +5,19 @@
     // margin-right: 20px;
     padding: 15px;
     width: inherit;
-    border-radius: 8px;
+    border-radius: 20px;
     position: relative;
     .img{
-        width: 80%;
+        width: 20%;
         height: auto;
         border-radius: 10px;
     }
-    .control {
-        border: none;
-        background-color: var(--theme-background);
-        border-radius: 37px;
-        outline: 0;
-        position: absolute;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0;
-        color: #FFFFFF;
-        font-weight: bold;
-        font-size: 1em;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        height: 50px;
-        width: 50px;
-      
-        .isode{
-            background: var(--primary);
-            height: 40px;
-            width: 40px;
-            border-radius: 37px;
-            right: 4px;
-            padding: 5px;
-            position: absolute;
-        }
-        &:hover,
-        &:focus {
-          opacity: 1;
-        }
-      
-        &.prev {
-            right: 20px;
-            top: 52%;
-        }
-    }
     .content{
         margin-top: 5px;
+        margin-left: 15px;
         display: flex;
         flex-direction: column;
+        width: calc(100% - 25%);
         .podcast_name{
             font-size: 14px;
             font-weight: 500;
@@ -62,6 +25,20 @@
         .author{
             font-size: 12px;
             font-weight: 400;
+        }
+        .vote-count{
+            background: var(--tertiary-background);
+            color: var(--accenttwo);
+            font-size: 12px;
+            padding: 0px 7px;
+            display: flex;
+            align-items: center;
+            border-radius: 15px;
+            cursor: pointer;
+            .icon{
+                font-size: 14px;
+                margin-right: 3px;
+            }
         }
     }
 }

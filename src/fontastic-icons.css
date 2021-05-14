@@ -116,3 +116,9 @@
 .icon-right-open-mini:before {
   content: "\7a";
 }
+.icon-up-circled:before {
+  content: "\42";
+}
+.icon-comments-o:before {
+  content: "\41";
+}

@@ -18,6 +18,7 @@ import {
   query
 } from '@angular/animations';
 import { appConstants } from './app.constants';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -66,21 +67,23 @@ export class AppComponent implements OnInit {
     private authService: SocialAuthService,
     public commonService : CommonService,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private themeService: ThemeService
     ) {
-    if(this.commonService.isMobile()){
-      this.appMode = 'over';
-      this.isSidebarOpened = false;
-    }
+      this.themeService.theme = 'dark';
+      if(this.commonService.isMobile()){
+        this.appMode = 'over';
+        this.isSidebarOpened = false;
+      }
 
-    this.currentModule = this.playerService.getCurrentModule();
-    this.updateClient();
-    if(window.location.pathname.split('/')[1] == 'embed-player'){
-      this.isEmbedPlayer = true;
-    }else{
-      this.isEmbedPlayer = false;
-    }
-    console.log(this.isEmbedPlayer);
+      this.currentModule = this.playerService.getCurrentModule();
+      this.updateClient();
+      if(window.location.pathname.split('/')[1] == 'embed-player'){
+        this.isEmbedPlayer = true;
+      }else{
+        this.isEmbedPlayer = false;
+      }
+      console.log(this.isEmbedPlayer);
 
   }
   
@@ -182,4 +185,8 @@ export class AppComponent implements OnInit {
   //   this.isSidebarExpanded = false;
   //   this.content.nativeElement.style.marginLeft = '100px';
   // }
+
+  get dark() {
+    return this.themeService.theme === 'dark';
+  }
 }

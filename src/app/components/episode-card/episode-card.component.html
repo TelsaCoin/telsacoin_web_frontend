@@ -1,71 +1,28 @@
-<div class="episode-card d-flex">
+<div class="podcast-card d-flex flex-column">
     <img class="img" [src]="episodeData.image">
+    <button class="control prev" (click)="playEpisode(episodeData)">
+        <div class="isode">
+          <mat-icon mat-list-icon class="left" style="font-size: 30px; height: 30px; width: 30px;">play_arrow</mat-icon>
+        </div>
+    </button>
     <div class="content">
-        <span class="episode_name text-truncate accent mb-1 pointer" (click)="openEpisode(episodeData)">{{episodeData.name}}</span>
-        <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openPodcast(episodeData)">{{episodeData.podcast_name}}</span>
-        <span class="author text-truncate accenttwo mb-1">{{episodeData.author}}</span>
-        <div class="d-flex justify-content-between align-items-center mb-1">
-            <div>
-                <div class="video-play-button" (click)="playEpisode(episodeData);">
-                    <mat-icon mat-list-icon class="accenttwo">play_circle_outline</mat-icon>
-                    <span class="ml-1 mt-1 accenttwo">
-                        {{formatDuration(episodeData.duration)}}                        
-                    </span>
-                    <span class="m-1 accenttwo">
-                        .    
-                    </span>
-                    <span class="ml-1 mt-1 accenttwo">
-                        {{episodeData.published_at | date: 'MMM dd yyyy'}}                        
-                    </span>
-                </div>
+        <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openPodcast(episodeData)">{{episodeData.name}}</span>
+        <span class="author text-truncate accenttwo mb-1">{{episodeData.podcast_name}}</span>
+        <div class="d-flex align-center">
+            <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}">
+                <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
+                <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
+            </div>
+            <div class="vote-count">
+                <span>{{episodeData.votes}}</span>
+            </div>
+            <div class="vote-count">
+                <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
+            </div>
+            <div class="comment-count" (click)="openEpisode(episodeData)">
+                <span class="icon icon-comments-o"></span>
+                <span>{{episodeData.comments_count}}</span>
             </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center mb-1">
-            <div class="d-flex align-items-center">
-                <div class="vote-section accenttwo" (click)="upvote(episodeData)" [ngClass]="{'is-voted' : episodeData.ifVoted}">
-                    <!-- <mat-icon mat-list-icon>expand_less</mat-icon>
-                    <mat-icon mat-list-icon>autorenew</mat-icon> -->
-                    <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
-                    <i class="fa fa-chevron-circle-up" aria-hidden="true" *ngIf="!upvoteOngoing"></i>
-                    <span class="ml-1 mt-1">
-                        {{episodeData.votes}}                        
-                    </span>
-                    <span class="ml-2 mr-2">
-                        |
-                    </span>
-                    <span class="ml-1 mt-1">
-                        {{episodeData.payout_value.replace("HBD", "$")}}                 
-                    </span>
-                </div>
-                <div class="vote-section accenttwo ml-2" (click)="openEpisode(episodeData)">
-                    <mat-icon mat-list-icon class="comment-icon">chat_bubble_outline</mat-icon>
-                    <span class="ml-1 mt-1">
-                        {{episodeData.comments_count}}                        
-                    </span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-end drpdown" ngbDropdown container="body">
-                <div class="ml-1 mt-2 accenttwo" ngbDropdownToggle>
-                    <mat-icon mat-list-icon>more_vert</mat-icon>
-                </div>
-                <ul id="dropdown-basic" ngbDropdownMenu>
-                    <li role="menuitem mb-2 accenttwo" ngbDropdownItem (click)="tipAuthor(episodeData)">
-                        <mat-icon mat-list-icon class="accenttwo">card_giftcard</mat-icon>
-                        Tip Author
-                    </li>
-                    <li role="menuitem mb-2 accenttwo" ngbDropdownItem (click)="socialShare('episode', episodeData)">
-                        <mat-icon mat-list-icon class="accenttwo">share</mat-icon>
-                        Share
-                    </li>
-                </ul>
-                <!-- <div>
-                    
-                </div>
-                <div class="ml-1 mr-1">
-                    
-                </div> -->
-            </div>
-        </div>
-
     </div>
 </div>

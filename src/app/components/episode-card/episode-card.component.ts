@@ -17,46 +17,61 @@ import { ToastrService } from 'ngx-toastr';
 export class EpisodeCardComponent implements OnInit {
   @Input() episodeData;
 
-  // @Input() showUpvote;
   upvoteOngoing: Boolean = false;
 
   constructor(
     public router: Router,
-    public playerService: PlayerService,
-    public commonService: CommonService,
     public authService: AuthService,
+    private commonService : CommonService,
     public dialog: MatDialog,
+    public playerService: PlayerService,
     private toastr: ToastrService
-  ) { }
+    ) { }
 
   ngOnInit(): void {
   }
 
-  formatDuration(seconds) {
-    return moment.duration(seconds, 'seconds').minutes() + ' mins';
-    // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
-  }
-
-  openEpisode(data): void {
-    this.router.navigateByUrl('episode/'+data.id);
-  }
-
   openPodcast(data): void {
-    this.router.navigateByUrl('podcast/'+data.podcast_id);
+    this.router.navigateByUrl('podcast/'+data.id);
+  }
+
+  followPodcast(ifFollows) {
+    if (this.episodeData.id) {
+      let body = new FormData;
+      if (this.authService.isAuthenticated()) {
+        body.append('user_id', localStorage.getItem('userId'));
+        body.append('podcast_id', this.episodeData.id);
+        this.commonService.followPodcast(body).subscribe((res: any) => {
+          this.episodeData.follows = !this.episodeData.follows;
+        })
+      } else {
+        this.openHiveAuthDialog(false);
+      }
+    }
+  }
+
+  openHiveAuthDialog(autoCheck: Boolean): void {
+    this.dialog.open(HiveAuthComponent, {
+      width: '800px',
+      // height:  '350px',
+      maxWidth: '95vw',
+      hasBackdrop: true,
+      data: { autoCheck: autoCheck }
+    });
+  }
+
+  socialShare(type, episodeData) {
+    this.dialog.open(SocialShareComponent, {
+      width: '400px',
+      // height:  '350px',
+      maxWidth: '95vw',
+      hasBackdrop: true,
+      data: { type: type, attributes: episodeData }
+    });
   }
 
   playEpisode(episodeData) {
     this.playerService.setCurrentModule(episodeData);
-    this.addListen(episodeData);
-  }
-
-  addListen(episodeData) {
-    let body = new FormData;
-    body.append('episode_id', episodeData.id);
-    body.append('user_id', localStorage.getItem('userId'));
-    this.commonService.addListen(body).subscribe(res => {
-      ;
-    })
   }
 
   upvote(episodeData) {
@@ -85,38 +100,15 @@ export class EpisodeCardComponent implements OnInit {
           } else if (res.err) {
             this.toastr.error('Something went wrong.');
           } else {
-            this.episodeData.ifVoted = true;
-            this.episodeData.votes = episodeData.votes + 1;
+            episodeData.ifVoted = true;
+            episodeData.votes = episodeData.votes + 1;
           }
         });
       }
     }
   }
 
-  openHiveAuthDialog(autoCheck: Boolean): void {
-    this.dialog.open(HiveAuthComponent, {
-      width: '800px',
-      // height:  '350px',
-      maxWidth: '95vw',
-      hasBackdrop: true,
-      data: { autoCheck: autoCheck }
-    });
-  }
-
-  tipAuthor(episodeData){
-    if(episodeData.author_hiveusername){
-      window.open('https://buymeberri.es/@'+episodeData.author_hiveusername, "_blank")
-      // window.location(episodeData.author_hiveusername);
-    }
-  }
-
-  socialShare(type, episodeData) {
-    this.dialog.open(SocialShareComponent, {
-      width: '400px',
-      // height:  '350px',
-      maxWidth: '95vw',
-      hasBackdrop: true,
-      data: { type: type, attributes: episodeData }
-    });
+  openEpisode(data): void {
+    this.router.navigateByUrl('episode/'+data.id);
   }
 }

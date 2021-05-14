@@ -1,76 +1,53 @@
-<!-- <div class="d-flex align-items-center justify-content-between pl-5 pr-5 pt-3">
-    <h2>Listen on Aureal</h2>
-    <p>See all</p>
-</div> -->
 <div class="discover-container">
 	<div class="custom-card">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-           <span class="accent f500 card-heading">
-                Featured Podcasts
-           </span> 
-           <span class="accenttwo card-side-heading">
-               See all
-           </span>
-        </div>
-        <div *ngIf="!tabsSection[0].isLoaded">
-            <app-loader></app-loader>
-        </div>
-        <div class="custom-row" *ngIf="tabsSection[0].isLoaded">
-            <div *ngFor="let podcast of tabsSection[0].data; let i = index" class="custom-col">
-                <app-podcast-card [podcastData]="podcast"></app-podcast-card>
-            </div>
-        </div>
-    </div>
-    <div class="custom-card mt-4">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-           <span class="accent f500 card-heading">
-                Top Podcasts
-           </span> 
-           <span class="accenttwo card-side-heading">
-               See all
-           </span>
-        </div>
-        <div *ngIf="!tabsSection[1].isLoaded">
-            <app-loader></app-loader>
-        </div>
-        <div class="custom-row" *ngIf="tabsSection[1].isLoaded">
-            <div *ngFor="let podcast of tabsSection[1].data; let i = index" class="custom-col">
-                <app-podcast-card [podcastData]="podcast"></app-podcast-card>
-            </div>
-        </div>
-    </div>
-
-    <div class="custom-card mt-4">
-        <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="d-flex align-items-center justify-content-between">
            <span class="accent f500 card-heading">
                 Trending on Hive
            </span> 
-           <span class="accenttwo card-side-heading">
-               See all
+           <span class="accenttwo card-side-heading pointer" (click)="getHiveEpisodes()">
+               <span>See more</span>
            </span>
+        </div>
+        <div class="custom-row" *ngIf="tabsSection[2].isLoaded || tabsSection[2].data.length">
+            <div *ngFor="let episode of tabsSection[2].data; let i = index" class="custom-col mt-3">
+                <app-episode-card [episodeData]="episode"></app-episode-card>
+            </div>
         </div>
         <div *ngIf="!tabsSection[2].isLoaded">
             <app-loader></app-loader>
         </div>
-        <div class="d-flex flex-column" *ngIf="tabsSection[2].isLoaded">
-            <div *ngFor="let episode of tabsSection[2].data; let i = index" class="custom-col">
-                <app-episode-list-card [episodeData]="episode"></app-episode-list-card>
+    </div>
+
+    <div class="custom-card mt-4">
+        <div class="d-flex align-items-center justify-content-between">
+           <span class="accent f500 card-heading">
+                Featured Podcasts
+           </span> 
+        </div>
+        <div class="custom-row" *ngIf="tabsSection[0].isLoaded">
+            <div *ngFor="let podcast of tabsSection[0].data; let i = index" class="custom-col-podcast mt-3">
+                <app-podcast-card [podcastData]="podcast"></app-podcast-card>
             </div>
         </div>
-    </div>
-    <!-- <h1 class="mt-5 f500 accenttwo">Explore</h1>
-    <div class="tabs">
-        <div class="each-tab" *ngFor="let item of tabsSection; let i = index" [class.active]="i == currentTab" (click)="currentTab = i">
-            {{item.name}}
+        <div *ngIf="!tabsSection[0].isLoaded">
+            <app-loader></app-loader>
         </div>
     </div>
-    <div class="tab-content">
-        <div class="cards-list" *ngIf="tabsSection[currentTab].type == 'episodes'">
-            <app-episode-card *ngFor="let episode of tabsSection[currentTab].data;" [episodeData]="episode"></app-episode-card>
+
+    <div class="custom-card mt-4">
+        <div class="d-flex align-items-center justify-content-between">
+           <span class="accent f500 card-heading">
+                Recommended Podcasts
+           </span>
         </div>
-        <div class="cards-list" *ngIf="tabsSection[currentTab].type == 'podcasts'">
-            <app-podcast-card *ngFor="let episode of tabsSection[currentTab].data;" [podcastData]="episode"></app-podcast-card>
+        <div class="custom-row" *ngIf="tabsSection[1].isLoaded">
+            <div *ngFor="let podcast of tabsSection[1].data; let i = index" class="custom-col-podcast mt-3">
+                <app-podcast-card [podcastData]="podcast"></app-podcast-card>
+            </div>
         </div>
-    </div> -->
+        <div *ngIf="!tabsSection[1].isLoaded">
+            <app-loader></app-loader>
+        </div>
+    </div>
 </div>
 

@@ -17,7 +17,10 @@ export class PlayerComponent implements OnInit {
   prevToPlayData;
   globalListenFunc: Function;
 
-  constructor(private audioService: AudioService, private renderer: Renderer2) {
+  constructor(
+    private audioService: AudioService,
+    private renderer: Renderer2,
+    ) {
     // get media files
     this.files = [
       // tslint:disable-next-line: max-line-length
@@ -158,4 +161,5 @@ export class PlayerComponent implements OnInit {
     // remove listener
     this.globalListenFunc();
   }
+
 }

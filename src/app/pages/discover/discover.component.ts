@@ -24,19 +24,33 @@ export class DiscoverComponent implements OnInit {
       name : 'Featured Podcasts',
       data : [],
       type : 'podcasts',
-      isLoaded: false
+      isLoaded: false,
+      page: -1,
+      pageSize: 6
     },
     {
-      name : 'Top Podcasts',
+      name : 'Recommended Podcasts',
       data : [],
       type : 'podcasts',
-      isLoaded: false
+      isLoaded: false,
+      page: -1,
+      pageSize: 6
     },
     {
       name : 'Trending on Hive',
       data : [],
       type : 'episodes',
-      isLoaded: false
+      isLoaded: false,
+      page: -1,
+      pageSize: 5
+    },
+    {
+      name : 'Recently played',
+      data : [],
+      type : 'episodes',
+      isLoaded: false,
+      page: -1,
+      pageSize: 5
     },
   ]
   constructor(
@@ -48,33 +62,31 @@ export class DiscoverComponent implements OnInit {
     this.getFeaturedPodcasts();
     this.getHiveEpisodes();
     // this.getNewlyReleasedPodcasts();
-    this.getPopularTrendingPodcasts();
-    // if(this.authService.isAuthenticated()){
-      // this.getRecentlyPlayedEpisodes();
-      // this.getRecommendedPodcasts();
-    // }
+    // this.getPopularTrendingPodcasts();
+    if(this.authService.isAuthenticated()){
+      this.getRecentlyPlayedEpisodes();
+      this.getRecommendedPodcasts();
+    }
   }
 
   getFeaturedPodcasts(){
     this.tabsSection[0].isLoaded = false;
-    this.commonService.getFeaturedPodcasts(localStorage.getItem('userId'), 0, 5).subscribe((res:any) => {
+    this.tabsSection[0].page +=1;
+    this.commonService.getFeaturedPodcasts(localStorage.getItem('userId'), this.tabsSection[0].page, this.tabsSection[0].pageSize).subscribe((res:any) => {
       this.tabsSection[0].isLoaded = true;
       if(res.featured){
         this.tabsSection[0].data = res.featured;
-        // res.featured.forEach(element => {
-        //   if(this.tabsSection[0].data.length<5)
-        //   this.tabsSection[0].data.push(element);
-        // });
       }
     })
   }
 
   getHiveEpisodes(){
+    this.tabsSection[2].page +=1;
     this.tabsSection[2].isLoaded = false;
-    this.commonService.browseHiveEpisodes(0, 10).subscribe((res:any) => {
+    this.commonService.browseHiveEpisodes(this.tabsSection[2].page, this.tabsSection[2].pageSize).subscribe((res:any) => {
       this.tabsSection[2].isLoaded = true;
       if(res.EpisodeResult){
-        this.tabsSection[2].data = res.EpisodeResult;
+        this.tabsSection[2].data = [...this.tabsSection[2].data, ...res.EpisodeResult];
       }
     })
   }
@@ -89,33 +101,35 @@ export class DiscoverComponent implements OnInit {
   //   })
   // }
 
-  // getRecentlyPlayedEpisodes(){
-  //   this.tabsSection[2].isLoaded = false;
-  //   this.commonService.getRecentlyPlayedEpisodes(0, 10).subscribe((res:any) => {
-  //     this.tabsSection[2].isLoaded = true;
-  //     if(res.recently){
-  //       this.tabsSection[2].data = res.recently;
-  //     }
-  //   })
-  // }
-
-  getPopularTrendingPodcasts(){
-    this.tabsSection[1].isLoaded = false;
-    this.commonService.getPopularTrendingPodcasts(0, 5).subscribe((res:any) => {
-      this.tabsSection[1].isLoaded = true;
-      if(res.trending){
-        this.tabsSection[1].data = res.trending;
+  getRecentlyPlayedEpisodes(){
+    this.tabsSection[2].isLoaded = false;
+    this.commonService.getRecentlyPlayedEpisodes(0, 10).subscribe((res:any) => {
+      this.tabsSection[2].isLoaded = true;
+      if(res.recently){
+        this.tabsSection[2].data = res.recently;
       }
     })
   }
 
-  // getRecommendedPodcasts(){
-  //   this.tabsSection[4].isLoaded = false;
-  //   this.commonService.getRecommendedPodcasts(0, 10).subscribe((res:any) => {
-  //     this.tabsSection[4].isLoaded = true;
-  //     if(res.for_you){
-  //       this.tabsSection[4].data = res.for_you;
+  // getPopularTrendingPodcasts(){
+  //   this.tabsSection[1].page +=1;
+  //   this.tabsSection[1].isLoaded = false;
+  //   this.commonService.getPopularTrendingPodcasts(this.tabsSection[1].page, this.tabsSection[1].pageSize).subscribe((res:any) => {
+  //     this.tabsSection[1].isLoaded = true;
+  //     if(res.trending){
+  //       this.tabsSection[1].data = res.trending;
   //     }
   //   })
   // }
+
+  getRecommendedPodcasts(){
+    this.tabsSection[1].page +=1;
+    this.tabsSection[1].isLoaded = false;
+    this.commonService.getRecommendedPodcasts(this.tabsSection[1].page, this.tabsSection[1].pageSize).subscribe((res:any) => {
+      this.tabsSection[1].isLoaded = true;
+      if(res.for_you){
+        this.tabsSection[1].data = res.for_you;
+      }
+    })
+  }
 }
