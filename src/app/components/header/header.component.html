@@ -14,8 +14,8 @@
                     <span class="icon icon-light-up pointer accenttwo" *ngIf="dark" (click)="toggleTheme(false)"></span>
                 </div>
                 <div class="search-container relative">
-                    <input [(ngModel)]="searchText" class="accenttwo">
-                    <span class="icon icon-search-1 accenttwo"></span>
+                    <input [(ngModel)]="searchText" class="accenttwo" (keyup.enter)="triggerSearch($event)">
+                    <span class="icon icon-search-1 accenttwo" (click)="triggerSearch(true)"></span>
                 </div>
             </div>
         </div>

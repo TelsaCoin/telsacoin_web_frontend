@@ -25,11 +25,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private route: ActivatedRoute,
     public router: Router,
     public dialog: MatDialog,
     public userDetailsService: UserDetailsService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
         this.userDetailsService.UserDetails = res.users;
       });
     }
+    this.updateSearch();
   }
 
   navigateHome() {
@@ -114,5 +115,15 @@ export class HeaderComponent implements OnInit {
 
   get dark() {
     return this.themeService.theme === 'dark';
+  }
+  
+  triggerSearch(event){
+    this.router.navigateByUrl('search/'+this.searchText);
+  }
+
+  updateSearch(){
+    if(window.location.pathname.split('/')[1] == 'search'){
+      this.searchText = window.location.pathname.split('/')[2];
+    }
   }
 }

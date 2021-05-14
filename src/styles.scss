@@ -493,6 +493,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     right: 10px;
     top: 5px;
     cursor: pointer;
+    color: var(--accenttwo);
   }
   input{
     border-radius: 20px;
@@ -501,8 +502,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding: 5px 15px;
     font-size: 14px;
     width: 300px;
+    color: var(--accent);
     &:focus{
       outline: none;
+      width: 600px;
     }
   }
 }

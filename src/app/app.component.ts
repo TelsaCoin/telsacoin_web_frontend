@@ -68,7 +68,8 @@ export class AppComponent implements OnInit {
     public commonService : CommonService,
     private toastr: ToastrService,
     public dialog: MatDialog,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private activatedRoute: ActivatedRoute
     ) {
       this.themeService.theme = 'dark';
       if(this.commonService.isMobile()){

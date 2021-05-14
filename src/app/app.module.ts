@@ -34,9 +34,9 @@ import { EpisodeListCardComponent } from './components/episode-list-card/episode
 import { EpisodeCardComponent } from './components/episode-card/episode-card.component';
 import { PodcastCardComponent } from './components/podcast-card/podcast-card.component';
 import { DiscoverComponent } from './pages/discover/discover.component';
-import { FavoriteComponent } from './pages/favorite/favorite.component';
 import { EpisodeDetailsComponent } from './pages/episode-details/episode-details.component';
 import { HiveonboardComponent } from './pages/hiveonboard/hiveonboard.component';
+import { ExploreComponent } from './pages/explore/explore.component';
 
 @NgModule({
   declarations: [
@@ -59,9 +59,9 @@ import { HiveonboardComponent } from './pages/hiveonboard/hiveonboard.component'
     EpisodeCardComponent,
     PodcastCardComponent,
     DiscoverComponent,
-    FavoriteComponent,
     EpisodeDetailsComponent,
     HiveonboardComponent,
+    ExploreComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { EmbedComponent } from './pages/embed/embed.component';
 import { EpisodeDetailsComponent } from './pages/episode-details/episode-details.component';
 import { DiscoverComponent } from './pages/discover/discover.component';
-import { FavoriteComponent } from './pages/favorite/favorite.component';
+import { ExploreComponent } from './pages/explore/explore.component';
 import { HiveonboardComponent } from './pages/hiveonboard/hiveonboard.component';
 
 const routes: Routes = [
@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: "embed/:episode_id", component: EmbedComponent },
   { path: "episode/:episode_id", component: EpisodeDetailsComponent },
   { path: '', component: DiscoverComponent },
-  { path: 'favorite', component: FavoriteComponent },
+  { path: 'explore', component: ExploreComponent },
   // { path: '', component: HomeComponent },
   { path: 'episode/:episode_id', component: EpisodeDetailsComponent },
   { path: 'hive-onboarding', component: HiveonboardComponent },

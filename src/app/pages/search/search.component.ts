@@ -12,7 +12,6 @@ import { PlayerService } from 'src/app/services/player.service';
 })
 export class SearchComponent implements OnInit {
   searchQuery = '';
-  currentTab = 'Podcasts';
   isLoading: Boolean = true;
   searchResults = { EpisodeList: [], PodcastList: [] };
 
@@ -30,6 +29,7 @@ export class SearchComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.searchQuery = paramMap.get('query');
       this.page = 0;
+      this.searchResults = { EpisodeList: [], PodcastList: [] };
       this.getSearchResults();
     });
   }
@@ -40,18 +40,7 @@ export class SearchComponent implements OnInit {
       this.isLoading = false;
       console.log(res);
       this.searchResults.PodcastList = this.searchResults.PodcastList.concat(res.PodcastList);
-      this.searchResults.EpisodeList = this.searchResults.EpisodeList.concat(res.EpisodeList);
     });
-  }
-
-  tabChanged(tabChangeEvent: number) {
-    if (tabChangeEvent) {
-      this.currentTab = 'Episodes';
-    } else {
-      this.currentTab = 'Podcasts';
-    }
-    console.log(this.currentTab);
-    console.log(this.searchResults.EpisodeList);
   }
 
 

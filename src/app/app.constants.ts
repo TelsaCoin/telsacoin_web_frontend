@@ -6,7 +6,7 @@ export const appConstants = {
           icon : 'icon icon-home-black-24dp'
         },
         {
-          route : 'favorite',
+          route : 'explore',
           name : 'Explore',
           icon : 'icon icon-explore-black-24dp'
         },
