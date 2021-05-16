@@ -32,7 +32,7 @@ export class EpisodeCardComponent implements OnInit {
   }
 
   openPodcast(data): void {
-    this.router.navigateByUrl('podcast/'+data.id);
+    this.router.navigateByUrl('podcast/'+data.podcast_id);
   }
 
   followPodcast(ifFollows) {

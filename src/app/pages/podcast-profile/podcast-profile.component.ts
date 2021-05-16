@@ -23,7 +23,7 @@ export class PodcastProfileComponent implements OnInit {
   showPlayer: boolean = true;
   progress: boolean = true;
   categoryBasedPodcastsLoading = false;
-
+  viewMoreDescription: boolean = false;
   //scroll
   throttle = 300;
   scrollDistance = 1;
@@ -49,49 +49,24 @@ export class PodcastProfileComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.podcastId = paramMap.get('podcast_id');
       this.rssFeedDetailsService.getRssFeedDetails(paramMap.get('podcast_id'), this.page, this.pageSize).then(res => {
-        this.podcastData = res['podcasts'][0]; //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
+        this.podcastData = res['podcast']; //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
         document.title = this.podcastData.name;
         this.progress = false;
+      });
+      this.commonService.getPodcastEpisodes(localStorage.getItem('userId'),this.podcastId, 0,10).subscribe((res:any) => {
+        this.podcastData['Episodes'] = res.episodes;
       })
     });
-    if (this.activatedRoute.snapshot.queryParamMap.get("episode_id")) {
-      const episode_id = this.activatedRoute.snapshot.queryParamMap.get("episode_id");
-      // this.sharedEpisode['id'] = episode_id;
-      this.sharedEpisodeLoading = true;
-      this.commonService
-        .getEpisode(episode_id)
-        .subscribe((res: any) => {
-          console.log(res);
-          this.sharedEpisodeLoading = false;
-          this.sharedEpisode = res.episode;
-        });
-    }
-
-    // console.log(this.route.snapshot.queryParamMap.get("expires_in"));
-
-    // this.activatedRoute.paramMap.subscribe((paramMap) => {
-    //   this.rssFeedDetailsService.getRssFeedDetails(parseInt(window.location.pathname.split('/')[2])).then(res => {
-    //     this.activatedRoute.queryParams.subscribe( queryParams=>{
-    //       this.podcastData = res['podcasts'].find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
-    //       this.progress = false;
-    //     })
-
-    //   })    
-    // });
   }
 
-  followPodcast(ifFollows) {
+  followPodcast() {
     if (this.podcastData.id) {
       let body = new FormData;
       if (this.authService.isAuthenticated()) {
         body.append('user_id', localStorage.getItem('userId'));
         body.append('podcast_id', this.podcastData.id);
         this.commonService.followPodcast(body).subscribe((res: any) => {
-          this.podcastData.follows = true;
-          // if(res.msg){
-          //   this.toastr.error('Something went wrong');
-          // }else{
-          // }
+          this.podcastData.ifFollows = true;
         })
       } else {
         this.openHiveAuthDialog(false);

@@ -1,6 +1,7 @@
 .search-container{
   width: 100%;
   padding: 20px;
+  min-height: 100vh;
   .inside-search-container{
     border: 1px solid var(--primary-border);
     border-radius: 20px;

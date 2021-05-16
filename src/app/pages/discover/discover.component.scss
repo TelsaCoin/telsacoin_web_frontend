@@ -1,6 +1,6 @@
 .discover-container {
     width: 100%;
-    padding: 20px;
+    padding: 20px 40px;
 }
 
 .tabs{
@@ -35,65 +35,4 @@
           display: none; 
         }
     }
-}
-
-.custom-row{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -15px;
-    // margin-right: -15px;
-    // margin-left: -15px;
-
-    .custom-col{
-        flex: 0 0 20%;
-        max-width: 20%;
-        position: relative;
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        @media only screen and (max-width: 1024px) {
-            flex: 0 0 25%;
-            max-width: 25%;
-            position: relative;
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        @media (max-width: 576px) {
-            flex: 0 0 50%;
-            max-width: 50%;
-            position: relative;
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-
-    }
-
-    .custom-col-podcast{
-        flex: 0 0 33%;
-        max-width: 33%;
-        position: relative;
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        @media only screen and (max-width: 1024px) {
-            flex: 0 0 50%;
-            max-width: 50%;
-            position: relative;
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        @media (max-width: 576px) {
-            flex: 0 0 50%;
-            max-width: 50%;
-            position: relative;
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-
-    }
-
 }

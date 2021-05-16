@@ -28,6 +28,23 @@ export class CommonService {
     }
   }
 
+  recommendedEpisodes(page, pageSize, category_ids) {
+    if(category_ids){
+      if (localStorage.getItem('userId')) {
+        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId') + '&category_ids=' + category_ids);
+      } else {
+        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize + '&category_ids=' + category_ids);
+      }
+    }else{
+      if (localStorage.getItem('userId')) {
+        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId'));
+      } else {
+        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize);
+      }
+    }
+
+  }
+
   getNewlyReleasedPodcasts(page, pageSize) {
     if (localStorage.getItem('userId')) {
       return this.api.get(this.apiUrl + '/public/newest?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId'));

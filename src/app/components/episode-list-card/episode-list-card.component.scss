@@ -2,29 +2,21 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  padding: 20px;
-  border-bottom: 1px solid var(--light);
-  background: white;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--primary-border);
+  background: var(--theme-background);
   @media (max-width: 576px) {
     padding: 10px;
   }
-  &:hover {
-    background: #f9f9f9;
-    cursor: pointer;
-    .upvotes {
-      background: white;
-    }
-  }
+  // &:hover {
+  //   background: var(--tertiary-background);
+  //   cursor: pointer;
+  //   .upvotes {
+  //     border: 1px solid var(--primary-border);
+  //   }
+  // }
   .content {
-    margin-left: 15px;
     width: 100%;
-  }
-  img {
-    max-height: 100px;
-    border-radius: 8px;
-    @media (max-width: 576px) {
-      max-height: 70px;
-    }
   }
   .itemsContainer {
     background: transparent;
@@ -49,9 +41,8 @@
   }
   .name {
     color: var(--accent);
-    font-size: 16px !important;
-    font-weight: 500;
-    margin-bottom: 0px;
+    font-size: 14px !important;
+    margin-bottom: 7px;
     @media (max-width: 576px) {
       font-size: 13px !important;
     }
@@ -74,29 +65,42 @@
       font-size: 11px !important;
     }
   }
-  .duration {
+  .vote-count{
+    background: var(--tertiary-background);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 10px;
+    margin-right: 10px;
     display: flex;
-    margin-right: 20px;
-    color: var(--accenttwo);
-    p {
-      font-size: 13px !important;
-      margin-bottom: 0px;
-      @media (max-width: 576px) {
-        font-size: 11px !important;
-      }
+    align-items: center;
+    border-radius: 15px;
+    cursor: pointer;
+    .icon{
+        font-size: 14px;
+        margin-right: 3px;
     }
   }
+  // .duration {
+  //   display: flex;
+  //   margin-right: 20px;
+  //   color: var(--accenttwo);
+  //   p {
+  //     font-size: 13px !important;
+  //     margin-bottom: 0px;
+  //     @media (max-width: 576px) {
+  //       font-size: 11px !important;
+  //     }
+  //   }
+  // }
   .views {
     display: flex;
     margin-right: 20px;
     color: var(--accenttwo);
-    p {
-      font-size: 13px !important;
-      margin-left: 5px;
-      margin-bottom: 0px;
-      @media (max-width: 576px) {
-        font-size: 11px !important;
-      }
+    font-size: 13px !important;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    @media (max-width: 576px) {
+      font-size: 11px !important;
     }
   }
   .upvotes {
