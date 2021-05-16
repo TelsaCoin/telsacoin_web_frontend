@@ -39,14 +39,17 @@ export class UserProfileComponent implements OnInit {
 
     this.getUserDetails();
     this.rssFeedDetailsService.getSubmittedRssFeeds().subscribe((res: any) => {
-      if (res.podcasts && res.podcasts.length) {
+      if (res.podcasts) {
         this.podcasts = res.podcasts;
-        this.podcasts.forEach(podcast => {
-          podcast.Episodes.forEach(element => {
-            element['Categories'] = podcast['Categories'];
-            element['podcast_name'] = podcast['name'];
-            element['author'] = podcast['author'];
-          });
+        // this.podcasts.forEach(podcast => {
+        //   podcast.Episodes.forEach(element => {
+        //     element['Categories'] = podcast['Categories'];
+        //     element['podcast_name'] = podcast['name'];
+        //     element['author'] = podcast['author'];
+        //   });
+        // })
+        this.rssFeedDetailsService.getPodcastEpisodes(this.podcasts[0]['id'], 0,10).then((res:any) => {
+          this.podcasts[0]['Episodes'] = res.episodes;
         })
       }
       // this.dataSource = res.
