@@ -29,7 +29,7 @@ export class PodcastProfileComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   //paginate
-  page = 0;
+  page = -1;
   pageSize = 10;
   sharedEpisode;
   sharedEpisodeLoading: Boolean = false;
@@ -52,10 +52,12 @@ export class PodcastProfileComponent implements OnInit {
         this.podcastData = res['podcast']; //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
         document.title = this.podcastData.name;
         this.progress = false;
+        this.podcastData['Episodes'] = [];
+        this.onScrollDown();
       });
-      this.commonService.getPodcastEpisodes(localStorage.getItem('userId'),this.podcastId, 0,10).subscribe((res:any) => {
-        this.podcastData['Episodes'] = res.episodes;
-      })
+      // this.commonService.getPodcastEpisodes(localStorage.getItem('userId'),this.podcastId, 0,10).subscribe((res:any) => {
+      //   this.podcastData['Episodes'] = res.episodes;
+      // })
     });
   }
 
@@ -79,8 +81,9 @@ export class PodcastProfileComponent implements OnInit {
     this.categoryBasedPodcastsLoading = true;
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.podcastId = paramMap.get('podcast_id');
-      this.rssFeedDetailsService.getRssFeedDetails(paramMap.get('podcast_id'), this.page, this.pageSize).then(res => {
-        this.podcastData.Episodes = this.podcastData.Episodes.concat(res['podcasts'][0].Episodes); //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
+      this.commonService.getPodcastEpisodes(localStorage.getItem('userId'), paramMap.get('podcast_id'), this.page, this.pageSize).subscribe((res:any) => {
+        this.podcastData['Episodes'] = [...this.podcastData['Episodes'], ...res.episodes];
+        // this.podcastData.Episodes = this.podcastData.Episodes.concat(res['podcasts'][0].Episodes); //.find( podcast => podcast.id===parseInt(window.location.pathname.split('/')[2]));
         this.categoryBasedPodcastsLoading = false;
       })
     });

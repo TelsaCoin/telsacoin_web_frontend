@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EpisodeListCardComponent implements OnInit {
   @Input() episodeData;
   @Input() showUpvote : Boolean = false;
+  viewMoreDescription: boolean = false;
 
   upvoteOngoing: Boolean = false;
   // @Output() openCard = new EventEmitter<any>(true);
@@ -124,5 +125,9 @@ export class EpisodeListCardComponent implements OnInit {
       hasBackdrop: true,
       data: { type: type, attributes: episodeData }
     });
+  }
+
+  openEpisode(data): void {
+    this.router.navigateByUrl('episode/'+data.id);
   }
 }

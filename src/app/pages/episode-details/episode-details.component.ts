@@ -24,24 +24,25 @@ export class EpisodeDetailsComponent implements OnInit {
   episodeId;
   isAddingComment = false;
   upvoteOngoing: Boolean = false;
+  viewMoreDescription:Boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private commonService : CommonService, public authService: AuthService,
     private router: Router, private toastr: ToastrService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public playerService: PlayerService) {
     console.log(data);
     if (data && data.id) {
       this.episodeData = data;
-      let categoryIds = '';
-      this.episodeData['Categories'].forEach(element => {
-        categoryIds += (element.id + '_');
-      });
-      if (categoryIds) {
-        this.categoryBasedPodcastsLoading = true;
-        this.commonService.categoryBasedPodcasts(0, 10, categoryIds).subscribe((res: any) => {
-          this.categoryBasedPodcastsLoading = false;
-          this.categoryBasedPodcasts = res.PodcastList;
-          console.log(res);
-        });
-      }
+      // let categoryIds = '';
+      // this.episodeData['Categories'].forEach(element => {
+      //   categoryIds += (element.id + '_');
+      // });
+      // if (categoryIds) {
+      //   this.categoryBasedPodcastsLoading = true;
+      //   this.commonService.categoryBasedPodcasts(0, 10, categoryIds).subscribe((res: any) => {
+      //     this.categoryBasedPodcastsLoading = false;
+      //     this.categoryBasedPodcasts = res.PodcastList;
+      //     console.log(res);
+      //   });
+      // }
       this.getComments();
     } else {
       this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -49,18 +50,18 @@ export class EpisodeDetailsComponent implements OnInit {
         this.commonService.getEpisode(this.episodeId).subscribe((res: any) => {
           console.log(res);
           this.episodeData = res.episode;
-          let categoryIds = '';
-          this.episodeData['Categories'].forEach(element => {
-            categoryIds += (element.id + '_');
-          });
-          if (categoryIds) {
-            this.categoryBasedPodcastsLoading = true;
-            this.commonService.categoryBasedPodcasts(0, 10, categoryIds).subscribe((res: any) => {
-              this.categoryBasedPodcastsLoading = false;
-              this.categoryBasedPodcasts = res.PodcastList;
-              console.log(res);
-            });
-          }
+          // let categoryIds = '';
+          // this.episodeData['Categories'].forEach(element => {
+          //   categoryIds += (element.id + '_');
+          // });
+          // if (categoryIds) {
+          //   this.categoryBasedPodcastsLoading = true;
+          //   this.commonService.categoryBasedPodcasts(0, 10, categoryIds).subscribe((res: any) => {
+          //     this.categoryBasedPodcastsLoading = false;
+          //     this.categoryBasedPodcasts = res.PodcastList;
+          //     console.log(res);
+          //   });
+          // }
           this.getComments();
         });
       })
@@ -165,5 +166,12 @@ export class EpisodeDetailsComponent implements OnInit {
     this.commonService.addListen(body).subscribe(res => {
       ;
     })
+  }
+
+  tipAuthor(episodeData){
+    if(episodeData.author_hiveusername){
+      window.open('https://buymeberri.es/@'+episodeData.author_hiveusername, "_blank")
+      // window.location(episodeData.author_hiveusername);
+    }
   }
 }

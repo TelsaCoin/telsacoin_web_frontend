@@ -29,11 +29,14 @@ export class UserProfileComponent implements OnInit {
   isProfileFormOpen: Boolean = false;
   index = 0;
   unclaimedText = '';
+  episodesLoading: Boolean = false;
+  page = 0;
+  pageSize = 10;
   constructor(private userDetailsService: UserDetailsService, public rssFeedDetailsService: RssFeedDetailsService, private toastr: ToastrService, private router: Router, public dialog: MatDialog, private commonService : CommonService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
     this.profileForm = new FormGroup({
-      'fullname': new FormControl('', [Validators.required]),
+      'username': new FormControl('', [Validators.required]),
       'bio': new FormControl('', []), //this.checkPassword]),
     });
 
@@ -41,17 +44,17 @@ export class UserProfileComponent implements OnInit {
     this.rssFeedDetailsService.getSubmittedRssFeeds().subscribe((res: any) => {
       if (res.podcasts && res.podcasts.length) {
         this.podcasts = res.podcasts;
-        this.podcasts.forEach(podcast => {
-          podcast.Episodes.forEach(element => {
-            element['Categories'] = podcast['Categories'];
-            element['podcast_name'] = podcast['name'];
-            element['author'] = podcast['author'];
-          });
-        })
+        // this.podcasts.forEach(podcast => {
+        //   podcast.Episodes.forEach(element => {
+        //     element['Categories'] = podcast['Categories'];
+        //     element['podcast_name'] = podcast['name'];
+        //     element['author'] = podcast['author'];
+        //   });
+        // })
       }
       // this.dataSource = res.
     });
-    this.getCommunityData();
+    // this.getCommunityData();
     this.userDetailsService.getUserHiveDetails().then((res: any) => {
       console.log('hererere', res.client.account.reward_vesting_hive.split(' ')[0]);
       if (res.client && res.client.account.reward_hive_balance.split(' ')[0] != '0.000' && res.client.account.reward_hbd_balance.split(' ')[0] != '0.000' && res.client.account.reward_vesting_hive.split(' ')[0] != '0.000') {
@@ -63,6 +66,7 @@ export class UserProfileComponent implements OnInit {
 
 
   }
+
 
   claimRewards() {
     let body = new FormData;
@@ -127,7 +131,7 @@ export class UserProfileComponent implements OnInit {
       console.log(res);
       this.userDetailsService.UserDetails = res.users;
       this.userDetails = res.users;
-      this.profileForm.controls['fullname'].setValue(this.userDetails.fullname);
+      this.profileForm.controls['username'].setValue(this.userDetails.username);
       this.profileForm.controls['bio'].setValue(this.userDetails.settings.Account.Bio);
     });
   }
@@ -141,7 +145,7 @@ export class UserProfileComponent implements OnInit {
     let body = new FormData;
     body.append('username', data.username);
     body.append('password', data.password);
-    this.userDetails.fullname = data.fullname;
+    this.userDetails.username = data.username;
     this.userDetails.settings.Account.Bio = data.bio;
     this.updateUser();
   }
@@ -160,7 +164,7 @@ export class UserProfileComponent implements OnInit {
     let body = new FormData;
     body.append('user_id', localStorage.getItem('userId'));
     body.append('img', this.userDetails.img);
-    body.append('fullname', this.userDetails.fullname);
+    body.append('username', this.userDetails.username);
     body.append('settings_Account_Bio', this.userDetails.settings.Account.Bio);
     this.userDetailsService.updateUser(body).then((res) => {
       console.log(res);
@@ -202,8 +206,8 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  getErrorFullname(form) {
-    return form.get('fullname').hasError('required') ? 'Field is required' : '';
+  getErrorusername(form) {
+    return form.get('username').hasError('required') ? 'Field is required' : '';
   }
 
   openCommentDialog(episode_id): void {

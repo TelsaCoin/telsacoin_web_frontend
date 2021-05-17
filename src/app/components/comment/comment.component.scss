@@ -1,13 +1,23 @@
 :host {
   display: block;
 }
-
+.comment{
+  font-size: 14px;
+}
 .the-but-reply {
   color: var(--accenttwo);
-  font-weight: bold;
+  /* font-weight: bold; */
   cursor: pointer;
+  border: 1px solid var(--primary-border);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 i {
   margin-left: 5px;
   cursor: pointer;
+  font-size: 20px;
+  margin-top: 3px;
 }

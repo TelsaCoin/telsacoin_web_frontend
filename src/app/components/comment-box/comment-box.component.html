@@ -1,5 +1,6 @@
 <div class="comment-box">
   <textarea [(ngModel)]="value"></textarea>
-  <button mat-raised-button color="primary" (click)="post()" style="margin-right: 20px;">Post</button>
-  <button mat-raised-button color="secondary" (click)="value = ''">Cancel</button>
+  <div>
+    <button class="primary-but" (click)="post()" style="margin-right: 20px;">Post</button>
+  </div>
 </div>

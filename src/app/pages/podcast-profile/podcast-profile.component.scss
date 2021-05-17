@@ -84,6 +84,20 @@
   }
 }
 
+.view-more{
+  color: var(--accenttwo);
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  .icon{
+    font-size: 14px;
+    margin-top: 2px;
+  }
+}
+
 .podcast-episode-container {
   // width: 768px;
   margin: 40px auto;

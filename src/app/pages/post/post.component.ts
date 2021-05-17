@@ -31,7 +31,7 @@ export class PostComponent implements OnInit {
   episodes = [];
   episodesLoading: Boolean = false;
   page = 0;
-  pageSize = 1;
+  pageSize = 10;
   viewMoreDescription:Boolean = false;
   constructor(
     public authService: AuthService,

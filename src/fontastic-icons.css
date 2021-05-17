@@ -125,3 +125,9 @@
 .icon-times:before {
   content: "\44";
 }
+.icon-arrow-left:before {
+  content: "\43";
+}
+.icon-reply:before {
+  content: "\45";
+}
