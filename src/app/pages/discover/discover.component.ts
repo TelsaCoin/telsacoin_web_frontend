@@ -64,7 +64,7 @@ export class DiscoverComponent implements OnInit {
     // this.getNewlyReleasedPodcasts();
     // this.getPopularTrendingPodcasts();
     if(this.authService.isAuthenticated()){
-      this.getRecentlyPlayedEpisodes();
+      // this.getRecentlyPlayedEpisodes();
       this.getRecommendedPodcasts();
     }
   }
@@ -101,15 +101,15 @@ export class DiscoverComponent implements OnInit {
   //   })
   // }
 
-  getRecentlyPlayedEpisodes(){
-    this.tabsSection[2].isLoaded = false;
-    this.commonService.getRecentlyPlayedEpisodes(0, 10).subscribe((res:any) => {
-      this.tabsSection[2].isLoaded = true;
-      if(res.recently){
-        this.tabsSection[2].data = res.recently;
-      }
-    })
-  }
+  // getRecentlyPlayedEpisodes(){
+  //   this.tabsSection[2].isLoaded = false;
+  //   this.commonService.getRecentlyPlayedEpisodes(0, 10).subscribe((res:any) => {
+  //     this.tabsSection[2].isLoaded = true;
+  //     if(res.recently){
+  //       this.tabsSection[2].data = res.recently;
+  //     }
+  //   })
+  // }
 
   // getPopularTrendingPodcasts(){
   //   this.tabsSection[1].page +=1;

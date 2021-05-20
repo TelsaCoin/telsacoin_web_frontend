@@ -33,6 +33,7 @@ export class PodcastProfileComponent implements OnInit {
   pageSize = 10;
   sharedEpisode;
   sharedEpisodeLoading: Boolean = false;
+  userId = localStorage.getItem('userId');
   constructor(public rssFeedDetailsService: RssFeedDetailsService,
     public activatedRoute: ActivatedRoute, public playerService: PlayerService,
     private commonService : CommonService,

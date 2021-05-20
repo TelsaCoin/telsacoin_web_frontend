@@ -6,22 +6,30 @@
         </div>
     </button>
     <div class="content mt-2">
-        <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openPodcast(episodeData)">{{episodeData.name}}</span>
-        <span class="author text-truncate accenttwo mb-1">{{episodeData.podcast_name}}</span>
-        <div class="d-flex align-center">
-            <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}">
-                <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
-                <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
+        <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openEpisode(episodeData)">{{episodeData.name}}</span>
+        <span class="author text-truncate accenttwo mb-1 pointer" (click)="openPodcast(episodeData)">{{episodeData.podcast_name}}</span>
+        <div style="min-height: 30px;">
+            <div class="d-flex align-center" *ngIf="episodeData?.permlink && !isPaidOut()">
+                <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}">
+                    <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
+                    <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
+                </div>
+                <div class="vote-count" *ngIf="episodeData?.permlink">
+                    <span>{{episodeData.votes}}</span>
+                </div>
+                <div class="vote-count" *ngIf="episodeData?.permlink">
+                    <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
+                </div>
+                <div class="comment-count" (click)="openEpisode(episodeData)" *ngIf="episodeData?.permlink">
+                    <span class="icon icon-comments-o"></span>
+                    <span>{{episodeData.comments_count}}</span>
+                </div>
             </div>
-            <div class="vote-count">
-                <span>{{episodeData.votes}}</span>
-            </div>
-            <div class="vote-count">
-                <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
-            </div>
-            <div class="comment-count" (click)="openEpisode(episodeData)">
-                <span class="icon icon-comments-o"></span>
-                <span>{{episodeData.comments_count}}</span>
+            <div *ngIf="episodeData?.permlink && isPaidOut() && episodeData?.author_hiveusername">
+                <div class="comment-count" style="margin-left: 0;" (click)="tipAuthor(episodeData)" *ngIf="episodeData?.permlink">
+                    <i class="icon fa fa-gift" aria-hidden="true"></i>
+                    <span>Tip Podcaster</span>
+                </div>
             </div>
         </div>
     </div>

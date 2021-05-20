@@ -3,8 +3,8 @@
         <img src="https://aurealbucket.s3.us-east-2.amazonaws.com/Mascot.png">
     </div>
     <div class="r-block">
-        <h2 class="text-center f500 mt-5" *ngIf="!justHiveLogin">Sign up/ Log in using</h2>
-        <h2 class="text-center f500 mt-5" *ngIf="justHiveLogin">Connect your HIVE account</h2>
+        <h2 class="text-center f500 mt-5 accenttwo" *ngIf="!justHiveLogin">Sign up/ Log in using</h2>
+        <h2 class="text-center f500 mt-5 accenttwo" *ngIf="justHiveLogin">Connect your HIVE account</h2>
         <div class="mt-4 mb-5 d-flex flex-column">
             <button class="custom-primary-button" *ngIf="!justHiveLogin" (click)="signIn('google')">
                 <span class="icon icon-google-dark mr-2"></span>
@@ -16,7 +16,7 @@
             </button>
         </div>
         <span class="divider"></span>
-        <p class="accent text-center mt-4 mb-4" style="font-size: 12px; font-weight: 300;">Aureal enables your content monetisation through web 3.0, We recommend you to create and connect your HIVE account with Aureal.</p>
+        <p class="accenttwo text-center mt-4 mb-4" style="font-size: 12px; font-weight: 300;">Aureal enables your content monetisation through web 3.0, We recommend you to create and connect your HIVE account with Aureal.</p>
         <button class="custom-secondary-button" (click)="routeto('hive-onboarding')">
             <span>Create HIVE Account</span>
         </button>

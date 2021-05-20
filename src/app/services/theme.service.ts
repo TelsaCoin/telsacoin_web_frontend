@@ -12,5 +12,10 @@ export class ThemeService {
 
   set theme(name: string) {
     document.documentElement.setAttribute('theme', name);
+    if(name){
+      localStorage.setItem('theme', name) 
+    }else{
+      localStorage.setItem('theme', 'light')
+    }
   }
 }

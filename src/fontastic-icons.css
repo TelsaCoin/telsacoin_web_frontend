@@ -131,3 +131,21 @@
 .icon-reply:before {
   content: "\45";
 }
+.icon-android:before {
+  content: "\46";
+}
+.icon-apple:before {
+  content: "\47";
+}
+.icon-mic-none-black-24dp:before {
+  content: "\48";
+}
+.icon-add-circle-outline-black-24dp:before {
+  content: "\49";
+}
+.icon-task-alt-black-24dp:before {
+  content: "\4a";
+}
+.icon-schedule-white-18dp:before {
+  content: "\4b";
+}

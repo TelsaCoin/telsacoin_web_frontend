@@ -58,7 +58,7 @@
               <div class="left-content-content">
                 <form [formGroup]="linkForm" class="form" *ngIf="!isOtpFormShown">
                   <mat-form-field class="form-element search-container relative">
-                    <input class="accenttwo" placeholder="your Podcast's RSS link" formControlName="link">
+                    <input class="accenttwo" matInput placeholder="your Podcast's RSS link" formControlName="link">
                     <mat-error *ngIf="!linkForm.controls['link'].valid && linkForm.controls['link'].touched">
                       {{ getErrorLink(linkForm) }}
                     </mat-error>

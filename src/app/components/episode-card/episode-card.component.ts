@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as moment from 'moment';
 import { Router } from "@angular/router";
 import { PlayerService } from 'src/app/services/player.service';
 import {CommonService} from 'src/app/services/common.service';
@@ -8,6 +7,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { SocialShareComponent } from 'src/app/components/social-share/social-share.component';
 import { ToastrService } from 'ngx-toastr';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Component({
   selector: 'app-episode-card',
@@ -110,5 +111,17 @@ export class EpisodeCardComponent implements OnInit {
 
   openEpisode(data): void {
     this.router.navigateByUrl('episode/'+data.id);
+  }
+
+  isPaidOut(){
+    console.log(this.episodeData.published_at, moment().diff(this.episodeData.published_at, "days") > 7)
+    return moment().diff(this.episodeData.published_at, "days") > 7;
+  }
+
+  tipAuthor(episodeData){
+    if(episodeData.author_hiveusername){
+      window.open('https://buymeberri.es/@'+episodeData.author_hiveusername, "_blank")
+      // window.location(episodeData.author_hiveusername);
+    }
   }
 }

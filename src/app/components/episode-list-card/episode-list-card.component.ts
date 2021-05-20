@@ -17,9 +17,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EpisodeListCardComponent implements OnInit {
   @Input() episodeData;
+  @Input() userId = '';
   @Input() showUpvote : Boolean = false;
   viewMoreDescription: boolean = false;
-
+  publishing: Boolean = false;
   upvoteOngoing: Boolean = false;
   // @Output() openCard = new EventEmitter<any>(true);
   constructor(public router: Router, public authService: AuthService, public playerService: PlayerService, public dialog: MatDialog, public commonService: CommonService, private toastr: ToastrService) {
@@ -129,5 +130,20 @@ export class EpisodeListCardComponent implements OnInit {
 
   openEpisode(data): void {
     this.router.navigateByUrl('episode/'+data.id);
+  }
+
+  publishEpisode(episode) {
+    this.publishing = true;
+    let body1 = new FormData;
+    body1.append('episode_id', episode.id);
+    this.commonService.manualHivePublish(body1).subscribe((res: any) => {
+      this.publishing = false;
+      if (res.msg) {
+        this.toastr.error(res.msg);
+      } else {
+        episode.hive_status = 'done';
+        // this.addToSelectedCommunity(community);
+      }
+    });
   }
 }

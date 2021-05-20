@@ -47,7 +47,7 @@
                     <div class="inside-episode-container"
                         *ngFor="let episodeData of podcastData.Episodes; let episodeIndex = index;"
                         >
-                        <app-episode-list-card [episodeData]="episodeData"
+                        <app-episode-list-card [episodeData]="episodeData" [userId]="userId"
                             showUpvote="{{episodeData?.permlink ? true:false}}"></app-episode-list-card>
                     </div>
                 </div>

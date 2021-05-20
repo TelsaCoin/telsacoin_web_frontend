@@ -37,6 +37,9 @@ import { DiscoverComponent } from './pages/discover/discover.component';
 import { EpisodeDetailsComponent } from './pages/episode-details/episode-details.component';
 import { HiveonboardComponent } from './pages/hiveonboard/hiveonboard.component';
 import { ExploreComponent } from './pages/explore/explore.component';
+import { LiveComponent } from './pages/live/live.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { ExploreComponent } from './pages/explore/explore.component';
     EpisodeDetailsComponent,
     HiveonboardComponent,
     ExploreComponent,
+    LiveComponent,
+    AboutUsComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

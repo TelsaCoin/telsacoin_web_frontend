@@ -39,13 +39,10 @@ export class HeaderComponent implements OnInit {
     // if (!this.authService.isHiveConnected() && this.authService.isAuthenticated()) {
     //   this.openHiveAuthDialog(true);
     // }
-    if (!this.userDetailsService.UserDetails && this.authService.isAuthenticated()) {
-      this.userDetailsService.getUserDetails(localStorage.getItem('userId')).then((res: any) => {
-        console.log(res);
-        this.userDetailsService.UserDetails = res.users;
-      });
-    }
     this.updateSearch();
+    if(this.authService.isAuthenticated()){
+      this.getUserDetails();
+    }
   }
 
   navigateHome() {
@@ -125,5 +122,18 @@ export class HeaderComponent implements OnInit {
     if(window.location.pathname.split('/')[1] == 'search'){
       this.searchText = window.location.pathname.split('/')[2];
     }
+  }
+
+  getUserDetails(){
+    if (!this.userDetailsService.UserDetails && this.authService.isAuthenticated()) {
+      this.userDetailsService.getUserDetails(localStorage.getItem('userId')).then((res: any) => {
+        console.log(res);
+        this.userDetailsService.UserDetails = res.users;
+      });
+    }
+  }
+
+  navigateProfile(){
+    this.router.navigateByUrl('/profile');
   }
 }

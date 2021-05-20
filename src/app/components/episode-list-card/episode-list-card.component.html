@@ -12,17 +12,30 @@
                     <i class="far fa-clock-o" aria-hidden="true"></i>
                     <span>{{formatDuration(episodeData.duration)}}</span>
                 </div>
-                <div class="vote-count">
+                <div class="vote-count" *ngIf="episodeData?.user_id == userId">
+                    <span *ngIf="episodeData?.hive_status != 'done'" class="d-flex align-items-center" (click)="publishEpisode(episodeData)">
+                      <span>
+                        Publish Episode
+                      </span>
+                      <i class="fas fa-spinner fa-spin"
+                      *ngIf="publishing" aria-hidden="true"></i>
+                    </span>
+                    <span *ngIf="episodeData?.hive_status == 'done'">
+                      Published
+                      <span class="icon icon-check"></span>
+                    </span>
+                </div>
+                <div class="vote-count" *ngIf="episodeData?.hive_status == 'done'">
                     <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}" style="margin-top: 4px;">
                         <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
                         <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
                     </div>
                     <span>{{episodeData.votes}}</span>
                 </div>
-                <div class="comment-count">
+                <div class="comment-count" *ngIf="episodeData?.hive_status == 'done'">
                     <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
                 </div>
-                <div class="comment-count" (click)="openEpisode(episodeData)">
+                <div class="comment-count" (click)="openEpisode(episodeData)" *ngIf="episodeData?.hive_status == 'done'">
                     <span class="icon icon-comments-o"></span>
                     <span>{{episodeData.comments_count}}</span>
                 </div>

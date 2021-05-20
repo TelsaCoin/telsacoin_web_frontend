@@ -1,7 +1,7 @@
 export const appConstants = {
     routes : [
         {
-          route : '',
+          route : 'home',
           name : 'Podcasts',
           icon : 'icon icon-home-black-24dp'
         },

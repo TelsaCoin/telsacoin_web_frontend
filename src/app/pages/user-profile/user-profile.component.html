@@ -12,10 +12,10 @@
                         <img [src]="userDetails.img">
                     </div>
                 </div>
-                <div class="edit-icon">
+                <!-- <div class="edit-icon">
                     <input type="file" (change)="onFileChanged($event)" style="display: none" #fileInput>
                     <mat-icon (click)="fileInput.click()">edit</mat-icon>
-                </div>
+                </div> -->
             </div>
             <!-- <div class="the-form" *ngIf="isProfileFormOpen">
 
@@ -58,23 +58,74 @@
     </div>
     <div class="userpodcasts-section">
         <div class="heading">Your Podcasts</div>
-        <div *ngFor="let podcast of podcasts; let podcastIndex = index;">
-            <div class="podcast-card">
+        <div class="d-flex">
+            <div class="podcast-card" *ngFor="let podcast of podcasts; let podcastIndex = index;">
                 <img [src]="podcast.image">
                 <div class="flex flex-column">
                   <div class="podcast-name">
                     {{podcast.name}}
                   </div>
                   <div>
-                      <span class="vote-count"> 
+                      <span class="vote-count" (click)="redirectToPodcast(podcast)"> 
                         <span>
-                            Go to Podcast
+                            Go to podcast page
                         </span>  
-
+                        <span class="icon icon-right-open-big">
+                        </span>
                       </span>
+                  </div>
+                </div>
+            </div>
+            <div class="podcast-card" (click)="redirectToPost()">
+                <div class="dummy-image">
+                    <span class="icon icon-plus-square-o"></span>
+                </div>
+                <div class="flex flex-column">
+                  <div class="podcast-name">
+                   Add a podcast
                   </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="userpodcasts-section">
+        <div class="heading">Preferences</div>
+        <div class="userprofile-section">
+            <div class="sub-heading">
+                Your interests
+            </div>
+            <div class="catgories-section mt-2 mb-4">
+                <div *ngFor="let category of categories" class="each-category" 
+                    [ngClass]="{'selected' : category.follows}"
+                    >
+                    <span (click)="selectCategory(category)">
+                        {{category.name}}
+                    </span>
+                    <span class="icon ml-2 pointer accenttwo" (click)="removeSelectedCategory(category)"
+                        *ngIf="category.follows" >x</span>
+                 </div>
+            </div>
+            <!-- <div class="sub-heading">
+                Language
+            </div>
+            <div class="catgories-section mt-2 mb-4">
+                <div *ngFor="let category of languages" class="each-category" 
+                    [ngClass]="{'selected' : category.follows}"
+                    >
+                    <span (click)="selectLanguages(category)">
+                        {{category.name}}
+                    </span>
+                    <span class="icon ml-2 pointer accenttwo" (click)="removeSelectedLanguages(category)"
+                        *ngIf="category.follows" >x</span>
+                 </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="userpodcasts-section">
+        <div class="heading">Account</div>
+        <div class="logout-but pointer" (click)="logout()">
+            Sign Out
+        </div>
+    </div>
+
 </div>

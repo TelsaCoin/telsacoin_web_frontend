@@ -79,7 +79,40 @@
     // margin-left: 10px;
     width: calc(100% - 100px);
   }
+  .sub-heading{
+    color: var(--accent);
+    font-size: 16px;
+  }
+  .catgories-section{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    /* this will hide the scrollbar in mozilla based browsers */
+    overflow: -moz-scrollbars-none;
+    /* this will hide the scrollbar in internet explorers */
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { 
+        width: 0 !important;
+        display: none; 
+    }
+    .each-category{
+        font-size: 14px;
+        cursor: pointer;
+        color: var(--accenttwo);
+        padding: 3px 10px;
+        margin: 5px;
+        border: 1px solid var(--primary-border);
+        border-radius: 20px;
+        min-width: fit-content!important;
+        &.selected{
+            color: var(--accent);
+            background: var(--tertiary-background);
+        }
+    }
+  }
 }
+
 
 .the-episodes {
   position: relative;
@@ -155,27 +188,59 @@
   border-radius: 20px;
   padding: 20px;
   border: 1px solid var(--primary-border);
+  margin-right: 25px;
   img{
     width: 70%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+  }
+  .dummy-image{
+    width: 70%;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accenttwo);
+    cursor: pointer;
+    .icon{
+      font-size: 148px;
+    }
   }
   .podcast-name{
     font-size: 14px;
     font-weight: 500;
+    margin-bottom: 10px;
   }
   .vote-count{
     background: var(--tertiary-background);
     color: var(--accent);
     font-size: 12px;
-    padding: 0px 10px;
+    padding: 3px 15px;
     margin-right: 10px;
     display: flex;
     align-items: center;
     border-radius: 15px;
     cursor: pointer;
+    width: fit-content;
     .icon{
-        font-size: 14px;
-        margin-right: 3px;
+      margin-left: 10px;
+      margin-top: 2px;
     }
   }
+}
+
+.userpodcasts-section{
+  margin-bottom: 50px;
+}
+
+.logout-but{
+  background: var(--tertiary-background);
+  color: var(--accent);
+  font-size: 14px;
+  padding: 5px 20px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  cursor: pointer;
+  width: fit-content;
 }

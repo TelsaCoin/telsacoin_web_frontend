@@ -13,6 +13,9 @@ import { EpisodeDetailsComponent } from './pages/episode-details/episode-details
 import { DiscoverComponent } from './pages/discover/discover.component';
 import { ExploreComponent } from './pages/explore/explore.component';
 import { HiveonboardComponent } from './pages/hiveonboard/hiveonboard.component';
+import { LiveComponent } from './pages/live/live.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 const routes: Routes = [
   // { path: "", loadChildren: './pages/home-dashboard/home-dashboard.module#HomeDashboardModule' },
@@ -27,11 +30,13 @@ const routes: Routes = [
   { path: "profile", component: UserProfileComponent },
   { path: "embed/:episode_id", component: EmbedComponent },
   { path: "episode/:episode_id", component: EpisodeDetailsComponent },
-  { path: '', component: DiscoverComponent },
+  { path: '', component: LandingComponent },
+  { path: 'home', component: DiscoverComponent },
   { path: 'explore', component: ExploreComponent },
-  // { path: '', component: HomeComponent },
+  { path: 'live', component: LiveComponent },
   { path: 'episode/:episode_id', component: EpisodeDetailsComponent },
   { path: 'hive-onboarding', component: HiveonboardComponent },
+  { path: 'about-us', component: AboutUsComponent },
 ];
 
 @NgModule({

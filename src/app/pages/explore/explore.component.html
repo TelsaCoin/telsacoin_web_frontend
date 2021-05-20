@@ -18,13 +18,16 @@
            <span class="accent f500 card-heading">
                 Recommended episodes
            </span> 
-           <span class="accenttwo card-side-heading pointer" (click)="getRecommendedEpisodes()">
+           <span class="accenttwo card-side-heading pointer" (click)="getRecommendedEpisodes()" *ngIf="tabsSection[0].data.length">
                <span>See more</span>
            </span>
         </div>
         <div class="custom-row" *ngIf="tabsSection[0].isLoaded || tabsSection[0].data.length">
             <div *ngFor="let episode of tabsSection[0].data; let i = index" class="custom-col mt-3">
                 <app-episode-card [episodeData]="episode"></app-episode-card>
+            </div>
+            <div *ngIf="!tabsSection[0].data.length" class="d-flex align-items-center justify-content-center mt-5 mb-5 w100">
+                <span class="accenttwo">You don't follow any podcasts yet! Follow some to help us curate better.</span>
             </div>
         </div>
         <div *ngIf="!tabsSection[0].isLoaded">

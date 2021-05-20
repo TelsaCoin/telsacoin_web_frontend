@@ -1,8 +1,32 @@
 .discover-container {
     width: 100%;
     padding: 20px 40px;
+    @media (max-width: 767px) {
+        display: none;
+    }
 }
 
+.mobile-container{
+    display: none;
+    @media (max-width: 767px) {
+        display: block;
+        width: 100%;
+        padding: 30px;
+        img{
+            max-width: 51vw;
+        }
+        .tet-section{
+            padding: 50px 0;
+            .apps{
+                font-size: 14px;
+                margin: 20px auto;
+                .icon{
+                    font-size: 50px;
+                }
+            }
+        }
+    }
+}
 .tabs{
     display: flex;
     align-items: center;

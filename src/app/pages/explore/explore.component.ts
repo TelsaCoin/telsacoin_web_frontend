@@ -44,6 +44,8 @@ export class ExploreComponent implements OnInit {
       this.tabsSection[0].isLoaded = true;
       if(res.EpisodeResult){
         this.tabsSection[0].data = [...this.tabsSection[0].data, ...res.EpisodeResult];
+      }else{
+        this.tabsSection[0].data = [];
       }
     })
   }

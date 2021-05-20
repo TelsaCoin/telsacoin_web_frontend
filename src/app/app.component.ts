@@ -19,6 +19,8 @@ import {
 } from '@angular/animations';
 import { appConstants } from './app.constants';
 import { ThemeService } from 'src/app/services/theme.service';
+import { UserDetailsService } from 'src/app/services/user-details.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -55,6 +57,8 @@ export class AppComponent implements OnInit {
   playingEpisode;
   currentModule;
   isEmbedPlayer: Boolean = false;
+  userNotifications;
+  userHiveDetails;
   @ViewChild("sidenav") usuarioMenu: MatSidenav;
   @ViewChild("content") content: ElementRef;
 
@@ -64,14 +68,16 @@ export class AppComponent implements OnInit {
     public playerService: PlayerService,
     public router: Router,
     private update: SwUpdate, 
-    private authService: SocialAuthService,
+    private socialAuthService: SocialAuthService,
     public commonService : CommonService,
     private toastr: ToastrService,
     public dialog: MatDialog,
     private themeService: ThemeService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public userDetailsService: UserDetailsService,
+    private authService: AuthService
     ) {
-      this.themeService.theme = 'dark';
+
       if(this.commonService.isMobile()){
         this.appMode = 'over';
         this.isSidebarOpened = false;
@@ -85,14 +91,19 @@ export class AppComponent implements OnInit {
         this.isEmbedPlayer = false;
       }
       console.log(this.isEmbedPlayer);
+      this.setTheme();
+  }
 
+  setTheme(){
+    if(localStorage.getItem('theme')){
+       localStorage.getItem('theme') == 'light' ? this.themeService.theme = null : this.themeService.theme = 'dark';
+    }else{
+      this.themeService.theme = 'dark';
+    }
   }
   
   ngOnInit(): void {
-    this.authService.authState.subscribe((user) => {
-      
-      // this.user = user;
-      // this.loggedIn = (user != null);
+    this.socialAuthService.authState.subscribe((user) => {
       if(user.idToken){
         let body = new FormData;
         body.append('identifier', user.idToken);
@@ -126,10 +137,36 @@ export class AppComponent implements OnInit {
   
       }
     });  
+
+    if(this.authService.isAuthenticated()){
+      this.getUserDetails();
+      // if(this.authService.isHiveConnected()){
+      //   this.getUserNotifications();
+      // }
+    }
   }
 
   navigateTo(route){
     this.router.navigateByUrl(route);
+  }
+
+  getUserDetails(){
+    if (!this.userDetailsService.UserDetails && this.authService.isAuthenticated()) {
+      this.userDetailsService.getUserDetails(localStorage.getItem('userId')).then((res: any) => {
+        console.log(res);
+        this.userDetailsService.UserDetails = res.users;
+      });
+      this.userDetailsService.getUserHiveDetails().then((res:any) => {
+        console.log(res);
+        this.userHiveDetails = res;
+      })
+    }
+  }
+
+  getUserNotifications(){
+      this.userDetailsService.getUserNotifications().then((res: any) => {
+        this.userNotifications = res.notifications;
+      });
   }
 
   isActive(route){
@@ -163,6 +200,10 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  navigateProfile(){
+    this.router.navigateByUrl('/profile');
+  }
+
   closeAllSidenav() {
     this.usuarioMenu.close();
   }
@@ -176,16 +217,6 @@ export class AppComponent implements OnInit {
       data: { autoCheck: false }
     });
   }
-
-  // openSidebar(){
-  //   this.isSidebarExpanded = true;
-  //   this.content.nativeElement.style.marginLeft = '250px';
-  // }
-
-  // closeSidebar(){
-  //   this.isSidebarExpanded = false;
-  //   this.content.nativeElement.style.marginLeft = '100px';
-  // }
 
   get dark() {
     return this.themeService.theme === 'dark';
