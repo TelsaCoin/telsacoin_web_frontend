@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from "@angular/router";
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-landing',
@@ -36,6 +37,7 @@ export class LandingComponent implements OnInit {
     public dialog: MatDialog,
     public router: Router,
     public authService: AuthService,
+    private themeService: ThemeService,
   ) { }
 
   ngOnInit(): void {
@@ -104,5 +106,13 @@ export class LandingComponent implements OnInit {
       hasBackdrop: true,
       data: { autoCheck: autoCheck }
     });
+  }
+
+  toggleTheme(isDark){
+    this.themeService.theme = isDark ? 'dark' : null;
+  }
+
+  get dark() {
+    return this.themeService.theme === 'dark';
   }
 }

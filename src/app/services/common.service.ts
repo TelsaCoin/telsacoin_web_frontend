@@ -191,6 +191,14 @@ export class CommonService {
     }
   }
 
+  getFollowedPodcasts(userId, page, pageSize) {
+    if(userId){
+      return this.api.get(this.apiUrl + '/public/followedPodcasts?user_id=' + userId + '&page=' + page + '&pageSize=' + pageSize );
+    }else{
+      return this.api.get(this.apiUrl + '/public/followedPodcasts?page=' + page + '&pageSize=' + pageSize);
+    }
+  }
+
   getPodcastEpisodes(userId, podcastId, page, pageSize) {
     if(userId){
       return this.api.get(this.apiUrl + '/public/episode?user_id=' + userId + '&podcast_id=' + podcastId + '&page=' + page + '&pageSize=' + pageSize );

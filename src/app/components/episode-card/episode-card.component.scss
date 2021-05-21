@@ -47,8 +47,9 @@
         }
       
         &.prev {
-            right: 17%;
-            top: 43%;
+            left: 60%;
+            position: absolute;
+            bottom: 0px;
         }
     }
     .content{
@@ -66,12 +67,14 @@
         .vote-icon{
             color: var(--accenttwo);
             font-size: 24px;
+            margin-top: 5px;
             &.voted{
                 color: var(--primary);
             }
             cursor: pointer;
         }
         .vote-count{
+            margin-top: 5px;
             margin-left: 5px;
             color: var(--accenttwo);
             font-size: 12px;
@@ -86,6 +89,7 @@
             }
         }
         .comment-count{
+            margin-top: 5px;
             margin-left: 10px;
             color: var(--accenttwo);
             font-size: 12px;

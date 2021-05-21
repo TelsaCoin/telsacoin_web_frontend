@@ -114,7 +114,6 @@ export class EpisodeCardComponent implements OnInit {
   }
 
   isPaidOut(){
-    console.log(this.episodeData.published_at, moment().diff(this.episodeData.published_at, "days") > 7)
     return moment().diff(this.episodeData.published_at, "days") > 7;
   }
 

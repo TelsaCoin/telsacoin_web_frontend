@@ -8,7 +8,7 @@
         [@slideAnimation]="animationType"
       />
       <div class="content">
-        <div *ngIf="i === currentSlide" [innerHTML]="slide.headline">
+        <div *ngIf="i === currentSlide" [innerHTML]="slide.headline | safeHtml">
         </div>
         <!-- <div *ngIf="currentSlide === 1">
           <h3>You will see your proposed account information here.</h3>
@@ -52,12 +52,12 @@
     <!-- controls -->
 
     <button class="control prev" (click)="onPreviousClick()" *ngIf="currentSlide!=0">
-      <div class="isode">
+      <div class="isode prev">
         <span class="arrow left"></span>
       </div>
     </button>
     <button class="control next" (click)="onNextClick()"  *ngIf="currentSlide!=slides.length-1">
-      <div class="isode">
+      <div class="isode next">
         <span class="arrow right"></span>
       </div>
       <!-- <span class="arrow right"></span> -->

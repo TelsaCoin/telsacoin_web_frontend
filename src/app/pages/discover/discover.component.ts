@@ -21,7 +21,7 @@ export class DiscoverComponent implements OnInit {
   currentTab = 0;
   tabsSection = [
     {
-      name : 'Featured Podcasts',
+      name : 'User Podcasts',
       data : [],
       type : 'podcasts',
       isLoaded: false,
@@ -59,23 +59,20 @@ export class DiscoverComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getFeaturedPodcasts();
+    this.getFollowedPodcasts();
     this.getHiveEpisodes();
-    // this.getNewlyReleasedPodcasts();
-    // this.getPopularTrendingPodcasts();
     if(this.authService.isAuthenticated()){
-      // this.getRecentlyPlayedEpisodes();
       this.getRecommendedPodcasts();
     }
   }
 
-  getFeaturedPodcasts(){
+  getFollowedPodcasts(){
     this.tabsSection[0].isLoaded = false;
     this.tabsSection[0].page +=1;
-    this.commonService.getFeaturedPodcasts(localStorage.getItem('userId'), this.tabsSection[0].page, this.tabsSection[0].pageSize).subscribe((res:any) => {
+    this.commonService.getFollowedPodcasts(localStorage.getItem('userId'), this.tabsSection[0].page, this.tabsSection[0].pageSize).subscribe((res:any) => {
       this.tabsSection[0].isLoaded = true;
-      if(res.featured){
-        this.tabsSection[0].data = res.featured;
+      if(res.podcasts){
+        this.tabsSection[0].data = res.podcasts;
       }
     })
   }

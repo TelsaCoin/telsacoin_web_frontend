@@ -1,15 +1,17 @@
 <div class="podcast-card d-flex flex-column">
-    <img class="img" [src]="episodeData.image">
-    <button class="control prev" (click)="playEpisode(episodeData)">
-        <div class="isode">
-          <mat-icon mat-list-icon class="left" style="font-size: 30px; height: 30px; width: 30px;">play_arrow</mat-icon>
-        </div>
-    </button>
+    <div class="w100 relative">
+        <img class="img" [src]="episodeData.image">
+        <button class="control prev" (click)="playEpisode(episodeData)">
+            <div class="isode">
+              <mat-icon mat-list-icon class="left" style="font-size: 30px; height: 30px; width: 30px;">play_arrow</mat-icon>
+            </div>
+        </button>
+    </div>
     <div class="content mt-2">
         <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openEpisode(episodeData)">{{episodeData.name}}</span>
         <span class="author text-truncate accenttwo mb-1 pointer" (click)="openPodcast(episodeData)">{{episodeData.podcast_name}}</span>
         <div style="min-height: 30px;">
-            <div class="d-flex align-center" *ngIf="episodeData?.permlink && !isPaidOut()">
+            <div class="d-flex flex-wrap align-center" *ngIf="episodeData?.permlink && !isPaidOut()">
                 <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}">
                     <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
                     <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>

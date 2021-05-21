@@ -49,7 +49,6 @@ import { AuthService } from 'src/app/services/auth.service';
   ]
 })
 export class AppComponent implements OnInit {
-  
   appMode = 'side';
   isSidebarOpened = true;
   isSidebarExpanded = false;
@@ -63,7 +62,7 @@ export class AppComponent implements OnInit {
   @ViewChild("content") content: ElementRef;
 
   routes = appConstants.routes;
-
+  hideit: Boolean = false
   constructor(
     public playerService: PlayerService,
     public router: Router,
@@ -77,6 +76,11 @@ export class AppComponent implements OnInit {
     public userDetailsService: UserDetailsService,
     private authService: AuthService
     ) {
+      if(window.location.pathname == '/'){
+        this.hideit = true;
+      }else{
+        this.hideit = false;
+      }
 
       if(this.commonService.isMobile()){
         this.appMode = 'over';

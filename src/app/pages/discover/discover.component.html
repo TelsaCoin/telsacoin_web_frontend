@@ -1,5 +1,20 @@
 <div class="discover-container">
-	<div class="custom-card">
+    <div class="custom-card">
+        <div class="d-flex align-items-center justify-content-between">
+           <span class="accent f500 card-heading">
+                Followed Podcasts
+           </span> 
+        </div>
+        <div class="custom-row" *ngIf="tabsSection[0].isLoaded">
+            <div *ngFor="let podcast of tabsSection[0].data; let i = index" class="custom-col-podcast mt-3">
+                <app-podcast-card [podcastData]="podcast"></app-podcast-card>
+            </div>
+        </div>
+        <div *ngIf="!tabsSection[0].isLoaded">
+            <app-loader></app-loader>
+        </div>
+    </div>
+	<div class="custom-card mt-4">
         <div class="d-flex align-items-center justify-content-between">
            <span class="accent f500 card-heading">
                 Trending on Hive
@@ -18,7 +33,7 @@
         </div>
     </div>
 
-    <div class="custom-card mt-4">
+    <!-- <div class="custom-card mt-4">
         <div class="d-flex align-items-center justify-content-between">
            <span class="accent f500 card-heading">
                 Featured Podcasts
@@ -32,7 +47,7 @@
         <div *ngIf="!tabsSection[0].isLoaded">
             <app-loader></app-loader>
         </div>
-    </div>
+    </div> -->
 
     <div class="custom-card mt-4" *ngIf="authService.isAuthenticated()">
         <div class="d-flex align-items-center justify-content-between">

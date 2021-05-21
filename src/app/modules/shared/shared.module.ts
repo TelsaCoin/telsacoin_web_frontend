@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { DateAgoPipe } from 'src/app/pipes/date-ago.pipe';
+import { SafeHtmlPipe } from 'src/app/pipes/safehtml.pipe';
 import { ImagePreloadDirective } from 'src/app/directives/image-preload.directive';
 import { MatChipsModule } from '@angular/material/chips';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
@@ -39,6 +40,7 @@ import { CarouselComponent } from 'src/app/components/carousel/carousel.componen
 @NgModule({
   declarations: [
     DateAgoPipe, 
+    SafeHtmlPipe,
     ImagePreloadDirective,
     MinuteSecondPipe,
     AuthComponent,
@@ -87,6 +89,7 @@ import { CarouselComponent } from 'src/app/components/carousel/carousel.componen
   ],
   exports: [
     DateAgoPipe, 
+    SafeHtmlPipe,
     ImagePreloadDirective,
     MinuteSecondPipe,
     AuthComponent,

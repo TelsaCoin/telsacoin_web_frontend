@@ -103,13 +103,30 @@
 }
 
 .the-footer{
-  // position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
 }
 
 @media (max-width: 767px) {
+  mat-drawer{
+    display: none;
+  }
+  app-header{
+    display: none;
+  }
+  router-outlet{
+    display: none !important;
+  }
+  app-player{
+    display: none;
+  }
+  .mat-drawer-content {
+    margin-left: 0 !important;
+  }
+}
+
+.hideit{
   mat-drawer{
     display: none;
   }

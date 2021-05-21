@@ -60,16 +60,16 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
-      console.log(e.code);
-      if (e.code == 'Space' && this.state.canplay) {
-        if (this.state.playing) {
-          this.pause();
-        } else {
-          this.play();
-        }
-      }
-    });
+    // this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
+    //   console.log(e.code);
+    //   if (e.code == 'Space' && this.state.canplay) {
+    //     if (this.state.playing) {
+    //       this.pause();
+    //     } else {
+    //       this.play();
+    //     }
+    //   }
+    // });
     console.log('chalja', this.toPlayData);
     if (this.toPlayData) {
       this.prevToPlayData = this.toPlayData;
@@ -159,7 +159,7 @@ export class PlayerComponent implements OnInit {
 
   ngOnDestroy() {
     // remove listener
-    this.globalListenFunc();
+    // this.globalListenFunc();
   }
 
 }

@@ -1,7 +1,16 @@
 <div class="landing-container">
+    <div class="home-header">
+      <img src="./assets/Aureal_full_light.png" class="">
+      <div>
+        <div>
+          <span class="icon icon-moon-o pointer accenttwo" *ngIf="!dark" (click)="toggleTheme(true)"></span>
+          <span class="icon icon-light-up pointer accenttwo" *ngIf="dark" (click)="toggleTheme(false)"></span>
+        </div>
+      </div>
+    </div>
     <div class="d-block d-sm-none">
       <img src="./assets/Aureal_full_light.png" style="width: 100%;
-      padding: 0 100px;">
+      padding: 20px 100px;">
     </div>
     <div class="banner-container">
         <div class="image-section">

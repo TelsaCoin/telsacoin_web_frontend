@@ -488,6 +488,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-drawer-content {
   background: inherit !important;
   transition: margin-left 0.5s;
+  display: block;
   &.is-player-open{
     margin-bottom: 100px;
   }
@@ -605,4 +606,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .mat-form-field-subscript-wrapper{
   display: none;
+}
+
+.mat-drawer-inner-container{
+  overflow: hidden;
 }

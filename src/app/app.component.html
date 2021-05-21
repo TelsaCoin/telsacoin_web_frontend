@@ -1,4 +1,4 @@
-<mat-drawer-container>
+<mat-drawer-container [ngClass]="{'hideit': hideit}">
     <mat-drawer autosize [mode]="appMode" [opened]="isSidebarOpened" class="sidebar-container left" [ngClass]="{'expanded' : isSidebarExpanded}"
      #sidenav>
       <div class="logo" [@fadeAnimation]="isSidebarExpanded">
@@ -46,7 +46,7 @@
       </div>
    </mat-drawer> -->
     <mat-drawer-content #content [ngClass]="{'expanded' : isSidebarExpanded}">
-      <app-header style="position: fixed; width: calc(100% - 100px); z-index: 2;"></app-header>
+      <app-header style="position: fixed; width: calc(100% - 100px); z-index: 2; top: 0;"></app-header>
       <router-outlet style="margin-top: 70px; display: block; z-index: 1;"></router-outlet>
       <app-player class="the-player" *ngIf="playingEpisode && !isEmbedPlayer" [ngClass]="{'dark' : dark}" [toPlayData]="playingEpisode">
       </app-player>
