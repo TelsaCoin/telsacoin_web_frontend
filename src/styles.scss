@@ -409,32 +409,104 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   // background: linear-gradient(to bottom, #E8EAF6, #ffffff);
   border-radius: 5px;
   padding: 5px 0px;
+  .custom-card-heading{
+    padding: 0 20px;
+    .icon{
+      font-size: 24px;
+      color: var(--accenttwo);
+      cursor: pointer;
+    }
+  }
   .card-heading{
     font-size: 18px;
   }
   .card-side-heading{
       font-size: 14px;
   }
+  .custom-infinite-row{
+    overflow-x: scroll;
+    display: flex;
+    margin-right: 20px;
+    /* this will hide the scrollbar in mozilla based browsers */
+    overflow: -moz-scrollbars-none;
+    /* this will hide the scrollbar in internet explorers */
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { 
+        width: 0 !important;
+        display: none; 
+    }
+    .custom-col-episode{
+      flex: 0 0 24%;
+      max-width: 24%;
+      position: relative;
+      width: 100%;
+      // padding-right: 15px;
+      padding-left: 15px;
+      @media only screen and (max-width: 1024px) {
+          flex: 0 0 50%;
+          max-width: 50%;
+          position: relative;
+          width: 100%;
+          // padding-right: 15px;
+          padding-left: 15px;
+      }
+      @media (max-width: 576px) {
+          flex: 0 0 50%;
+          max-width: 50%;
+          position: relative;
+          width: 100%;
+          // padding-right: 15px;
+          padding-left: 15px;
+      }
+    }
+    .custom-col-podcast{
+      flex: 0 0 32%;
+      max-width: 32%;
+      position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      &.hideit{
+        display: none;
+      }
+      @media only screen and (max-width: 1024px) {
+          flex: 0 0 50%;
+          max-width: 50%;
+          position: relative;
+          width: 100%;
+          padding-right: 15px;
+          padding-left: 15px;
+      }
+      @media (max-width: 576px) {
+          flex: 0 0 50%;
+          max-width: 50%;
+          position: relative;
+          width: 100%;
+          padding-right: 15px;
+          padding-left: 15px;
+      }
+    }
+  }
   .custom-row{
     display: flex;
     flex-wrap: wrap;
     margin: 0 -15px;
-    // margin-right: -15px;
-    // margin-left: -15px;
+    margin: 0;
+    margin-right: 20px;
 
     .custom-col{
         flex: 0 0 20%;
         max-width: 20%;
         position: relative;
         width: 100%;
-        padding-right: 15px;
+        // padding-right: 15px;
         padding-left: 15px;
         @media only screen and (max-width: 1024px) {
             flex: 0 0 25%;
             max-width: 25%;
             position: relative;
             width: 100%;
-            padding-right: 15px;
+            // padding-right: 15px;
             padding-left: 15px;
         }
         @media (max-width: 576px) {
@@ -442,33 +514,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             max-width: 50%;
             position: relative;
             width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-
-    }
-
-    .custom-col-podcast{
-        flex: 0 0 33.33%;
-        max-width: 33.33%;
-        position: relative;
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        @media only screen and (max-width: 1024px) {
-            flex: 0 0 50%;
-            max-width: 50%;
-            position: relative;
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        @media (max-width: 576px) {
-            flex: 0 0 50%;
-            max-width: 50%;
-            position: relative;
-            width: 100%;
-            padding-right: 15px;
+            // padding-right: 15px;
             padding-left: 15px;
         }
 
@@ -489,6 +535,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: inherit !important;
   transition: margin-left 0.5s;
   display: block;
+  overflow-x: hidden !important;
+  /* this will hide the scrollbar in mozilla based browsers */
+  overflow: -moz-scrollbars-none;
+  /* this will hide the scrollbar in internet explorers */
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { 
+      width: 0 !important;
+      display: none; 
+  }
   &.is-player-open{
     margin-bottom: 100px;
   }
@@ -609,5 +664,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-drawer-inner-container{
-  overflow: hidden;
+  overflow: hidden !important;
 }

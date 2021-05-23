@@ -5,7 +5,7 @@
                 *ngIf="searchResults && searchResults.PodcastList && searchResults.PodcastList.length">
                 <div *ngFor="let eachPodcast of searchResults.PodcastList" class="upcoming-card"
                     (click)="redirectToPodcast(eachPodcast)">
-                    <img [src]="eachPodcast.image">
+                    <img [src]="eachPodcast.image" class="lazyload">
                     <div class="content">
                         <h6 class="name">{{eachPodcast.name}}</h6>
                         <p class="author text-truncate">By {{eachPodcast.author}}</p>

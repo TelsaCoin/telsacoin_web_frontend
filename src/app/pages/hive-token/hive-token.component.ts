@@ -14,7 +14,9 @@ import {CommonService} from 'src/app/services/common.service';
 export class HiveTokenComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public router: Router,
-    private commonService : CommonService, public authService: AuthService, private toastr: ToastrService) { }
+    private commonService : CommonService, public authService: AuthService, private toastr: ToastrService) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
 
   ngOnInit(): void {
     // console.log(this.route.snapshot.queryParamMap.get("access_token"));

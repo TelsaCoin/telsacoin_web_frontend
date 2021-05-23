@@ -34,7 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommentComponent } from 'src/app/components/comment/comment.component';
 import { CommentBoxComponent } from 'src/app/components/comment-box/comment-box.component';
 import { LoaderComponent } from 'src/app/components/loader/loader.component';
-
+import { FavoriteEpisodeComponent } from 'src/app/components/favorite-episode/favorite-episode.component';
 import { CarouselComponent } from 'src/app/components/carousel/carousel.component';
 
 @NgModule({
@@ -49,7 +49,8 @@ import { CarouselComponent } from 'src/app/components/carousel/carousel.componen
     CommentComponent,
     CommentBoxComponent,
     LoaderComponent,
-    CarouselComponent
+    CarouselComponent,
+    FavoriteEpisodeComponent,
   ],
   imports: [
     CommonModule,
@@ -129,7 +130,8 @@ import { CarouselComponent } from 'src/app/components/carousel/carousel.componen
     CommentComponent,
     CommentBoxComponent,
     LoaderComponent,
-    CarouselComponent
+    CarouselComponent,
+    FavoriteEpisodeComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

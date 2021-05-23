@@ -15,7 +15,9 @@ export class EmbedComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private commonService : CommonService,
     private domSanitizer: DomSanitizer
-  ) { }
+  ) { 
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
 
   ngOnInit(): void {
     this.progress = true;

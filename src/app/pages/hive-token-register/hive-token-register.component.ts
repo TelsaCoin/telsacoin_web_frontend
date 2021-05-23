@@ -13,7 +13,9 @@ const moment = moment_;
 })
 export class HiveTokenRegisterComponent implements OnInit {
   constructor(private route: ActivatedRoute, public router: Router,
-    private commonService : CommonService, public authService: AuthService, private toastr: ToastrService) { }
+    private commonService : CommonService, public authService: AuthService, private toastr: ToastrService) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
 
   ngOnInit(): void {
     if (this.route.snapshot.queryParamMap.get("code")) {

@@ -26,7 +26,7 @@ export class DiscoverComponent implements OnInit {
       type : 'podcasts',
       isLoaded: false,
       page: -1,
-      pageSize: 6
+      pageSize: 8
     },
     {
       name : 'Recommended Podcasts',
@@ -34,7 +34,7 @@ export class DiscoverComponent implements OnInit {
       type : 'podcasts',
       isLoaded: false,
       page: -1,
-      pageSize: 6
+      pageSize: 5
     },
     {
       name : 'Trending on Hive',
@@ -42,7 +42,7 @@ export class DiscoverComponent implements OnInit {
       type : 'episodes',
       isLoaded: false,
       page: -1,
-      pageSize: 5
+      pageSize: 12
     },
     {
       name : 'Recently played',
@@ -56,23 +56,25 @@ export class DiscoverComponent implements OnInit {
   constructor(
     private commonService : CommonService,
     public authService: AuthService,
-  ) { }
+  ) { 
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
 
   ngOnInit(): void {
-    this.getFollowedPodcasts();
+    this.getFollowedEpisodes();
     this.getHiveEpisodes();
     if(this.authService.isAuthenticated()){
       this.getRecommendedPodcasts();
     }
   }
 
-  getFollowedPodcasts(){
+  getFollowedEpisodes(){
     this.tabsSection[0].isLoaded = false;
     this.tabsSection[0].page +=1;
-    this.commonService.getFollowedPodcasts(localStorage.getItem('userId'), this.tabsSection[0].page, this.tabsSection[0].pageSize).subscribe((res:any) => {
+    this.commonService.getFollowedEpisodes(localStorage.getItem('userId'), this.tabsSection[0].page, this.tabsSection[0].pageSize).subscribe((res:any) => {
       this.tabsSection[0].isLoaded = true;
-      if(res.podcasts){
-        this.tabsSection[0].data = res.podcasts;
+      if(res.episodes){
+        this.tabsSection[0].data = res.episodes;
       }
     })
   }
@@ -128,5 +130,43 @@ export class DiscoverComponent implements OnInit {
         this.tabsSection[1].data = res.for_you;
       }
     })
+  }
+
+  rightScroll(e){
+    let wrapper = e.srcElement.closest('.discover-container');
+    wrapper.querySelector('.scrollable-episodes-1').scroll({
+      left: wrapper.querySelector('.scrollable-episodes-1').offsetWidth, 
+      behavior: 'smooth' 
+    });
+    // wrapper.querySelector('.scrollable-episodes-1').scrollLeft += wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+  }
+
+  leftScroll(e){
+    let wrapper = e.srcElement.closest('.discover-container');
+    console.log(wrapper.querySelector('.scrollable-episodes-1').scrollLeft);
+    wrapper.querySelector('.scrollable-episodes-1').scroll({
+      left: wrapper.querySelector('.scrollable-episodes-1').offsetWidth * -1, 
+      behavior: 'smooth' 
+    });
+    // wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+  }
+
+  rightScroll2(e){
+    let wrapper = e.srcElement.closest('.discover-container');
+    wrapper.querySelector('.scrollable-episodes-2').scroll({
+      left: wrapper.querySelector('.scrollable-episodes-2').offsetWidth, 
+      behavior: 'smooth' 
+    });
+    // wrapper.querySelector('.scrollable-episodes-1').scrollLeft += wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+  }
+
+  leftScroll2(e){
+    let wrapper = e.srcElement.closest('.discover-container');
+    console.log(wrapper.querySelector('.scrollable-episodes-2').scrollLeft);
+    wrapper.querySelector('.scrollable-episodes-2').scroll({
+      left: wrapper.querySelector('.scrollable-episodes-2').offsetWidth * -1, 
+      behavior: 'smooth' 
+    });
+    // wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
   }
 }

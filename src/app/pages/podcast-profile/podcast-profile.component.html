@@ -2,7 +2,7 @@
     <div class="inside-search-container w100" *ngIf="!progress">
         <div class="d-flex justify-content-between show-container row m-0 pb-3">
             <div class="col-md-8 col-sm-12 d-flex align-items-start p-0">
-                <img [src]="podcastData.image" class="album-art">
+                <img [src]="podcastData.image" class="album-art lazyload">
                 <div class="album-desc">
                     <div class="podcast-name">
                         <h3 class="podcast-name">{{podcastData.name}}</h3>
@@ -52,7 +52,10 @@
                     </div>
                 </div>
                 <div class="outside-episode-container" *ngIf="categoryBasedPodcastsLoading">
-                    <app-loader></app-loader>
+                    <div class="inside-episode-container" *ngFor="let episodeData of [].constructor(pageSize); let episodeIndex = index;">
+                        <app-episode-list-card [episodeData]="episodeData" [userId]="userId" isLoading="true"
+                        showUpvote="false"></app-episode-list-card>
+                    </div>
                 </div>
             </div>
             <div class="view-more" (click)="onScrollDown()">

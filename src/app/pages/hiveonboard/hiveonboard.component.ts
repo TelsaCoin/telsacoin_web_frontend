@@ -64,7 +64,10 @@ export class HiveonboardComponent implements OnInit {
       "./assets/hiveonboard_images/HIVEonboardingscreenshots-07.jpg"
     }
   ];
-  constructor() { }
+  constructor() { 
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
+  }
 
   ngOnInit(): void {
   }

@@ -23,7 +23,9 @@ export class SearchComponent implements OnInit {
   page = 0;
   pageSize = 10;
 
-  constructor(public playerService: PlayerService, private activatedRoute: ActivatedRoute, private commonService : CommonService, private router: Router) { }
+  constructor(public playerService: PlayerService, private activatedRoute: ActivatedRoute, private commonService : CommonService, private router: Router) {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -45,7 +47,12 @@ export class SearchComponent implements OnInit {
 
 
   formatDuration(seconds) {
-    return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
+      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' mins';
+    }else{
+      return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
+    }
   }
 
   playEpisode(episodeData) {

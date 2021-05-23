@@ -38,7 +38,9 @@ export class LandingComponent implements OnInit {
     public router: Router,
     public authService: AuthService,
     private themeService: ThemeService,
-  ) { }
+  ) { 
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
 
   ngOnInit(): void {
       // Mouse

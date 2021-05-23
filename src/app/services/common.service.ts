@@ -191,11 +191,11 @@ export class CommonService {
     }
   }
 
-  getFollowedPodcasts(userId, page, pageSize) {
+  getFollowedEpisodes(userId, page, pageSize) {
     if(userId){
-      return this.api.get(this.apiUrl + '/public/followedPodcasts?user_id=' + userId + '&page=' + page + '&pageSize=' + pageSize );
+      return this.api.get(this.apiUrl + '/public/newEpisodes?user_id=' + userId + '&page=' + page + '&pageSize=' + pageSize );
     }else{
-      return this.api.get(this.apiUrl + '/public/followedPodcasts?page=' + page + '&pageSize=' + pageSize);
+      return this.api.get(this.apiUrl + '/public/newEpisodes?page=' + page + '&pageSize=' + pageSize);
     }
   }
 

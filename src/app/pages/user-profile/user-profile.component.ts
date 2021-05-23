@@ -49,7 +49,9 @@ export class UserProfileComponent implements OnInit {
     private commonService : CommonService,
     private confirmationDialogService: ConfirmationDialogService,
     public authService: AuthService,
-  ) { }
+  ) {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
 
   ngOnInit(): void {
     this.profileForm = new FormGroup({

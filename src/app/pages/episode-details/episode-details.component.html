@@ -1,44 +1,57 @@
 <div class="episode-container">
-    <div class="podcast-card">
+    <div class="podcast-card" *ngIf="!episodeLoading">
         <div class="d-flex align-items-center mb-5">
-            <span class="icon icon-arrow-left accenttwo mt-1 pointer"></span>
+            <span class="icon icon-arrow-left-1 accenttwo mt-1 pointer" (click)="back()"></span>
             <span>
-                <h6 class="podcast-name">{{episodeData.podcast_name}}</h6>
+                <h6 class="podcast-name" (click)="redirectToPodcast(episodeData)">{{episodeData.podcast_name}}</h6>
             </span>
         </div>
-        <div class="content">
-            <div class="d-flex justify-content-start">
-                <img [src]="episodeData.podcast_image">
-                <div>
-                    <div class="name truncate-overflow">{{episodeData.name}}</div>
-                    <div class="author text-truncate mb-3">by {{episodeData.author}}</div>
-                    <div class="d-flex flex-wrap">
-                        <div class="comment-count duration">
-                            <i class="far fa-clock-o" aria-hidden="true"></i>
-                            <span>{{formatDuration(episodeData.duration)}}</span>
-                        </div>
-                        <div class="vote-count">
-                            <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}" style="margin-top: 4px;">
-                                <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
-                                <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
+        <div class="d-flex justify-content-between">
+            <div style="width: 50%;">
+                <div class="content">
+                    <div class="d-flex justify-content-start">
+                        <img [src]="episodeData.podcast_image" class="lazyload">
+                        <div>
+                            <div class="name truncate-overflow">{{episodeData.name}}</div>
+                            <div class="author text-truncate mb-3">by {{episodeData.author}}</div>
+                            <div class="d-flex flex-wrap">
+                                <div class="comment-count duration">
+                                    <i class="far fa-clock-o" aria-hidden="true"></i>
+                                    <span>{{formatDuration(episodeData.duration)}}</span>
+                                </div>
+                                <div class="vote-count" *ngIf="episodeData.permlink && !isPaidOut()">
+                                    <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}" style="margin-top: 4px;">
+                                        <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
+                                        <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
+                                    </div>
+                                    <span>{{episodeData.votes}}</span>
+                                </div>
+                                <div class="comment-count" *ngIf="episodeData.permlink">
+                                    <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
+                                </div>
+                                <div class="comment-count">
+                                    <span class="icon icon-comments-o"></span>
+                                    <span>{{episodeData.comments_count}}</span>
+                                </div>
+                                <div class="comment-count" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">
+                                    <i class="icon fa fa-gift" aria-hidden="true"></i>
+                                    <span>Tip</span>
+                                </div>
                             </div>
-                            <span>{{episodeData.votes}}</span>
                         </div>
-                        <div class="comment-count">
-                            <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
-                        </div>
-                        <div class="comment-count">
-                            <span class="icon icon-comments-o"></span>
-                            <span>{{episodeData.comments_count}}</span>
-                        </div>
-                        <div class="comment-count" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">
-                            <i class="icon fa fa-gift" aria-hidden="true"></i>
-                            <span>Tip</span>
+                    </div>
+                </div>
+                <div class="more-content">
+                    <div class="comments-container">
+                        <div class="heading mb-4">Comments</div>
+                        <div class="comments">
+                            <app-comment *ngFor="let c of comments" (refresh)="getComments()" [comment]="c"></app-comment>
+                            <app-comment-box (add)="addComment($event)" [isLoading]="isAddingComment"></app-comment-box>
                         </div>
                     </div>
                 </div>
             </div>
-            <div style="width: 50%; margin-left: 5%;">
+            <div style="width: 45%; margin-left: 5%;">
                 <div class="description" [innerHTML]="episodeData.summary" [ngClass]="{'truncate-overflow' : !viewMoreDescription}">
                 </div>
                 <div class="view-more" (click)="viewMoreDescription = !viewMoreDescription">
@@ -49,23 +62,8 @@
                 </div>
             </div>
         </div>
-        <div class="more-content">
-            <div class="row w100">
-                <div class="col-sm-12 col-md-8">
-                    <div class="comments-container">
-                        <div class="heading mb-4">Comments</div>
-                        <div class="comments">
-                            <app-comment *ngFor="let c of comments" (refresh)="getComments()" [comment]="c"></app-comment>
-                            <app-comment-box (add)="addComment($event)" [isLoading]="isAddingComment"></app-comment-box>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4">
-                    <div class="similar-podcasts">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+    <div *ngIf="episodeLoading">
+        <app-loader></app-loader>
     </div>
 </div>

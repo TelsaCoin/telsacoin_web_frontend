@@ -4,7 +4,7 @@
       <img
         *ngIf="i === currentSlide"
         [src]="slide.src"
-        class="slide"
+        class="slide lazyload"
         [@slideAnimation]="animationType"
       />
       <div class="content">

@@ -1,25 +1,22 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from "@angular/router";
-import { PlayerService } from 'src/app/services/player.service';
-import {CommonService} from 'src/app/services/common.service';
 import { AuthService } from 'src/app/services/auth.service';
+import {CommonService} from 'src/app/services/common.service';
 import { MatDialog } from "@angular/material/dialog";
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { SocialShareComponent } from 'src/app/components/social-share/social-share.component';
+import { PlayerService } from 'src/app/services/player.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment_ from 'moment';
 const moment = moment_;
-
 @Component({
-  selector: 'app-episode-card',
-  templateUrl: './episode-card.component.html',
-  styleUrls: ['./episode-card.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-favorite-episode',
+  templateUrl: './favorite-episode.component.html',
+  styleUrls: ['./favorite-episode.component.scss']
 })
-export class EpisodeCardComponent implements OnInit {
+export class FavoriteEpisodeComponent implements OnInit {
   @Input() episodeData;
   @Input() isLoading = false;
-
   upvoteOngoing: Boolean = false;
 
   constructor(
@@ -29,28 +26,9 @@ export class EpisodeCardComponent implements OnInit {
     public dialog: MatDialog,
     public playerService: PlayerService,
     private toastr: ToastrService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-  }
-
-  openPodcast(data): void {
-    this.router.navigateByUrl('podcast/'+data.podcast_id);
-  }
-
-  followPodcast(ifFollows) {
-    if (this.episodeData.id) {
-      let body = new FormData;
-      if (this.authService.isAuthenticated()) {
-        body.append('user_id', localStorage.getItem('userId'));
-        body.append('podcast_id', this.episodeData.id);
-        this.commonService.followPodcast(body).subscribe((res: any) => {
-          this.episodeData.follows = !this.episodeData.follows;
-        })
-      } else {
-        this.openHiveAuthDialog(false);
-      }
-    }
   }
 
   openHiveAuthDialog(autoCheck: Boolean): void {
@@ -61,20 +39,6 @@ export class EpisodeCardComponent implements OnInit {
       hasBackdrop: true,
       data: { autoCheck: autoCheck }
     });
-  }
-
-  socialShare(type, episodeData) {
-    this.dialog.open(SocialShareComponent, {
-      width: '400px',
-      // height:  '350px',
-      maxWidth: '95vw',
-      hasBackdrop: true,
-      data: { type: type, attributes: episodeData }
-    });
-  }
-
-  playEpisode(episodeData) {
-    this.playerService.setCurrentModule(episodeData);
   }
 
   upvote(episodeData) {
@@ -111,8 +75,21 @@ export class EpisodeCardComponent implements OnInit {
     }
   }
 
+  formatDuration(seconds) {
+    // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
+      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' mins';
+    }else{
+      return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
+    }
+  }
+
   openEpisode(data): void {
     this.router.navigateByUrl('episode/'+data.id);
+  }
+
+  playEpisode(episodeData) {
+    this.playerService.setCurrentModule(episodeData);
   }
 
   isPaidOut(){
@@ -123,15 +100,6 @@ export class EpisodeCardComponent implements OnInit {
     if(episodeData.author_hiveusername){
       window.open('https://buymeberri.es/@'+episodeData.author_hiveusername, "_blank")
       // window.location(episodeData.author_hiveusername);
-    }
-  }
-
-  formatDuration(seconds) {
-    // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
-    if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
-      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' mins';
-    }else{
-      return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
     }
   }
 }

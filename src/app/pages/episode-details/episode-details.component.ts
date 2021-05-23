@@ -25,10 +25,14 @@ export class EpisodeDetailsComponent implements OnInit {
   isAddingComment = false;
   upvoteOngoing: Boolean = false;
   viewMoreDescription:Boolean = false;
+  episodeLoading:Boolean = false;
+  commentsLoading:Boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private commonService : CommonService, public authService: AuthService,
     private router: Router, private toastr: ToastrService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public playerService: PlayerService) {
     console.log(data);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
     if (data && data.id) {
       this.episodeData = data;
       // let categoryIds = '';
@@ -47,9 +51,11 @@ export class EpisodeDetailsComponent implements OnInit {
     } else {
       this.activatedRoute.paramMap.subscribe(paramMap => {
         this.episodeId = paramMap.get('episode_id');
+        this.episodeLoading = true;
         this.commonService.getEpisode(this.episodeId).subscribe((res: any) => {
           console.log(res);
           this.episodeData = res.episode;
+          this.episodeLoading = false;
           // let categoryIds = '';
           // this.episodeData['Categories'].forEach(element => {
           //   categoryIds += (element.id + '_');
@@ -62,8 +68,8 @@ export class EpisodeDetailsComponent implements OnInit {
           //     console.log(res);
           //   });
           // }
-          this.getComments();
         });
+        this.getComments();
       })
     }
 
@@ -74,18 +80,25 @@ export class EpisodeDetailsComponent implements OnInit {
   }
 
   getComments() {
-    this.commonService.getComments(this.episodeData.id).subscribe((res: any) => {
+    this.commentsLoading = true;
+    this.commonService.getComments(this.episodeId).subscribe((res: any) => {
       console.log(res);
       this.comments = res.comments;
+      this.commentsLoading = false;
     })
   }
 
   formatDuration(seconds) {
-    return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
+      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' mins';
+    }else{
+      return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
+    }
   }
 
   redirectToPodcast(podcast) {
-    this.router.navigateByUrl('podcast/' + podcast.id);
+    this.router.navigateByUrl('podcast/' + podcast.podcast_id);
   }
 
   addComment($event) {
@@ -173,5 +186,13 @@ export class EpisodeDetailsComponent implements OnInit {
       window.open('https://buymeberri.es/@'+episodeData.author_hiveusername, "_blank")
       // window.location(episodeData.author_hiveusername);
     }
+  }
+
+  back(){
+    history.back();
+  }
+
+  isPaidOut(){
+    return moment().diff(this.episodeData.published_at, "days") > 7;
   }
 }

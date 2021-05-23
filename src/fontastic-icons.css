@@ -149,3 +149,21 @@
 .icon-schedule-white-18dp:before {
   content: "\4b";
 }
+.icon-arrow-left-1:before {
+  content: "\4c";
+}
+.icon-comment:before {
+  content: "\4d";
+}
+.icon-left:before {
+  content: "\4e";
+}
+.icon-reply-1:before {
+  content: "\4f";
+}
+.icon-right:before {
+  content: "\50";
+}
+.icon-send:before {
+  content: "\51";
+}

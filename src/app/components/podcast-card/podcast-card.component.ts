@@ -15,6 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PodcastCardComponent implements OnInit {
   @Input() podcastData;
+  @Input() isLoading = false;
+
   upvoteOngoing: Boolean = false;
 
   constructor(

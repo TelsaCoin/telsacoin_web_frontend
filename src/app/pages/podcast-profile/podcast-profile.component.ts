@@ -42,6 +42,8 @@ export class PodcastProfileComponent implements OnInit {
     public dialog: MatDialog,
     public router: Router,
   ) {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
   }
 
 
@@ -114,7 +116,12 @@ export class PodcastProfileComponent implements OnInit {
   }
 
   formatDuration(seconds) {
-    return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
+      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' mins';
+    }else{
+      return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
+    }
   }
 
   tempdurationupvotes(sec) {

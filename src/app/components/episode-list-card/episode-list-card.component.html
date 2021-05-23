@@ -1,4 +1,4 @@
-<div class="podcast-card">
+<div class="podcast-card" *ngIf="!isLoading">
     <div class="content">
         <h6 class="name truncate-overflow pointer" (click)="openEpisode(episodeData)">{{episodeData.name}}</h6>
         <div class="d-flex align-items-center justify-content-start mb-2">
@@ -49,6 +49,19 @@
     <div class="play-section">
         <div class="isode" (click)="playEpisode(episodeData)">
             <mat-icon mat-list-icon class="left" style="font-size: 30px; height: 30px; width: 30px;">play_arrow</mat-icon>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading">
+    <div class="timeline-wrapper">
+        <div class="timeline-item">
+          <div class="animated-background-1">
+            <div class="background-masker-1 header-top-1"></div>
+            <div class="background-masker-1 header-bottom-1"></div>
+            <div class="background-masker-1 content-top-1"></div>
+            <div class="background-masker-1 content-second-line-1"></div>
+          </div>
         </div>
     </div>
 </div>

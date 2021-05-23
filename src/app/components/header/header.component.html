@@ -21,7 +21,7 @@
                 </div>
                 <div class="user" (click)="navigateProfile()" *ngIf="userDetailsService.UserDetails?.username">
                     <div>
-                      <img *ngIf="userDetailsService.UserDetails?.img" [src]="userDetailsService.UserDetails?.img"/>
+                      <img *ngIf="userDetailsService.UserDetails?.img" class="lazyload" [src]="userDetailsService.UserDetails?.img"/>
                       <span *ngIf="!userDetailsService.UserDetails?.img" class="icon icon-user"></span>
                     </div>
                     <!-- <div class="user-name text-truncate">

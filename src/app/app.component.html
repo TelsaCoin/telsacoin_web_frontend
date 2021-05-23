@@ -1,10 +1,10 @@
-<mat-drawer-container [ngClass]="{'hideit': hideit}">
+<mat-drawer-container [ngClass]="{'hideit': hideit, 'player-open' : playingEpisode && !isEmbedPlayer}">
     <mat-drawer autosize [mode]="appMode" [opened]="isSidebarOpened" class="sidebar-container left" [ngClass]="{'expanded' : isSidebarExpanded}"
      #sidenav>
       <div class="logo" [@fadeAnimation]="isSidebarExpanded">
         <a>
-          <img src="./assets/aureal_full_dark.png" [ngClass]="{'expanded' : isSidebarExpanded}" style="padding: 0 40px;"/>
-          <img src="./assets/launch_icon.png" [ngClass]="{'expanded' : !isSidebarExpanded}" style="padding: 0 15px;"/>
+          <img src="./assets/aureal_full_dark.png" class="lazyload" [ngClass]="{'expanded' : isSidebarExpanded}" style="padding: 0 40px;"/>
+          <img src="./assets/launch_icon.png" class="lazyload" [ngClass]="{'expanded' : !isSidebarExpanded}" style="padding: 0 15px;"/>
         </a>
       </div>
       <div class="tabs">

@@ -59,6 +59,9 @@
       &.active{
         color: var(--primary) !important;
       }
+      &:hover {
+        text-decoration: none;
+      }
     }
     .search-part {
       border: 1px solid var(--light);

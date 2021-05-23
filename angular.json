@@ -109,7 +109,9 @@
               "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/lazysizes/lazysizes.min.js"
+            ]
           }
         },
         "lint": {

@@ -1,67 +1,66 @@
 .podcast-card{
     // background: white;
     border: 1px solid var(--primary-border);
-    // display: flex;
+    display: flex;
     // margin-right: 20px;
-    padding: 15px;
+    padding: 10px;
     width: inherit;
     border-radius: 20px;
     position: relative;
     .img{
-        width: 65%;
+        max-width: 21%;
         height: auto;
-        border-radius: 10px;
+        object-fit: contain;
+        border-radius: 12px;
     }
     .content{
-        margin-top: 5px;
+        margin-left: 10px;
         display: flex;
         flex-direction: column;
+        width: calc(100% - 25%);
         .podcast_name{
             font-size: 14px;
             font-weight: 500;
         }
-        .author{
-            font-size: 12px;
-            font-weight: 400;
-        }
-        .vote-icon{
-            color: var(--accenttwo);
-            font-size: 24px;
-            margin-top: 5px;
-            &.voted{
-                color: var(--primary);
-            }
-            cursor: pointer;
-        }
         .vote-count{
-            margin-top: 5px;
-            margin-right: 10px;
+            background: var(--tertiary-background);
             color: var(--accenttwo);
-            font-size: 12px;
-            border: 1px solid var(--primary-border);
+            font-size: 10px;
             padding: 0px 7px;
             display: flex;
             align-items: center;
             border-radius: 15px;
+            cursor: pointer;
             .icon{
                 font-size: 14px;
                 margin-right: 3px;
+                margin-top: 1px;
             }
         }
         .comment-count{
             margin-top: 5px;
-            margin-left: 10px;
+            margin-right: 10px;
             color: var(--accenttwo);
-            font-size: 12px;
+            font-size: 10px;
             border: 1px solid var(--primary-border);
-            padding: 0px 7px;
+            padding: 2px 7px;
             display: flex;
             align-items: center;
             border-radius: 15px;
             width: fit-content;
             .icon{
-                font-size: 14px;
+                font-size: 18px;
                 margin-right: 3px;
+                margin-top: 1px;
+                color: var(--accent);
+            }
+            .icon-up-circled{
+                margin-left: -3px;
+            }
+            &.voted{
+                .icon{
+                    color: var(--primary);
+                }
             }
             cursor: pointer;
         }
@@ -96,7 +95,7 @@
     background: var(--tertiary-background);
     background: linear-gradient(to right, var(--tertiary-background) 8%, var(--accenttwo) 18%, var(--tertiary-background) 33%);
     background-size: 800px 104px;
-    height: 220px;
+    height: 40px;
     position: relative;
 }
 .background-masker {
@@ -105,40 +104,21 @@
 }
 /* Every thing below this is just positioning */
 .background-masker.header-top,.background-masker.header-bottom,.background-masker.subheader-bottom {
-    top: 150px;
-    left: 0px;
+    top: 15px;
+    left: 50px;
     right: 0;
-    height: 15px;
+    height: 8px;
 }
 .background-masker.header-bottom {
-    top: 185px;
-    height: 6px;
-}
-.background-masker.subheader-left,.background-masker.subheader-right {
-    top: 184px;
-    height: 6px;
-}
-.background-masker.subheader-bottom {
-    top: 190px;
-    height: 10px;
+    top: 60px;
+    height: 20px;
 }
 .background-masker.content-top,.background-masker.content-second-line,.background-masker.content-third-line,
 .background-masker.content-second-end,.background-masker.content-third-end,.background-masker.content-first-end {
-    top: 185px;
-    left: 0;
-    right: 0;
-    height: 10px;
+    top: 0px;
+    left: 40px;
+    height: 40px;
 }
 .background-masker.content-top {
-    height: 12px;
-}
-.background-masker.content-first-end,.background-masker.content-second-end,.background-masker.content-third-end{
-    width: auto;
-    left: 380px;
-    right: 0;
-    top: 120px;
-    height: 8px;
-}
-.background-masker.content-second-line  {
-    top: 213px;
+    width: 15px;
 }

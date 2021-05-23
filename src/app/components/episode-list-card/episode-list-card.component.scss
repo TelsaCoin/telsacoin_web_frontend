@@ -191,3 +191,81 @@
     color: white;
   }
 }
+
+/* loader */
+.timeline-item {
+  background: var(--theme-background);
+  border-radius: 3px;
+  padding: 12px;
+  border: 1px solid var(--primary-border);
+  margin-bottom: 25px;
+  padding: 15px;
+  border-radius: 20px;
+}
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
+.animated-background-1 {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: var(--tertiary-background);
+  background: linear-gradient(to right, var(--tertiary-background) 8%, var(--accenttwo) 18%, var(--tertiary-background) 33%);
+  background-size: 800px 104px;
+  height: 121px;
+  position: relative;
+}
+.background-masker-1 {
+  background: var(--theme-background);
+  position: absolute;
+}
+
+/* Every thing below this is just positioning */
+.background-masker.header-top-1,.background-masker-1.header-bottom-1,.background-masker-1.subheader-bottom-1 {
+  top: 40px;
+  left: 0px;
+  right: 0;
+  height: 15px;
+}
+.background-masker-1.header-bottom-1 {
+  top: 75px;
+  height: 15px;
+}
+.background-masker-1.subheader-left-1,.background-masker-1.subheader-right-1 {
+  top: 184px;
+  height: 6px;
+}
+.background-masker-1.subheader-bottom-1 {
+  top: 190px;
+  height: 10px;
+}
+.background-masker-1.content-top-1,.background-masker-1.content-second-line-1,.background-masker-1.content-third-line-1,
+.background-masker-1.content-second-end-1,.background-masker-1.content-third-end-1,.background-masker-1.content-first-end-1 {
+  top: 40px;
+  left: 0;
+  right: 0;
+}
+.background-masker-1.content-top-1 {
+  height: 10px;
+}
+.background-masker-1.content-first-end-1,.background-masker-1.content-second-end-1,.background-masker-1.content-third-end-1{
+  width: auto;
+  left: 380px;
+  right: 0;
+  top: 120px;
+  height: 8px;
+}
+.background-masker-1.content-second-line-1  {
+  top: 213px;
+}
+
+.header-top-1{
+  left: 110px !important;
+}

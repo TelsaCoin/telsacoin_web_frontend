@@ -36,6 +36,7 @@
     "google-libphonenumber": "^3.2.15",
     "intl-tel-input": "^17.0.3",
     "jquery": "^3.5.1",
+    "lazysizes": "^5.3.2",
     "moment": "^2.29.1",
     "ngx-audio-player": "^9.2.1",
     "ngx-bootstrap": "^6.2.0",

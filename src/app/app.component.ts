@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
   appMode = 'side';
   isSidebarOpened = true;
   isSidebarExpanded = false;
-  title = 'Aureal - Podcast Rating Platform';
+  title = 'Aureal - Podcasts';
   playingEpisode;
   currentModule;
   isEmbedPlayer: Boolean = false;

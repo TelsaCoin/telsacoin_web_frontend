@@ -41,7 +41,7 @@
            </span>
         </div>
         <div class="custom-row" *ngIf="tabsSection[1].isLoaded">
-            <div *ngFor="let podcast of tabsSection[1].data; let i = index" class="custom-col-podcast mt-3">
+            <div *ngFor="let podcast of tabsSection[1].data; let i = index" class="custom-col mt-3">
                 <app-podcast-card [podcastData]="podcast"></app-podcast-card>
             </div>
         </div>

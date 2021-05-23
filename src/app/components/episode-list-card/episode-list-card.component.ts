@@ -19,9 +19,12 @@ export class EpisodeListCardComponent implements OnInit {
   @Input() episodeData;
   @Input() userId = '';
   @Input() showUpvote : Boolean = false;
+  @Input() isLoading = false;
+
   viewMoreDescription: boolean = false;
   publishing: Boolean = false;
   upvoteOngoing: Boolean = false;
+
   // @Output() openCard = new EventEmitter<any>(true);
   constructor(public router: Router, public authService: AuthService, public playerService: PlayerService, public dialog: MatDialog, public commonService: CommonService, private toastr: ToastrService) {
   }
@@ -31,7 +34,12 @@ export class EpisodeListCardComponent implements OnInit {
   }
 
   formatDuration(seconds) {
-    return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
+    if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
+      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' mins';
+    }else{
+      return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
+    }
   }
 
   tempdurationupvotes(sec) {
