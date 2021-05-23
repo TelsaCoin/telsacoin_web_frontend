@@ -1,9 +1,9 @@
 <div class="episode-container">
     <div class="podcast-card" *ngIf="!episodeLoading">
         <div class="d-flex align-items-center mb-5">
-            <span class="icon icon-arrow-left-1 accenttwo mt-1 pointer" (click)="back()"></span>
+            <span class="icon icon-arrow-left-1 accenttwo mt-1 pointer" (click)="back()" style="font-size: 18px;"></span>
             <span>
-                <h6 class="podcast-name" (click)="redirectToPodcast(episodeData)">{{episodeData.podcast_name}}</h6>
+                <h6 class="podcast-name pointer" (click)="redirectToPodcast(episodeData)">{{episodeData.podcast_name}}</h6>
             </span>
         </div>
         <div class="d-flex justify-content-between">
@@ -29,13 +29,12 @@
                                 <div class="comment-count" *ngIf="episodeData.permlink">
                                     <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
                                 </div>
-                                <div class="comment-count">
+                                <div class="comment-count" *ngIf="episodeData.permlink">
                                     <span class="icon icon-comments-o"></span>
                                     <span>{{episodeData.comments_count}}</span>
                                 </div>
                                 <div class="comment-count" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">
-                                    <i class="icon fa fa-gift" aria-hidden="true"></i>
-                                    <span>Tip</span>
+                                    <span>Tip Author</span>
                                 </div>
                             </div>
                         </div>
@@ -44,9 +43,12 @@
                 <div class="more-content">
                     <div class="comments-container">
                         <div class="heading mb-4">Comments</div>
-                        <div class="comments">
+                        <div class="comments" *ngIf="episodeData.permlink">
                             <app-comment *ngFor="let c of comments" (refresh)="getComments()" [comment]="c"></app-comment>
                             <app-comment-box (add)="addComment($event)" [isLoading]="isAddingComment"></app-comment-box>
+                        </div>
+                        <div *ngIf="!episodeData.permlink">
+                            <span class="accenttwo"> Comments are enabled only for podcast episodes published on Hive.</span>
                         </div>
                     </div>
                 </div>

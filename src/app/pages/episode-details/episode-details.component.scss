@@ -71,6 +71,14 @@
     .icon{
         font-size: 14px;
         margin-right: 3px;
+
+    }
+    .vote-icon{
+      &.voted{
+        .icon{
+          color: var(--primary);
+        }
+      }
     }
   }
   .comment-count{

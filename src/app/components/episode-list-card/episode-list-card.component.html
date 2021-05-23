@@ -8,12 +8,12 @@
         </div>
         <div class="d-flex justify-content-between align-center">
             <div class="d-flex flex-wrap">
-                <div class="comment-count duration">
-                    <i class="far fa-clock-o" aria-hidden="true"></i>
+                <div class="comment-count duration pointer" (click)="playEpisode(episodeData)">
+                    <span class="icon icon-play accent"></span>
                     <span>{{formatDuration(episodeData.duration)}}</span>
                 </div>
                 <div class="vote-count" *ngIf="episodeData?.user_id == userId">
-                    <span *ngIf="episodeData?.hive_status != 'done'" class="d-flex align-items-center" (click)="publishEpisode(episodeData)">
+                    <span *ngIf="episodeData?.hive_status != 'done'" class="d-flex align-items-center pointer" (click)="publishEpisode(episodeData)">
                       <span>
                         Publish Episode
                       </span>
@@ -25,8 +25,8 @@
                       <span class="icon icon-check"></span>
                     </span>
                 </div>
-                <div class="vote-count" *ngIf="episodeData?.hive_status == 'done'">
-                    <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}" style="margin-top: 4px;">
+                <div class="vote-count" *ngIf="episodeData?.hive_status == 'done' && !isPaidOut()">
+                    <div class="vote-icon pointer" [ngClass]="{'voted' : episodeData.ifVoted}" style="margin-top: 4px;">
                         <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
                         <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
                     </div>
@@ -35,22 +35,21 @@
                 <div class="comment-count" *ngIf="episodeData?.hive_status == 'done'">
                     <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
                 </div>
-                <div class="comment-count" (click)="openEpisode(episodeData)" *ngIf="episodeData?.hive_status == 'done'">
+                <div class="comment-count pointer" (click)="openEpisode(episodeData)" *ngIf="episodeData?.hive_status == 'done'">
                     <span class="icon icon-comments-o"></span>
                     <span>{{episodeData.comments_count}}</span>
                 </div>
-                <div class="comment-count" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">
-                    <i class="icon fa fa-gift" aria-hidden="true"></i>
-                    <span>Tip</span>
+                <div class="comment-count pointer" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">
+                    <span>Tip Author</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="play-section">
+    <!-- <div class="play-section">
         <div class="isode" (click)="playEpisode(episodeData)">
             <mat-icon mat-list-icon class="left" style="font-size: 30px; height: 30px; width: 30px;">play_arrow</mat-icon>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <div *ngIf="isLoading">

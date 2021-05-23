@@ -75,10 +75,17 @@
     display: flex;
     align-items: center;
     border-radius: 15px;
-    cursor: pointer;
+    // cursor: pointer;
     .icon{
         font-size: 14px;
         margin-right: 3px;
+    }
+    .vote-icon{
+      &.voted{
+        .icon{
+          color: var(--primary);
+        }
+      }
     }
   }
   .comment-count{
@@ -94,7 +101,7 @@
         font-size: 14px;
         margin-right: 3px;
     }
-    cursor: pointer;
+    // cursor: pointer;
   }
   // .duration {
   //   display: flex;

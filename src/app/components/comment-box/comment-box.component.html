@@ -1,6 +1,11 @@
 <div class="comment-box">
   <textarea [(ngModel)]="value"></textarea>
   <div>
-    <button class="primary-but" (click)="post()" style="margin-right: 20px;">Post</button>
+    <button class="send-but" (click)="post()" style="font-size: 25px;">
+      <span *ngIf="!isLoading" class="icon icon-send"></span>
+      <span *ngIf="isLoading">
+        <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+      </span>
+    </button>
   </div>
 </div>

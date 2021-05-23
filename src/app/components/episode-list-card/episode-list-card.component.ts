@@ -154,4 +154,8 @@ export class EpisodeListCardComponent implements OnInit {
       }
     });
   }
+
+  isPaidOut(){
+    return moment().diff(this.episodeData.published_at, "days") > 7;
+  }
 }
