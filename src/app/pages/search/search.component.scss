@@ -28,7 +28,6 @@
   border-bottom: 1px solid var(--primary-border);
   // background: white;
   &:hover {
-    background: var(--tertiary-background);
     cursor: pointer;
   }
   @media (max-width: 576px) {

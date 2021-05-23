@@ -31,18 +31,17 @@ export class CommonService {
   recommendedEpisodes(page, pageSize, category_ids) {
     if(category_ids){
       if (localStorage.getItem('userId')) {
-        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId') + '&category_ids=' + category_ids);
+        return this.api.get(this.apiUrl + '/public/exploreEpisodes?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId') + '&category_ids=' + category_ids);
       } else {
-        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize + '&category_ids=' + category_ids);
+        return this.api.get(this.apiUrl + '/public/exploreEpisodes?page=' + page + '&pageSize=' + pageSize + '&category_ids=' + category_ids);
       }
     }else{
       if (localStorage.getItem('userId')) {
-        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId'));
+        return this.api.get(this.apiUrl + '/public/exploreEpisodes?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId'));
       } else {
-        return this.api.get(this.apiUrl + '/public/followedEpisodes?page=' + page + '&pageSize=' + pageSize);
+        return this.api.get(this.apiUrl + '/public/exploreEpisodes?page=' + page + '&pageSize=' + pageSize);
       }
     }
-
   }
 
   getNewlyReleasedPodcasts(page, pageSize) {
@@ -74,6 +73,38 @@ export class CommonService {
       return this.api.get(this.apiUrl + '/public/recommend?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId'));
     } else {
       return this.api.get(this.apiUrl + '/public/recommend?page=' + page + '&pageSize=' + pageSize);
+    }
+  }
+
+  getExplorePodcasts(page, pageSize, category_ids) {
+    if(category_ids){
+      if (localStorage.getItem('userId')) {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId') + '&category_ids=' + category_ids);
+      } else {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?page=' + page + '&pageSize=' + pageSize + '&category_ids=' + category_ids);
+      }
+    }else{
+      if (localStorage.getItem('userId')) {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId'));
+      } else {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?page=' + page + '&pageSize=' + pageSize);
+      }
+    }
+  }
+
+  getExploreNewPodcasts(page, pageSize, category_ids) {
+    if(category_ids){
+      if (localStorage.getItem('userId')) {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?type=new&page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId') + '&category_ids=' + category_ids);
+      } else {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?type=new&page=' + page + '&pageSize=' + pageSize + '&category_ids=' + category_ids);
+      }
+    }else{
+      if (localStorage.getItem('userId')) {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?type=new&page=' + page + '&pageSize=' + pageSize + '&user_id=' + localStorage.getItem('userId'));
+      } else {
+        return this.api.get(this.apiUrl + '/public/explorePodcasts?type=new&page=' + page + '&pageSize=' + pageSize);
+      }
     }
   }
 

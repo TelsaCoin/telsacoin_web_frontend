@@ -118,7 +118,7 @@ export class PodcastProfileComponent implements OnInit {
   formatDuration(seconds) {
     // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
     if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
-      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' mins';
+      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' min';
     }else{
       return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
     }

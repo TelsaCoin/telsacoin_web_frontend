@@ -19,12 +19,20 @@ export class ExploreComponent implements OnInit {
       pageSize: 5
     },
     {
-      name : 'Recommended Podcasts',
+      name : 'Trending Podcasts',
       data : [],
       type : 'podcasts',
       isLoaded: false,
       page: -1,
-      pageSize: 6
+      pageSize: 10
+    },
+    {
+      name : 'New Podcasts',
+      data : [],
+      type : 'podcasts',
+      isLoaded: false,
+      page: -1,
+      pageSize: 10
     },
   ]
   constructor(
@@ -35,19 +43,21 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.getRecommendedEpisodes();
+    // this.getRecommendedEpisodes();
     this.getRecommendedPodcasts();
+    this.getNewPodcasts();
+
   }
 
-  getRecommendedEpisodes(){
-    this.tabsSection[0].page +=1;
-    this.tabsSection[0].isLoaded = false;
-    this.commonService.recommendedEpisodes(this.tabsSection[0].page, this.tabsSection[0].pageSize, this.selectedCategories.join(',')).subscribe((res:any) => {
-      this.tabsSection[0].isLoaded = true;
-      if(res.EpisodeResult){
-        this.tabsSection[0].data = [...this.tabsSection[0].data, ...res.EpisodeResult];
+  getNewPodcasts(){
+    this.tabsSection[2].page +=1;
+    this.tabsSection[2].isLoaded = false;
+    this.commonService.getExploreNewPodcasts(this.tabsSection[2].page, this.tabsSection[2].pageSize, this.selectedCategories.join(',')).subscribe((res:any) => {
+      this.tabsSection[2].isLoaded = true;
+      if(res.podcasts){
+        this.tabsSection[2].data = [...this.tabsSection[2].data, ...res.podcasts];
       }else{
-        this.tabsSection[0].data = [];
+        this.tabsSection[2].data = [];
       }
     })
   }
@@ -55,10 +65,10 @@ export class ExploreComponent implements OnInit {
   getRecommendedPodcasts(){
     this.tabsSection[1].page +=1;
     this.tabsSection[1].isLoaded = false;
-    this.commonService.getRecommendedPodcasts(this.tabsSection[1].page, this.tabsSection[1].pageSize).subscribe((res:any) => {
+    this.commonService.getExplorePodcasts(this.tabsSection[1].page, this.tabsSection[1].pageSize, this.selectedCategories.join(',')).subscribe((res:any) => {
       this.tabsSection[1].isLoaded = true;
-      if(res.for_you){
-        this.tabsSection[1].data = res.for_you;
+      if(res.podcasts){
+        this.tabsSection[1].data = res.podcasts;
       }
     })
   }
@@ -74,15 +84,23 @@ export class ExploreComponent implements OnInit {
         pageSize: 5
       },
       {
-        name : 'Recommended Podcasts',
+        name : 'Trending Podcasts',
         data : [],
         type : 'podcasts',
         isLoaded: false,
         page: -1,
-        pageSize: 6
+        pageSize: 10
       },
-    ];
-    this.getRecommendedEpisodes();
+      {
+        name : 'New Podcasts',
+        data : [],
+        type : 'podcasts',
+        isLoaded: false,
+        page: -1,
+        pageSize: 10
+      },
+    ]
+    this.getNewPodcasts();
     this.getRecommendedPodcasts();
   }
 
