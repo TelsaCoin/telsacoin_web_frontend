@@ -1,6 +1,7 @@
 <div class="landing-container">
     <div class="home-header">
-      <img src="./assets/Aureal_full_light.png" class="lazyload">
+      <img src="./assets/Aureal_full_light.png" *ngIf="dark" class="lazyload">
+      <img src="./assets/aureal_full_dark.png" *ngIf="!dark" class="lazyload">
       <div>
         <div>
           <span class="icon icon-moon-o pointer accenttwo" *ngIf="!dark" (click)="toggleTheme(true)"></span>
@@ -9,7 +10,9 @@
       </div>
     </div>
     <div class="d-block d-sm-none">
-      <img src="./assets/Aureal_full_light.png" class="lazyload" style="width: 100%;
+      <img src="./assets/Aureal_full_light.png" *ngIf="dark" class="lazyload" style="width: 100%;
+      padding: 20px 100px;">
+      <img src="./assets/aureal_full_dark.png" *ngIf="!dark" class="lazyload" style="width: 100%;
       padding: 20px 100px;">
     </div>
     <div class="banner-container">

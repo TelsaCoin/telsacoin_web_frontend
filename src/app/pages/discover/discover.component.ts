@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CommonService} from 'src/app/services/common.service';
 import { trigger, transition, animate, style } from '@angular/animations'
 import { AuthService } from 'src/app/services/auth.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-discover',
@@ -56,6 +57,7 @@ export class DiscoverComponent implements OnInit {
   constructor(
     private commonService : CommonService,
     public authService: AuthService,
+    private themeService: ThemeService,
   ) { 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
@@ -168,5 +170,9 @@ export class DiscoverComponent implements OnInit {
       behavior: 'smooth' 
     });
     // wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+  }
+
+  get dark() {
+    return this.themeService.theme === 'dark';
   }
 }

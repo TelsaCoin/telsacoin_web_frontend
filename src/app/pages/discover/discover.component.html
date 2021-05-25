@@ -71,7 +71,8 @@
 
 <div class="mobile-container">
     <div class="w100 d-flex flex-column align-items-center justify-content-center">
-        <img src="./assets/Aureal_full_light.png" class="lazyload">
+        <img src="./assets/Aureal_full_light.png" *ngIf="dark" class="lazyload">
+        <img src="./assets/aureal_full_dark.png" *ngIf="!dark" class="lazyload">
     </div>
     <div class="tet-section mt-5">
         <h4 class="accent text-center mb-5">Aureal is a decentralised podcast platform built on hive blockchain that enables you to monetise your podcast and rewards you for your interactions.</h4>
