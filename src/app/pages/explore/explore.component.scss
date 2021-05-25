@@ -1,7 +1,7 @@
 .explore-container{
     min-height: 100vh;
     width: 100%;
-    padding: 20px 40px;
+    padding: 20px;
     .the-text{
         font-size: 18px;
         font-weight: 500;
@@ -12,6 +12,7 @@
         align-items: center;
         overflow: scroll;
         max-width: 90vw;
+        margin: 0 20px;
         /* this will hide the scrollbar in mozilla based browsers */
         overflow: -moz-scrollbars-none;
         /* this will hide the scrollbar in internet explorers */

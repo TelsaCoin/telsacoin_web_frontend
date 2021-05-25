@@ -76,6 +76,9 @@ export class AppComponent implements OnInit {
     public userDetailsService: UserDetailsService,
     private authService: AuthService
     ) {
+
+      this.preloadThumbnail();
+
       if(window.location.pathname == '/'){
         this.hideit = true;
       }else{
@@ -96,6 +99,11 @@ export class AppComponent implements OnInit {
       }
       console.log(this.isEmbedPlayer);
       this.setTheme();
+  }
+
+  preloadThumbnail(){
+    let a = new Image();
+    a.src = 'https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png';
   }
 
   setTheme(){
@@ -143,6 +151,7 @@ export class AppComponent implements OnInit {
     });  
 
     if(this.authService.isAuthenticated()){
+      this.hideit = false;
       this.getUserDetails();
       // if(this.authService.isHiveConnected()){
       //   this.getUserNotifications();

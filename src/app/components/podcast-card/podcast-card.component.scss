@@ -1,6 +1,6 @@
 .podcast-card{
-    // background: white;
-    border: 1px solid var(--primary-border);
+    background: var(--secondary-background);
+    // border: 1px solid var(--primary-border);
     // display: flex;
     // margin-right: 20px;
     padding: 15px;
@@ -8,9 +8,12 @@
     border-radius: 20px;
     position: relative;
     .img{
-        width: 65%;
+        width: 75%;
         height: auto;
+        min-height: 150px;
         border-radius: 10px;
+        transition: background-image 1s ease-out;
+        // background-image: url('./../../../assets/thumbnail.png');
     }
     .content{
         margin-top: 5px;
@@ -36,10 +39,11 @@
         .vote-count{
             margin-top: 5px;
             margin-right: 10px;
-            color: var(--accenttwo);
-            font-size: 12px;
-            border: 1px solid var(--primary-border);
-            padding: 0px 7px;
+            color: var(--accent);
+            font-size: 10px;
+            // border: 1px solid var(--primary-border);
+            background: var(--tertiary-background);
+            padding: 2px 7px;
             display: flex;
             align-items: center;
             border-radius: 15px;
@@ -51,9 +55,9 @@
         .comment-count{
             margin-top: 5px;
             margin-left: 10px;
-            color: var(--accenttwo);
+            color: var(--accent);
             font-size: 12px;
-            border: 1px solid var(--primary-border);
+            background: var(--tertiary-background);
             padding: 0px 7px;
             display: flex;
             align-items: center;
@@ -71,11 +75,11 @@
 
 /* loader */
 .timeline-item {
-    background: var(--theme-background);
+    background: var(--secondary-background);
     border-radius: 3px;
     padding: 12px;
-    border: 1px solid var(--primary-border);
-    margin-bottom: 25px;
+    // border: 1px solid var(--primary-border);
+    margin-bottom: 20px;
     padding: 15px;
     border-radius: 20px;
 }
@@ -96,11 +100,11 @@
     background: var(--tertiary-background);
     background: linear-gradient(to right, var(--tertiary-background) 8%, var(--accenttwo) 18%, var(--tertiary-background) 33%);
     background-size: 800px 104px;
-    height: 220px;
+    height: 230px;
     position: relative;
 }
 .background-masker {
-    background: var(--theme-background);
+    background: var(--secondary-background);
     position: absolute;
 }
 /* Every thing below this is just positioning */
@@ -111,8 +115,8 @@
     height: 15px;
 }
 .background-masker.header-bottom {
-    top: 185px;
-    height: 6px;
+    top: 190px;
+    height: 15px;
 }
 .background-masker.subheader-left,.background-masker.subheader-right {
     top: 184px;
@@ -125,9 +129,9 @@
 .background-masker.content-top,.background-masker.content-second-line,.background-masker.content-third-line,
 .background-masker.content-second-end,.background-masker.content-third-end,.background-masker.content-first-end {
     top: 185px;
-    left: 0;
+    left: 150px;
     right: 0;
-    height: 10px;
+    height: 151px;
 }
 .background-masker.content-top {
     height: 12px;
@@ -140,5 +144,5 @@
     height: 8px;
 }
 .background-masker.content-second-line  {
-    top: 213px;
+    top: 0px;
 }

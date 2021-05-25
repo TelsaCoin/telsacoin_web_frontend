@@ -1,6 +1,7 @@
 .podcast-card-1{
     // background: white;
-    border: 1px solid var(--primary-border);
+    background: var(--secondary-background);
+    // border: 1px solid var(--primary-border);
     display: flex;
     // margin-right: 20px;
     padding: 15px;
@@ -54,11 +55,12 @@
         }
     }
     .content{
-        // margin-top: 5px;
         display: flex;
         flex-direction: column;
-        width: 80%;
-        margin-left: 10px;
+        width: calc(80% - 15px);
+        align-self: stretch;
+        justify-content: space-between;
+        margin-left: 15px;
         .podcast_name{
             font-size: 14px;
             font-weight: 500;
@@ -79,7 +81,7 @@
 
     }
     .vote-icon{
-        color: var(--accenttwo);
+        color: var(--theme-color);
         font-size: 24px;
         margin-top: 5px;
         &.voted{
@@ -90,9 +92,9 @@
     .vote-count{
         margin-top: 5px;
         margin-left: 5px;
-        color: var(--accenttwo);
+        color: var(--theme-color);
         font-size: 12px;
-        border: 1px solid var(--primary-border);
+        background: var(--tertiary-background);
         padding: 0px 7px;
         display: flex;
         align-items: center;
@@ -105,16 +107,16 @@
     .comment-count{
         margin-top: 5px;
         margin-right: 10px;
-        color: var(--accenttwo);
-        font-size: 12px;
-        border: 1px solid var(--primary-border);
+        color: var(--theme-color);
+        font-size: 10px;
+        background: var(--tertiary-background);
         padding: 0px 7px;
         display: flex;
         align-items: center;
         border-radius: 15px;
         width: fit-content;
         .icon{
-            font-size: 20px;
+            font-size: 18px;
             margin-right: 3px;
             margin-top: 2px;
         }
@@ -133,11 +135,11 @@
 
 /* loader */
 .timeline-item {
-    background: var(--theme-background);
+    background: var(--secondary-background);
     border-radius: 3px;
     padding: 12px;
-    border: 1px solid var(--primary-border);
-    margin-bottom: 25px;
+    // border: 1px solid var(--primary-border);
+    margin-bottom: 20px;
     padding: 15px;
     border-radius: 20px;
 }
@@ -158,23 +160,23 @@
     background: var(--tertiary-background);
     background: linear-gradient(to right, var(--tertiary-background) 8%, var(--accenttwo) 18%, var(--tertiary-background) 33%);
     background-size: 800px 104px;
-    height: 140px;
+    height: 100px;
     position: relative;
 }
 .background-masker-1 {
-    background: var(--theme-background);
+    background: var(--secondary-background);
     position: absolute;
 }
 
 /* Every thing below this is just positioning */
 .background-masker.header-top-1,.background-masker-1.header-bottom-1,.background-masker-1.subheader-bottom-1 {
     top: 40px;
-    left: 0px;
+    left: 105px;
     right: 0;
     height: 15px;
 }
 .background-masker-1.header-bottom-1 {
-    top: 90px;
+    top: 60px;
     height: 15px;
 }
 .background-masker-1.subheader-left-1,.background-masker-1.subheader-right-1 {

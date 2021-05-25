@@ -36,6 +36,7 @@ import { CommentBoxComponent } from 'src/app/components/comment-box/comment-box.
 import { LoaderComponent } from 'src/app/components/loader/loader.component';
 import { FavoriteEpisodeComponent } from 'src/app/components/favorite-episode/favorite-episode.component';
 import { CarouselComponent } from 'src/app/components/carousel/carousel.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { CarouselComponent } from 'src/app/components/carousel/carousel.componen
     MatTableModule,
     FormsModule,
     ReactiveFormsModule,
-    MatListModule
+    MatListModule,
+    LazyLoadImageModule
   ],
   exports: [
     DateAgoPipe, 
@@ -132,6 +134,7 @@ import { CarouselComponent } from 'src/app/components/carousel/carousel.componen
     LoaderComponent,
     CarouselComponent,
     FavoriteEpisodeComponent,
+    LazyLoadImageModule
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

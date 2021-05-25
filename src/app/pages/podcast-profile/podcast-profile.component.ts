@@ -34,6 +34,9 @@ export class PodcastProfileComponent implements OnInit {
   sharedEpisode;
   sharedEpisodeLoading: Boolean = false;
   userId = localStorage.getItem('userId');
+
+  similarPodcastsLoading:Boolean = false;
+  similarPodcasts = [];
   constructor(public rssFeedDetailsService: RssFeedDetailsService,
     public activatedRoute: ActivatedRoute, public playerService: PlayerService,
     private commonService : CommonService,
@@ -58,10 +61,19 @@ export class PodcastProfileComponent implements OnInit {
         this.podcastData['Episodes'] = [];
         this.onScrollDown();
       });
+      this.getSimilarPodcasts();
       // this.commonService.getPodcastEpisodes(localStorage.getItem('userId'),this.podcastId, 0,10).subscribe((res:any) => {
       //   this.podcastData['Episodes'] = res.episodes;
       // })
     });
+  }
+
+  getSimilarPodcasts(){
+    this.similarPodcastsLoading = true;
+    this.commonService.getSimilarPodcasts(this.podcastId).subscribe((res:any) => {
+      this.similarPodcasts = res.podcasts;
+      this.similarPodcastsLoading = false;
+    })
   }
 
   followPodcast() {
@@ -113,6 +125,9 @@ export class PodcastProfileComponent implements OnInit {
 
   playEpisode(episodeData) {
     this.playerService.setCurrentModule(episodeData);
+  }
+  redirectToPodcast(podcast) {
+    this.router.navigateByUrl('podcast/' + podcast.id);
   }
 
   formatDuration(seconds) {

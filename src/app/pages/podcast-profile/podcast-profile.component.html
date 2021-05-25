@@ -1,8 +1,8 @@
 <div class="podcast-container">
     <div class="inside-search-container w100" *ngIf="!progress">
-        <div class="d-flex justify-content-between show-container row m-0 pb-3">
-            <div class="col-md-8 col-sm-12 d-flex align-items-start p-0">
-                <img [src]="podcastData.image" class="album-art lazyload">
+        <div class="d-flex justify-content-between show-container row m-0 pb-5">
+            <div class="col-md-11 col-sm-12 d-flex align-items-start p-0">
+                <img defaultImage="https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png" [lazyLoad]="podcastData.image" class="album-art lazyload">
                 <div class="album-desc">
                     <div class="podcast-name">
                         <h3 class="podcast-name">{{podcastData.name}}</h3>
@@ -10,21 +10,18 @@
                     <div class="podcast-author">
                         <h5 class="podcast-author">By {{podcastData.author}}</h5>
                     </div>
-                    <div class="podcast-desc" [ngClass]="{'truncate-overflow' : !viewMoreDescription}">
+                    <div class="podcast-desc">
                         <span [innerHTML]="podcastData.description"></span>
                     </div>
-                    <div class="view-more" (click)="viewMoreDescription = !viewMoreDescription">
+                    <!-- <div class="view-more" (click)="viewMoreDescription = !viewMoreDescription">
                         <span *ngIf="!viewMoreDescription">view more
                         </span>
                         <span *ngIf="viewMoreDescription">view less</span>
                         <span class="icon icon-right-open-mini ml-2"></span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="col-md-4 col-sm-12 album-art p-0">
-                <div>
-
-                </div>
+            <div class="col-md-1 col-sm-12 album-art p-0">
                 <div class="d-flex align-items-center">
                     <div class="vote-count" (click)="followPodcast()">
                         <span *ngIf="podcastData.ifFollows">Followed</span>
@@ -39,30 +36,53 @@
             </div>
         </div>
         <div class="podcast-episode-container">
-            <div class="episode-container" infinite-scroll [infiniteScrollDistance]="scrollDistance"
-                [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle"
-                (scrolled)="onScrollDown()">
-                <h5>Episodes</h5>
-                <div class="outside-episode-container">
-                    <div class="inside-episode-container"
-                        *ngFor="let episodeData of podcastData.Episodes; let episodeIndex = index;"
-                        >
-                        <app-episode-list-card [episodeData]="episodeData" [userId]="userId"
-                            showUpvote="{{episodeData?.permlink ? true:false}}"></app-episode-list-card>
+            <div class="some-container">
+                <div class="episode-container" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+                    [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle"
+                    (scrolled)="onScrollDown()">
+                    <h5 class="font-weight-bold">Episodes</h5>
+                    <div class="outside-episode-container">
+                        <div class="inside-episode-container"
+                            *ngFor="let episodeData of podcastData.Episodes; let episodeIndex = index;"
+                            >
+                            <app-episode-list-card [episodeData]="episodeData" [userId]="userId"
+                                showUpvote="{{episodeData?.permlink ? true:false}}"></app-episode-list-card>
+                        </div>
+                    </div>
+                    <div class="outside-episode-container" *ngIf="categoryBasedPodcastsLoading">
+                        <div class="inside-episode-container" *ngFor="let episodeData of [].constructor(pageSize); let episodeIndex = index;">
+                            <app-episode-list-card [episodeData]="episodeData" [userId]="userId" isLoading="true"
+                            showUpvote="false"></app-episode-list-card>
+                        </div>
                     </div>
                 </div>
-                <div class="outside-episode-container" *ngIf="categoryBasedPodcastsLoading">
-                    <div class="inside-episode-container" *ngFor="let episodeData of [].constructor(pageSize); let episodeIndex = index;">
-                        <app-episode-list-card [episodeData]="episodeData" [userId]="userId" isLoading="true"
-                        showUpvote="false"></app-episode-list-card>
-                    </div>
+                <div class="view-more" (click)="onScrollDown()">
+                    <span>
+                    Show more
+                    </span>
+                    <span class="icon icon-down-open-mini"></span>
                 </div>
             </div>
-            <div class="view-more" (click)="onScrollDown()">
-                <span>
-                  Show more
-                </span>
-                <span class="icon icon-down-open-mini"></span>
+            <div class="similar-podcasts">
+                <div class="heading">
+                    Similar Podcasts
+                </div>
+                <div *ngIf="similarPodcastsLoading">
+                    <app-loader></app-loader>
+                </div>
+                <div *ngIf="!similarPodcastsLoading">
+                    <div *ngFor="let podcast of similarPodcasts;" class="each-podcast">
+                        <img defaultImage="https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png" [lazyLoad]="podcast.image" class="lazyload">
+                        <div>
+                            <div class="episode-name pointer truncate-overflow"  (click)="redirectToPodcast(podcast)">
+                                {{podcast.name}}
+                            </div>
+                             <div class="published_at">
+                                {{podcast.author}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

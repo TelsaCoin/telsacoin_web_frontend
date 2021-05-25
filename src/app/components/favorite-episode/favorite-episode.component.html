@@ -1,5 +1,6 @@
 <div class="podcast-card d-flex" *ngIf="!isLoading">
-    <img class="img lazyload" default="https://aurealbucket.s3.us-east-2.amazonaws.com/Thumbnail.png" [src]="episodeData.image" (click)="openEpisode(episodeData)">
+    <img class="img lazyload" 
+    defaultImage="https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png" [lazyLoad]="episodeData.image" (click)="openEpisode(episodeData)">
     <div class="content">
         <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openEpisode(episodeData)">{{episodeData.name}}</span>
         <div class="d-flex align-center">

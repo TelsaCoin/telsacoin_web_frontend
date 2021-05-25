@@ -14,19 +14,19 @@
          </div>
     </div>
 
-    <div class="custom-card">
+    <div class="custom-card" style="margin-top: 60px;">
         <div class="d-flex align-items-center justify-content-between custom-card-heading">
            <span class="accent f500 card-heading">
                 Top Podcasts
            </span>
         </div>
         <div class="custom-row" *ngIf="tabsSection[1].isLoaded">
-            <div *ngFor="let podcast of tabsSection[1].data; let i = index" class="custom-col mt-3">
+            <div *ngFor="let podcast of tabsSection[1].data; let i = index" class="custom-col" style="margin-top: 20px;">
                 <app-podcast-card [podcastData]="podcast"></app-podcast-card>
             </div>
         </div>
-        <div class="custom-row" *ngIf="!tabsSection[1].isLoaded">
-            <div *ngFor="let episode of [].constructor(tabsSection[1].pageSize) let i = index" class="custom-col mt-3">
+        <div class="custom-row mt-4" *ngIf="!tabsSection[1].isLoaded">
+            <div *ngFor="let episode of [].constructor(tabsSection[1].pageSize) let i = index" class="custom-col">
                 <app-podcast-card [podcastData]="episode" isLoading="true"></app-podcast-card>
             </div>
         </div>
@@ -34,19 +34,19 @@
             <app-loader></app-loader>
         </div> -->
     </div>
-    <div class="custom-card mt-4">
+    <div class="custom-card" style="margin-top: 60px; margin-bottom: 60px;">
         <div class="d-flex align-items-center justify-content-between custom-card-heading">
            <span class="accent f500 card-heading">
                 New Podcasts
            </span>
         </div>
         <div class="custom-row" *ngIf="tabsSection[2].isLoaded">
-            <div *ngFor="let podcast of tabsSection[2].data; let i = index" class="custom-col mt-3">
+            <div *ngFor="let podcast of tabsSection[2].data; let i = index" class="custom-col" style="margin-top: 20px;">
                 <app-podcast-card [podcastData]="podcast"></app-podcast-card>
             </div>
         </div>
         <div class="custom-row" *ngIf="!tabsSection[2].isLoaded">
-            <div *ngFor="let episode of [].constructor(tabsSection[2].pageSize) let i = index" class="custom-col mt-3">
+            <div *ngFor="let episode of [].constructor(tabsSection[2].pageSize) let i = index" class="custom-col" style="margin-top: 20px;">
                 <app-podcast-card [podcastData]="episode" isLoading="true"></app-podcast-card>
             </div>
         </div>

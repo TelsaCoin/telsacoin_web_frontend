@@ -1,5 +1,6 @@
 <div class="podcast-card" *ngIf="!isLoading">
-    <img class="img lazyload" [src]="podcastData.image" default="https://aurealbucket.s3.us-east-2.amazonaws.com/Thumbnail.png" (click)="openPodcast(podcastData)">
+    <img class="img lazyload" defaultImage="https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png" [lazyLoad]="podcastData.image"
+     (click)="openPodcast(podcastData)">
     <div class="content mt-2">
         <span class="podcast_name text-truncate accent mb-1 pointer" (click)="openPodcast(podcastData)">{{podcastData.name}}</span>
         <span class="author text-truncate accenttwo mb-1">{{podcastData.author}}</span>
@@ -21,7 +22,7 @@
           <div class="animated-background">
             <div class="background-masker header-top"></div>
             <div class="background-masker header-bottom"></div>
-            <div class="background-masker content-top"></div>
+            <!-- <div class="background-masker content-top"></div> -->
             <div class="background-masker content-second-line"></div>
           </div>
         </div>

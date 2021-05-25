@@ -38,6 +38,7 @@
     "jquery": "^3.5.1",
     "lazysizes": "^5.3.2",
     "moment": "^2.29.1",
+    "ng-lazyload-image": "^9.1.0",
     "ngx-audio-player": "^9.2.1",
     "ngx-bootstrap": "^6.2.0",
     "ngx-clipboard": "^13.0.1",

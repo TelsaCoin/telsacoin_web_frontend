@@ -4,8 +4,6 @@
   min-height: 100vh;
 }
 .inside-search-container {
-  // border: 1px solid var(--primary-border);
-  // border-radius: 20px;
   padding: 15px;
   position: relative;
   @media (max-width: 767px) {
@@ -45,7 +43,7 @@
   }
   .album-art {
     margin-bottom: 15px;
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -67,20 +65,8 @@
       font-size: 14px;
       color: var(--accenttwo);
       margin-bottom: 1em;
-    }
-    .view-more{
-      color: var(--accenttwo);
-      font-size: 12px;
-      font-weight: 400;
-      margin-bottom: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      .icon{
-        font-size: 14px;
-        margin-top: 2px;
-      }
+      overflow-y: scroll;
+      max-height: 200px;
     }
   }
 }
@@ -100,145 +86,19 @@
 }
 
 .podcast-episode-container {
-  // width: 768px;
-  margin: 40px auto;
-  // box-shadow: 0 4px 10px rgba(0,0,0,.2);
+  margin: 60px auto;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  display: flex;
+  justify-content: space-between;
   @media (max-width: 767px) {
     margin: 20px auto;
-  }
-  // background: #F8F9F9;
-  // background-color: #3f67f6;
-  // background: linear-gradient(to bottom, #3f67f6, #ffffff);
-  .player-container {
-    margin-top: 16px;
-    // border-bottom: 1px solid rgba(0,0,0,0.1);
-    .inside-player-container {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-
-      // background-color: rgba(0,0,0,.55);
-      .episode-image {
-        height: 160px;
-        width: 160px;
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
-      .player-view {
-        width: calc(100% - 160px);
-        // overflow: hidden;
-        // position: absolute;
-        bottom: 0;
-        top: 0;
-        right: 0;
-        left: 160px;
-        padding: 10px;
-        color: #fff;
-
-        .controls_style {
-          height: 35px;
-          margin-bottom: 17px;
-          right: 205px;
-          position: absolute;
-          left: 0;
-          width: 130px;
-          bottom: 7px;
-          .inside_controls_style {
-            .forward-button {
-              left: 91px;
-              bottom: 7px;
-              right: 7px;
-              position: absolute;
-              top: 0;
-              .forward-button-default {
-                top: 12px;
-                width: 17px;
-                height: 12px;
-                visibility: visible;
-              }
-              .forward-button-hover {
-                top: 12px;
-                width: 17px;
-                height: 12px;
-                visibility: hidden;
-              }
-            }
-            .play-button {
-              height: 35px;
-              min-height: 35px;
-              width: 35px;
-              min-width: 35px;
-              border-radius: 18px;
-              position: absolute;
-              &.styles__circle___1g-9u {
-                border: none;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              }
-              &.styles__playButton___1Sp9K {
-                display: flex;
-                top: 0;
-                left: 47px;
-              }
-              // &.styles__playButton___1Sp9K {
-              //     display: none;
-              // }
-              &.styles__playButton___1Ivi4 {
-                cursor: pointer;
-                text-align: center;
-                padding: 0;
-              }
-              &.styles__gray___3ikRg {
-                // background: #5f6369;
-              }
-              &.styles__circle___1g-9u {
-                border: none;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              }
-            }
-
-            .backward-button {
-              left: 21px;
-              bottom: 7px;
-              position: absolute;
-              top: 0;
-              .backward-button-default {
-                top: 12px;
-                width: 17px;
-                height: 12px;
-                visibility: visible;
-              }
-              .backward-button-hover {
-                top: 12px;
-                width: 17px;
-                height: 12px;
-                visibility: hidden;
-              }
-            }
-          }
-        }
-      }
-    }
   }
   .episode-container {
     margin-bottom: 40px;
     @media (max-width: 767px) {
       padding: 0px;
       margin-bottom: 30px;
-    }
-    .outside-episode-container {
-
     }
     .inside-episode-container {
       .podcast-card {
@@ -389,6 +249,48 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
+      }
+    }
+  }
+  .some-container{
+    width: 70%;
+    background: var(--secondary-background);
+    border-radius: 20px;
+    padding: 25px;
+  }
+  .similar-podcasts{
+    width: 28%;
+    background: var(--secondary-background);
+    padding: 30px;
+    border-radius: 20px;
+    height: fit-content;
+    .heading {
+      font-size: 16px;
+      color: var(--accent);
+      font-weight: bold;
+      text-transform: capitalize;
+      margin-bottom: 30px;
+    }
+    .each-podcast{
+      border-bottom: 1px solid var(--primary-border);
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      width: 100%;
+      display: flex;
+      img{
+        max-width: 20%;
+        border-radius: 8px;
+        margin-right: 10px;
+        object-fit: contain;
+      }
+      .episode-name{
+        font-size: 14px;
+        color: var(--accent);
+        margin-bottom: 5px;
+      }
+      .published_at{
+        font-size: 12px;
+        color: var(--accenttwo);
       }
     }
   }

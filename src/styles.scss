@@ -188,7 +188,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-dialog-container {
-    border-radius: 25px !important;
+    border-radius: 20px !important;
     background: var(--tertiary-background);
     padding: 0 !important;
     @media (max-width: 576px) {
@@ -275,8 +275,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
     /* loader */
     .timeline-item {
-        background: #fff;
-        border-bottom: 1px solid var(--light);
+        background: var(--secondary-background);
+        // border-bottom: 1px solid var(--light);
         border-radius: 3px;
         padding: 12px;
         margin-bottom: 25px;
@@ -426,7 +426,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .custom-infinite-row{
     overflow-x: scroll;
     display: flex;
-    margin-right: 20px;
+    margin-right: 0px;
+    padding-left: 20px;
     /* this will hide the scrollbar in mozilla based browsers */
     overflow: -moz-scrollbars-none;
     /* this will hide the scrollbar in internet explorers */
@@ -441,14 +442,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       position: relative;
       width: 100%;
       // padding-right: 15px;
-      padding-left: 15px;
+      padding-right: 20px;
       @media only screen and (max-width: 1024px) {
           flex: 0 0 50%;
           max-width: 50%;
           position: relative;
           width: 100%;
           // padding-right: 15px;
-          padding-left: 15px;
+          padding-right: 20px;
       }
       @media (max-width: 576px) {
           flex: 0 0 50%;
@@ -456,16 +457,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
           position: relative;
           width: 100%;
           // padding-right: 15px;
-          padding-left: 15px;
+          padding-right: 20px;
       }
     }
     .custom-col-podcast{
-      flex: 0 0 32%;
-      max-width: 32%;
+      flex: 0 0 40%;
+      max-width: 40%;
       position: relative;
       width: 100%;
-      padding-right: 15px;
-      padding-left: 15px;
+      padding-right: 20px;
+      padding-left: 0;
       &.hideit{
         display: none;
       }
@@ -500,14 +501,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         position: relative;
         width: 100%;
         // padding-right: 15px;
-        padding-left: 15px;
+        padding-left: 20px;
         @media only screen and (max-width: 1024px) {
             flex: 0 0 25%;
             max-width: 25%;
             position: relative;
             width: 100%;
             // padding-right: 15px;
-            padding-left: 15px;
+            padding-left: 20px;
         }
         @media (max-width: 576px) {
             flex: 0 0 50%;
@@ -515,7 +516,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             position: relative;
             width: 100%;
             // padding-right: 15px;
-            padding-left: 15px;
+            padding-left: 20px;
         }
 
     }

@@ -237,4 +237,12 @@ export class CommonService {
       return this.api.get(this.apiUrl + '/public/episode?podcast_id=' + podcastId + '&page=' + page + '&pageSize=' + pageSize);
     }
   }
+
+  getOtherEpisodes(episode_id, podcast_id) {
+    return this.api.get(this.apiUrl + '/public/getOtherEpisode?episode_id=' + episode_id + '&podcast_id=' + podcast_id);
+  }
+
+  getSimilarPodcasts(podcast_id) {
+    return this.api.get(this.apiUrl + '/public/getSimilarPodcasts?podcast_id=' + podcast_id + '&user_id=' + localStorage.getItem('userId'));
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as moment_ from 'moment';
 const moment = moment_;
@@ -9,11 +9,14 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from "@angular/material/dialog";
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { PlayerService } from 'src/app/services/player.service';
+import { StreamState } from 'src/app/interfaces/stream-state';
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-episode-details',
   templateUrl: './episode-details.component.html',
-  styleUrls: ['./episode-details.component.scss']
+  styleUrls: ['./episode-details.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EpisodeDetailsComponent implements OnInit {
   episodeData;
@@ -27,14 +30,26 @@ export class EpisodeDetailsComponent implements OnInit {
   viewMoreDescription:Boolean = false;
   episodeLoading:Boolean = false;
   commentsLoading:Boolean = false;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private commonService : CommonService, public authService: AuthService,
-    private router: Router, private toastr: ToastrService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public playerService: PlayerService) {
+  otherEpisodesLoading:Boolean = false;
+  otherEpisodes = [];
+  state: StreamState;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private commonService : CommonService,
+    public authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService,
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
+    public playerService: PlayerService,
+    private audioService: AudioService,
+    ) {
     console.log(data);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
     if (data && data.id) {
       this.episodeData = data;
+      this.getOtherEpisodes(this.episodeData.podcast_id);
       // let categoryIds = '';
       // this.episodeData['Categories'].forEach(element => {
       //   categoryIds += (element.id + '_');
@@ -48,6 +63,7 @@ export class EpisodeDetailsComponent implements OnInit {
       //   });
       // }
       this.getComments();
+
     } else {
       this.activatedRoute.paramMap.subscribe(paramMap => {
         this.episodeId = paramMap.get('episode_id');
@@ -56,6 +72,7 @@ export class EpisodeDetailsComponent implements OnInit {
           console.log(res);
           this.episodeData = res.episode;
           this.episodeLoading = false;
+          this.getOtherEpisodes(this.episodeData.podcast_id);
           // let categoryIds = '';
           // this.episodeData['Categories'].forEach(element => {
           //   categoryIds += (element.id + '_');
@@ -77,6 +94,18 @@ export class EpisodeDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.audioService.getState()
+    .subscribe(state => {
+      this.state = state;
+    });
+  }
+
+  getOtherEpisodes(podcast_id){
+    this.otherEpisodesLoading = true;
+    this.commonService.getOtherEpisodes(this.episodeId, podcast_id ).subscribe((res:any) => {
+      this.otherEpisodes = res.episodes;
+      this.otherEpisodesLoading = false;
+    })
   }
 
   getComments() {
@@ -99,6 +128,10 @@ export class EpisodeDetailsComponent implements OnInit {
 
   redirectToPodcast(podcast) {
     this.router.navigateByUrl('podcast/' + podcast.podcast_id);
+  }
+
+  gotoEpisode(episode) {
+    this.router.navigateByUrl('episode/' + episode.id);
   }
 
   addComment($event) {
@@ -194,5 +227,41 @@ export class EpisodeDetailsComponent implements OnInit {
 
   isPaidOut(){
     return moment().diff(this.episodeData.published_at, "days") > 7;
+  }
+
+  pause() {
+    this.audioService.pause();
+  }
+
+  play() {
+    this.audioService.playStream(this.episodeData.url)
+    .subscribe(events => {
+      // listening for fun here
+    });
+    this.audioService.play();
+  }
+
+  stop() {
+    this.audioService.stop();
+  }
+
+  isReplayDisabled() {
+    return this.state?.currentTime < 10;
+  }
+
+  isForwardDisabled() {
+    return this.state?.duration - this.state?.currentTime < 10;
+  }
+
+  onSliderChangeEnd(change) {
+    this.audioService.seekTo(change.value);
+  }
+
+  forward() {
+    this.audioService.seekTo(this.state?.currentTime + 10);
+  }
+
+  replay() {
+    this.audioService.seekTo(this.state?.currentTime - 10);
   }
 }

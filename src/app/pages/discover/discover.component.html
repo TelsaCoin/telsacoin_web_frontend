@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="custom-card mt-4" *ngIf="authService.isAuthenticated()">
+    <div class="custom-card" *ngIf="authService.isAuthenticated()" style="margin-top: 60px;">
         <div class="d-flex align-items-center justify-content-between custom-card-heading">
            <span class="accent f500 card-heading">
                 Recommended Podcasts
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="custom-card mt-4 mb-4">
+    <div class="custom-card" style="margin-top: 60px; margin-bottom: 60px;">
         <div class="d-flex align-items-center justify-content-between custom-card-heading">
            <span class="accent f500 card-heading">
                 Newly Released
@@ -54,12 +54,12 @@
             <div *ngFor="let episode of [].constructor(tabsSection[2].data.length); let i = index; let even = even;" class="custom-col-podcast mt-3" [ngClass]="{'hideit' : !even}">
                 <div class="d-flex flex-column" *ngIf="even">
                     <app-episode-card [episodeData]="tabsSection[2]?.data[i]"></app-episode-card>
-                    <app-episode-card [episodeData]="tabsSection[2]?.data[i+1]" class="mt-3"></app-episode-card>
+                    <app-episode-card [episodeData]="tabsSection[2]?.data[i+1]" style="margin-top: 20px;"></app-episode-card>
                 </div>
             </div>
         </div>
         <div class="custom-infinite-row" *ngIf="!tabsSection[2].isLoaded">
-            <div *ngFor="let episode of [].constructor(tabsSection[2].pageSize) let i = index;  let even = even;" class="custom-col-podcast mt-3" [ngClass]="{'hideit' : !even}">
+            <div *ngFor="let episode of [].constructor(tabsSection[2].pageSize) let i = index;  let even = even;" class="custom-col-podcast" style="margin-top: 20px;" [ngClass]="{'hideit' : !even}">
                 <div class="d-flex flex-column" *ngIf="even">
                     <app-episode-card [episodeData]="episode" isLoading="true"></app-episode-card>
                     <app-episode-card [episodeData]="episode" isLoading="true"></app-episode-card>
