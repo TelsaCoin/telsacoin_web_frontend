@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment_ from 'moment';
 const moment = moment_;
 import {CommonService} from 'src/app/services/common.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-hive-token',
@@ -13,9 +14,17 @@ import {CommonService} from 'src/app/services/common.service';
 })
 export class HiveTokenComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, public router: Router,
-    private commonService : CommonService, public authService: AuthService, private toastr: ToastrService) {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  constructor(
+    private route: ActivatedRoute,
+    public router: Router, 
+    private commonService : CommonService,
+    public authService: AuthService,
+    private toastr: ToastrService,
+    @Inject(PLATFORM_ID) private platformId: Object
+    ) {
+      if (isPlatformBrowser(this.platformId)) {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }
     }
 
   ngOnInit(): void {

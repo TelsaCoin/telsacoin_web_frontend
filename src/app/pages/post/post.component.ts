@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RssFeedDetailsService } from 'src/app/services/rss-feed-details.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { MatDialog } from "@angular/material/dialog";
 import { CommonService } from 'src/app/services/common.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-post',
@@ -40,8 +41,11 @@ export class PostComponent implements OnInit {
     public router: Router,
     public dialog: MatDialog,
     private commonService: CommonService,
+    @Inject(PLATFORM_ID) private platformId: Object
     ) {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      if (isPlatformBrowser(this.platformId)) {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }
     }
 
   ngOnInit(): void {

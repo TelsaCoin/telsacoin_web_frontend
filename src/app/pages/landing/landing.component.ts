@@ -1,9 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from "@angular/router";
 import { ThemeService } from 'src/app/services/theme.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-landing',
@@ -38,8 +39,11 @@ export class LandingComponent implements OnInit {
     public router: Router,
     public authService: AuthService,
     private themeService: ThemeService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { 
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
   }
 
   ngOnInit(): void {

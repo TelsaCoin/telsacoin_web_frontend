@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService
     ) {
 
-      this.preloadThumbnail();
+      // this.preloadThumbnail();
 
       if(window.location.pathname == '/'){
         this.hideit = true;
@@ -101,10 +101,10 @@ export class AppComponent implements OnInit {
       this.setTheme();
   }
 
-  preloadThumbnail(){
-    let a = new Image();
-    a.src = 'https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png';
-  }
+  // preloadThumbnail(){
+  //   let a = new Image();
+  //   a.src = 'https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png';
+  // }
 
   setTheme(){
     if(localStorage.getItem('theme')){

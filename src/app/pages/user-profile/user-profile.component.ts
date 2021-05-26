@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { UserDetailsService } from 'src/app/services/user-details.service';
 import { RssFeedDetailsService } from 'src/app/services/rss-feed-details.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +10,7 @@ import {CommonService} from 'src/app/services/common.service';
 import { Observable, forkJoin } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
@@ -49,8 +50,11 @@ export class UserProfileComponent implements OnInit {
     private commonService : CommonService,
     private confirmationDialogService: ConfirmationDialogService,
     public authService: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
   }
 
   ngOnInit(): void {

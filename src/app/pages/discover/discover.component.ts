@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import {CommonService} from 'src/app/services/common.service';
 import { trigger, transition, animate, style } from '@angular/animations'
 import { AuthService } from 'src/app/services/auth.service';
 import { ThemeService } from 'src/app/services/theme.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-discover',
@@ -58,8 +59,11 @@ export class DiscoverComponent implements OnInit {
     private commonService : CommonService,
     public authService: AuthService,
     private themeService: ThemeService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { 
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
   }
 
   ngOnInit(): void {

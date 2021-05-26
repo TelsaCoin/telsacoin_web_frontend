@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {CommonService} from 'src/app/services/common.service';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { PlayerService } from 'src/app/services/player.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-search',
@@ -23,8 +24,16 @@ export class SearchComponent implements OnInit {
   page = 0;
   pageSize = 10;
 
-  constructor(public playerService: PlayerService, private activatedRoute: ActivatedRoute, private commonService : CommonService, private router: Router) {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  constructor(
+    public playerService: PlayerService,
+    private activatedRoute: ActivatedRoute,
+    private commonService : CommonService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+    ) {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
   }
 
   ngOnInit(): void {

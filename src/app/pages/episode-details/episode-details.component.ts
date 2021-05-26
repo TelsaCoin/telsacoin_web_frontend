@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject, PLATFORM_ID } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as moment_ from 'moment';
 const moment = moment_;
@@ -11,6 +11,7 @@ import { HiveAuthComponent } from 'src/app/components/hive-auth/hive-auth.compon
 import { PlayerService } from 'src/app/services/player.service';
 import { StreamState } from 'src/app/interfaces/stream-state';
 import { AudioService } from 'src/app/services/audio.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-episode-details',
@@ -43,9 +44,13 @@ export class EpisodeDetailsComponent implements OnInit {
     public dialog: MatDialog,
     public playerService: PlayerService,
     private audioService: AudioService,
+    @Inject(PLATFORM_ID) private platformId: Object
+
     ) {
     console.log(data);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
 
     if (data && data.id) {
       this.episodeData = data;

@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { Slide } from "src/app/components/carousel/carousel.interface";
 import { AnimationType } from "src/app/components/carousel/carousel.animation";
 import { CarouselComponent } from 'src/app/components/carousel/carousel.component';;
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-hiveonboard',
@@ -64,9 +65,12 @@ export class HiveonboardComponent implements OnInit {
       "./assets/hiveonboard_images/HIVEonboardingscreenshots-07.jpg"
     }
   ];
-  constructor() { 
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { 
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
   }
 
   ngOnInit(): void {
