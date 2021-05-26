@@ -70,7 +70,7 @@ import { LandingComponent } from './pages/landing/landing.component';
     LandingComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
