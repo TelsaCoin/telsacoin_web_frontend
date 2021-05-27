@@ -67,6 +67,14 @@
       margin-bottom: 1em;
       overflow-y: scroll;
       max-height: 200px;
+      /* this will hide the scrollbar in mozilla based browsers */
+      overflow: -moz-scrollbars-none;
+      /* this will hide the scrollbar in internet explorers */
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar { 
+          width: 0 !important;
+          display: none; 
+      }
     }
   }
 }

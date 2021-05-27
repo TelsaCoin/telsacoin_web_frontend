@@ -98,7 +98,11 @@ export class LandingComponent implements OnInit {
 
   getStarted(){
     if (!this.authService.isAuthenticated()) {
-      this.openHiveAuthDialog(true);
+      if(window.innerWidth < 756) {
+        this.router.navigateByUrl('/home');
+      }else{
+        this.openHiveAuthDialog(true);
+      }
     }else{
       // this.router.navigateByUrl('/home');
     }

@@ -50,10 +50,11 @@
                                         </div>
                                     </div>
                                     <div class="buttons">
+                                        {{playingThis}}
                                         <button mat-button [disabled]="isReplayDisabled()" (click)="replay()">
                                           <mat-icon mat-list-icon>replay_10</mat-icon>
                                         </button>
-                                        <button mat-button (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing">
+                                        <button mat-button (click)="playEpisode(episodeData)" [disabled]="state?.error" *ngIf="!state?.playing">
                                           <mat-icon mat-list-icon>play_circle_filled</mat-icon>
                                         </button>
                                         <button mat-button (click)="pause()" *ngIf="state?.playing">
@@ -71,7 +72,7 @@
                     </div>
                 </div>
                 <div class="more-content">
-                    <div class="comments-container">
+                    <div class="comments-container" style="margin-right: 2%;" *ngIf="episodeData.permlink">
                         <div class="heading mb-4">Comments</div>
                         <div class="comments" *ngIf="episodeData.permlink">
                             <div style="margin-left: -25px;">
@@ -83,7 +84,7 @@
                             <span class="accenttwo"> Comments are enabled only for podcast episodes published on Hive.</span>
                         </div>
                     </div>
-                    <div style="width: 33%; margin-left: 2%;">
+                    <div class="outside-other-episods" [ngClass]="{'fullwidth' : !episodeData.permlink}">
                         <div class="other-episodes">
                             <div class="heading mb-3">Other Episodes</div>
                             <div *ngIf="otherEpisodesLoading">

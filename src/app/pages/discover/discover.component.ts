@@ -44,7 +44,7 @@ export class DiscoverComponent implements OnInit {
       type : 'episodes',
       isLoaded: false,
       page: -1,
-      pageSize: 12
+      pageSize: 14
     },
     {
       name : 'Recently played',
@@ -154,26 +154,39 @@ export class DiscoverComponent implements OnInit {
       left: wrapper.querySelector('.scrollable-episodes-1').offsetWidth * -1, 
       behavior: 'smooth' 
     });
-    // wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+    wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+
   }
 
   rightScroll2(e){
-    let wrapper = e.srcElement.closest('.discover-container');
-    wrapper.querySelector('.scrollable-episodes-2').scroll({
-      left: wrapper.querySelector('.scrollable-episodes-2').offsetWidth, 
-      behavior: 'smooth' 
-    });
+    // let wrapper = e.srcElement.closest('.discover-container');
+    // console.log(wrapper.querySelector('.scrollable-episodes-2').offsetWidth * 0.8);
+    // wrapper.querySelector('.scrollable-episodes-2').scroll({
+    //   left: wrapper.querySelector('.scrollable-episodes-2').offsetWidth * 0.8, 
+    //   behavior: 'smooth' 
+    // });
+
     // wrapper.querySelector('.scrollable-episodes-1').scrollLeft += wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+    if(this.current+4<=this.tabsSection[2].pageSize)
+      this.current+=4;
+    document.getElementById('point_'+this.current)?.scrollIntoView(
+      { behavior: "smooth", block: "end", inline: "start" }
+    );
   }
 
   leftScroll2(e){
-    let wrapper = e.srcElement.closest('.discover-container');
-    console.log(wrapper.querySelector('.scrollable-episodes-2').scrollLeft);
-    wrapper.querySelector('.scrollable-episodes-2').scroll({
-      left: wrapper.querySelector('.scrollable-episodes-2').offsetWidth * -1, 
-      behavior: 'smooth' 
-    });
+    // let wrapper = e.srcElement.closest('.discover-container');
+    // console.log(wrapper.querySelector('.scrollable-episodes-2').offsetWidth * -0.8);
+    // wrapper.querySelector('.scrollable-episodes-2').scroll({
+    //   left: wrapper.querySelector('.scrollable-episodes-2').offsetWidth * -0.8, 
+    //   behavior: 'smooth' 
+    // });
     // wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+    if(this.current-4>=0)
+      this.current-=4;
+    document.getElementById('point_'+this.current)?.scrollIntoView(
+      { behavior: "smooth", block: "end", inline: "start" }
+    );
   }
 
   get dark() {

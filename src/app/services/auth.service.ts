@@ -53,7 +53,9 @@ export class AuthService {
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('/');
-    location.reload();
+    setTimeout(()=>{
+      location.reload();
+    },100);
   }
 
   registerHiveUser(body) {

@@ -47,14 +47,15 @@ export class PodcastProfileComponent implements OnInit {
     public router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    }
-
   }
 
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(()=>{
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      },100)
+    }
     this.progress = true;
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.podcastId = paramMap.get('podcast_id');

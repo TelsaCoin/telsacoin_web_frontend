@@ -52,7 +52,7 @@
         </div>
         <div class="custom-infinite-row scrollable-episodes-2" *ngIf="tabsSection[2].isLoaded || tabsSection[2].data.length">
             <div *ngFor="let episode of [].constructor(tabsSection[2].data.length); let i = index; let even = even;" class="custom-col-podcast mt-3" [ngClass]="{'hideit' : !even}">
-                <div class="d-flex flex-column" *ngIf="even">
+                <div class="d-flex flex-column" *ngIf="even" id="point_{{i}}">
                     <app-episode-card [episodeData]="tabsSection[2]?.data[i]"></app-episode-card>
                     <app-episode-card [episodeData]="tabsSection[2]?.data[i+1]" style="margin-top: 20px;"></app-episode-card>
                 </div>

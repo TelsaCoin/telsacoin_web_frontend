@@ -34,6 +34,7 @@ export class EpisodeDetailsComponent implements OnInit {
   otherEpisodesLoading:Boolean = false;
   otherEpisodes = [];
   state: StreamState;
+  playingThis: Boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private commonService : CommonService,
@@ -48,9 +49,7 @@ export class EpisodeDetailsComponent implements OnInit {
 
     ) {
     console.log(data);
-    if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    }
+
 
     if (data && data.id) {
       this.episodeData = data;
@@ -67,6 +66,19 @@ export class EpisodeDetailsComponent implements OnInit {
       //     console.log(res);
       //   });
       // }
+
+      this.playerService.getCurrentModule().subscribe( (current:any) =>{
+        console.log(current);
+        if(current){
+          if(current.id == this.episodeData.id){
+            this.playingThis = true;
+            this.audioService.getState()
+            .subscribe(state => {
+              this.state = state;
+            });
+          }
+        }
+      }); 
       this.getComments();
 
     } else {
@@ -90,6 +102,19 @@ export class EpisodeDetailsComponent implements OnInit {
           //     console.log(res);
           //   });
           // }
+
+          this.playerService.getCurrentModule().subscribe( (current:any) =>{
+            console.log(current);
+            if(current){
+              if(current.id == this.episodeData.id){
+                this.playingThis = true;
+                this.audioService.getState()
+                .subscribe(state => {
+                  this.state = state;
+                });
+              }
+            }
+          }); 
         });
         this.getComments();
       })
@@ -99,10 +124,12 @@ export class EpisodeDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.audioService.getState()
-    .subscribe(state => {
-      this.state = state;
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(()=>{
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      },100)
+    }
+
   }
 
   getOtherEpisodes(podcast_id){
@@ -162,8 +189,13 @@ export class EpisodeDetailsComponent implements OnInit {
   }
 
   playEpisode(episodeData) {
-    this.playerService.setCurrentModule(episodeData);
-    this.addListen(episodeData);
+    if(!this.playingThis){
+      this.playerService.setCurrentModule(episodeData);
+      this.playingThis = true;
+      this.play();
+    }else{
+      this.audioService.play();
+    }
   }
 
   upvote(episodeData) {
@@ -242,6 +274,10 @@ export class EpisodeDetailsComponent implements OnInit {
     this.audioService.playStream(this.episodeData.url)
     .subscribe(events => {
       // listening for fun here
+    });
+    this.audioService.getState()
+    .subscribe(state => {
+      this.state = state;
     });
     this.audioService.play();
   }

@@ -30,7 +30,7 @@ export class HiveAuthComponent implements OnInit {
   connectHive(toConnectGoogleAccount) {
     let redirectUrl = 'http://localhost:4201/hive-token';
     if (environment.production) {
-      redirectUrl = 'https://aureal-ab06d.firebaseapp.com/hive-token';
+      redirectUrl = 'https://aureal.one/hive-token';
     }
     if (toConnectGoogleAccount) {
       redirectUrl += '-register';
