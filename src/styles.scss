@@ -427,7 +427,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow-x: scroll;
     display: flex;
     margin-right: 0px;
-    padding-left: 20px;
+    padding-left: 0px;
+    margin-left: 20px;
     /* this will hide the scrollbar in mozilla based browsers */
     overflow: -moz-scrollbars-none;
     /* this will hide the scrollbar in internet explorers */
@@ -437,19 +438,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         display: none; 
     }
     .custom-col-episode{
-      flex: 0 0 24%;
-      max-width: 24%;
+      flex: 0 0 23%;
+      max-width: 23%;
       position: relative;
       width: 100%;
       // padding-right: 15px;
-      padding-right: 20px;
+      padding-right: 0;
+      margin-right: 20px;
       @media only screen and (max-width: 1024px) {
           flex: 0 0 50%;
           max-width: 50%;
           position: relative;
           width: 100%;
           // padding-right: 15px;
-          padding-right: 20px;
+          padding-right: 0;
+          margin-right: 20px;
       }
       @media (max-width: 576px) {
           flex: 0 0 50%;
@@ -457,7 +460,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
           position: relative;
           width: 100%;
           // padding-right: 15px;
-          padding-right: 20px;
+          padding-right: 0;
+          margin-right: 20px;
       }
     }
     .custom-col-podcast{

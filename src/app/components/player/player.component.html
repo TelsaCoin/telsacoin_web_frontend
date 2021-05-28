@@ -5,7 +5,7 @@
         <h6 class="name">{{toPlayData.name}}</h6>
       </marquee>
     </mat-toolbar-row> -->
-    <mat-toolbar-row class="media-action-bar d-flex justify-content-center">
+    <mat-toolbar-row class="media-action-bar relative d-flex justify-content-center">
       <div class="d-none d-sm-block">
         <div class="upcoming-card ">
           <img defaultImage="https://aurealbucket.s3.us-east-2.amazonaws.com/thumbnailnew.png" [lazyLoad]="toPlayData.image" class="lazyload">
@@ -40,6 +40,9 @@
             (input)="onSliderChangeEnd($event)" [disabled]="state?.error"></mat-slider>
           {{ state?.readableDuration }}
         </div>
+      </div>
+      <div class="close-icon" (click)="stopPlaying()">
+        <span class="icon icon-times" style="font-size: 18px;"></span>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

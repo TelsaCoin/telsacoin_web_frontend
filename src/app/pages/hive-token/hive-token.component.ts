@@ -6,6 +6,7 @@ import * as moment_ from 'moment';
 const moment = moment_;
 import {CommonService} from 'src/app/services/common.service';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { UserDetailsService } from 'src/app/services/user-details.service';
 
 @Component({
   selector: 'app-hive-token',
@@ -20,6 +21,7 @@ export class HiveTokenComponent implements OnInit {
     private commonService : CommonService,
     public authService: AuthService,
     private toastr: ToastrService,
+    public userDetailsService: UserDetailsService,
     @Inject(PLATFORM_ID) private platformId: Object
     ) {
       if (isPlatformBrowser(this.platformId)) {
@@ -44,6 +46,7 @@ export class HiveTokenComponent implements OnInit {
           localStorage.setItem('userName',res.userData.username);
           localStorage.setItem('hive_username',res.userData.hive_username);
           localStorage.setItem('token',res.userData.token);
+          this.userDetailsService.UserDetails = res.userData;
           this.router.navigateByUrl('/');
       })
     }else{

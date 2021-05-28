@@ -154,7 +154,7 @@ export class DiscoverComponent implements OnInit {
       left: wrapper.querySelector('.scrollable-episodes-1').offsetWidth * -1, 
       behavior: 'smooth' 
     });
-    wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
+    // wrapper.querySelector('.scrollable-episodes-1').scrollLeft -= wrapper.querySelector('.scrollable-episodes-1').offsetWidth;
 
   }
 

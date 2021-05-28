@@ -21,9 +21,14 @@
         width: calc(100% - 25%);
         align-self: stretch;
         justify-content: space-between;
-        .podcast_name{
+        .episode_name{
             font-size: 14px;
             font-weight: 500;
+        }
+        .podcast_name{
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--accenttwo);
         }
         .vote-count{
             background: var(--tertiary-background);
@@ -57,7 +62,7 @@
                 margin-top: 2px;
                 color: var(--accent);
             }
-            .icon-up-circled{
+            .icon-vote-up-arrow{
                 margin-left: -3px;
             }
             &.voted{

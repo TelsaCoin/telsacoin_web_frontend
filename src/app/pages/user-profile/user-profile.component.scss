@@ -1,6 +1,6 @@
 .profile-container{
   width: 100%;
-  padding: 20px 40px;
+  padding: 25px 40px;
   min-height: 100vh;
 
   .heading{
@@ -12,8 +12,7 @@
 }
 .userprofile-section {
   width: 100%;
-  background: var(--theme-background);
-  border: 1px solid var(--primary-border);
+  background: var(--secondary-background);
   display: flex;
   justify-content: space-between;
   flex-wrap: initial;
@@ -187,7 +186,7 @@
   width: 20%;
   border-radius: 20px;
   padding: 20px;
-  border: 1px solid var(--primary-border);
+  background: var(--secondary-background);
   margin-right: 25px;
   img{
     width: 70%;

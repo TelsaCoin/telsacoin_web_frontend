@@ -11,7 +11,7 @@
             <div style="min-height: 30px;">
                 <div class="d-flex flex-wrap align-center">
                     <!-- <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}">
-                        <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
+                        <span class="icon icon-vote-up-arrow" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
                         <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
                     </div>
                     <div class="vote-count" *ngIf="episodeData?.permlink">
@@ -25,14 +25,14 @@
                         <span>{{formatDuration(episodeData.duration)}}</span>
                     </div>
                     <div class="comment-count" *ngIf="episodeData?.permlink && !isPaidOut()" [ngClass]="{'voted' : episodeData.ifVoted}">
-                        <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
+                        <span class="icon icon-vote-up-arrow" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
                         <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
                         <span class="mr-1 ml-1">{{episodeData.votes}}</span>
                         <span class="ml-1 mr-1">|</span>
                         <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
                     </div>
                     <div class="comment-count" (click)="openEpisode(episodeData)" *ngIf="episodeData?.permlink">
-                        <span class="icon icon-comments-o"></span>
+                        <span class="icon icon-comment" style="font-size: 14px;"></span>
                         <span>{{episodeData.comments_count}}</span>
                     </div>
                     <div *ngIf="episodeData?.permlink && isPaidOut() && episodeData?.author_hiveusername">

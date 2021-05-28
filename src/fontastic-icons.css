@@ -167,3 +167,6 @@
 .icon-send:before {
   content: "\51";
 }
+.icon-vote-up-arrow:before {
+  content: "\52";
+}

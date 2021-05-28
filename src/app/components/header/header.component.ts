@@ -40,9 +40,11 @@ export class HeaderComponent implements OnInit {
     //   this.openHiveAuthDialog(true);
     // }
     this.updateSearch();
-    if(this.authService.isAuthenticated()){
-      this.getUserDetails();
-    }
+    setTimeout(()=>{
+      if(this.authService.isAuthenticated()){
+        this.getUserDetails();
+      }
+    },1000);
   }
 
   navigateHome() {

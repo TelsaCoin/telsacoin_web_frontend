@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
   appMode = 'side';
   isSidebarOpened = true;
   isSidebarExpanded = false;
-  title = 'Aureal - Podcasts';
+  title = 'Aureal - The podcast platform that pays you';
   playingEpisode;
   currentModule;
   isEmbedPlayer: Boolean = false;
@@ -148,7 +148,8 @@ export class AppComponent implements OnInit {
           this.playingEpisode = current;
         }
         console.log('wertyuiop',this.playingEpisode);
-  
+      }else{
+        this.playingEpisode = null;
       }
     });  
 
@@ -186,6 +187,10 @@ export class AppComponent implements OnInit {
 
   isActive(route){
     return window.location.pathname == ('/' + route)
+  }
+
+  redirectToHome(){
+    this.router.navigateByUrl('/home');
   }
 
   updateClient() {

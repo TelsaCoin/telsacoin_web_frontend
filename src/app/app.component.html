@@ -1,10 +1,10 @@
-<mat-drawer-container [ngClass]="{'hideit': hideit, 'player-open' : playingEpisode && !isEmbedPlayer}">
+<mat-drawer-container [ngClass]="{'hideit': hideit}">
     <mat-drawer autosize [mode]="appMode" [opened]="isSidebarOpened" class="sidebar-container left" [ngClass]="{'expanded' : isSidebarExpanded}"
      #sidenav>
       <div class="logo" [@fadeAnimation]="isSidebarExpanded">
         <a>
           <img src="./assets/aureal_full_dark.png" class="lazyload" [ngClass]="{'expanded' : isSidebarExpanded}" style="padding: 0 40px;"/>
-          <img src="./assets/launch_icon.png" class="lazyload" [ngClass]="{'expanded' : !isSidebarExpanded}" style="padding: 0 15px;"/>
+          <img src="./assets/launch_icon.png" class="lazyload" [ngClass]="{'expanded' : !isSidebarExpanded}" style="padding: 0 15px;" (click)="redirectToHome()"/>
         </a>
       </div>
       <div class="tabs">
@@ -50,7 +50,7 @@
       <router-outlet style="margin-top: 70px; display: block; z-index: 1;"></router-outlet>
       <app-player class="the-player" *ngIf="playingEpisode && !isEmbedPlayer" [ngClass]="{'dark' : dark}" [toPlayData]="playingEpisode">
       </app-player>
-      <app-footer class="the-footer"></app-footer>
+      <app-footer class="the-footer" *ngIf="hideit"></app-footer>
     </mat-drawer-content>
 </mat-drawer-container>
   

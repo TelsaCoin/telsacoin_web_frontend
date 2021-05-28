@@ -18,7 +18,7 @@ export class PlayerService {
     console.log('setCurrentModule', data);
     this.currentAudio = data;
     this.currentModule.next(data);
-    if(this.authService.isAuthenticated())
+    if(data && this.authService.isAuthenticated())
       this.addListen(data);
   }
 

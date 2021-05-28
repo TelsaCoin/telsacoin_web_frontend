@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="vote-count" *ngIf="episodeData.permlink && !isPaidOut()">
                                             <div class="vote-icon" [ngClass]="{'voted' : episodeData.ifVoted}" style="margin-top: 4px;">
-                                                <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
+                                                <span class="icon icon-vote-up-arrow" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
                                                 <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
                                             </div>
                                             <span>{{episodeData.votes}}</span>
@@ -42,7 +42,7 @@
                                             <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
                                         </div>
                                         <!-- <div class="comment-count" *ngIf="episodeData.permlink">
-                                            <span class="icon icon-comments-o"></span>
+                                            <span class="icon icon-comment"></span>
                                             <span>{{episodeData.comments_count}}</span>
                                         </div> -->
                                         <div class="comment-count" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">
@@ -50,7 +50,6 @@
                                         </div>
                                     </div>
                                     <div class="buttons">
-                                        {{playingThis}}
                                         <button mat-button [disabled]="isReplayDisabled()" (click)="replay()">
                                           <mat-icon mat-list-icon>replay_10</mat-icon>
                                         </button>
@@ -72,7 +71,7 @@
                     </div>
                 </div>
                 <div class="more-content">
-                    <div class="comments-container" style="margin-right: 2%;" *ngIf="episodeData.permlink">
+                    <div class="comments-container" style="margin-right: 2%; height: fit-content;" *ngIf="episodeData.permlink">
                         <div class="heading mb-4">Comments</div>
                         <div class="comments" *ngIf="episodeData.permlink">
                             <div style="margin-left: -25px;">

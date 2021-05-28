@@ -27,7 +27,7 @@
                 </div>
                 <div class="vote-count" *ngIf="episodeData?.hive_status == 'done' && !isPaidOut()">
                     <div class="vote-icon pointer" [ngClass]="{'voted' : episodeData.ifVoted}" style="margin-top: 4px;">
-                        <span class="icon icon-up-circled" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
+                        <span class="icon icon-vote-up-arrow" *ngIf="!upvoteOngoing" (click)="upvote(episodeData)"></span>
                         <i class="fas fa-spinner fa-spin" aria-hidden="true" *ngIf="upvoteOngoing"></i>
                     </div>
                     <span>{{episodeData.votes}}</span>
@@ -36,7 +36,7 @@
                     <span>{{episodeData.payout_value.replace("HBD", "$")}}</span>
                 </div>
                 <div class="comment-count pointer" (click)="openEpisode(episodeData)" *ngIf="episodeData?.hive_status == 'done'">
-                    <span class="icon icon-comments-o"></span>
+                    <span class="icon icon-comment"  style="font-size: 14px;"></span>
                     <span>{{episodeData.comments_count}}</span>
                 </div>
                 <div class="comment-count pointer" *ngIf="episodeData.author_hiveusername" (click)="tipAuthor(episodeData)">

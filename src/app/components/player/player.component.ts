@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { AudioService } from 'src/app/services/audio.service';
 import { StreamState } from 'src/app/interfaces/stream-state';
+import { PlayerService } from 'src/app/services/player.service';
 
 import { Track } from 'ngx-audio-player';
 @Component({
@@ -20,6 +21,7 @@ export class PlayerComponent implements OnInit {
   constructor(
     private audioService: AudioService,
     private renderer: Renderer2,
+    public playerService: PlayerService,
     ) {
     // get media files
     this.files = [
@@ -96,6 +98,12 @@ export class PlayerComponent implements OnInit {
       .subscribe(events => {
         // listening for fun here
       });
+  }
+
+  stopPlaying(){
+    this.playerService.setCurrentModule(null);
+    this.playStream(null);
+    this.stop();
   }
 
   openFile(file, index) {

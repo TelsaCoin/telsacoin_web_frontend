@@ -35,6 +35,7 @@ export class EpisodeDetailsComponent implements OnInit {
   otherEpisodes = [];
   state: StreamState;
   playingThis: Boolean = false;
+  subscription;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private commonService : CommonService,
@@ -48,78 +49,6 @@ export class EpisodeDetailsComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object
 
     ) {
-    console.log(data);
-
-
-    if (data && data.id) {
-      this.episodeData = data;
-      this.getOtherEpisodes(this.episodeData.podcast_id);
-      // let categoryIds = '';
-      // this.episodeData['Categories'].forEach(element => {
-      //   categoryIds += (element.id + '_');
-      // });
-      // if (categoryIds) {
-      //   this.categoryBasedPodcastsLoading = true;
-      //   this.commonService.categoryBasedPodcasts(0, 10, categoryIds).subscribe((res: any) => {
-      //     this.categoryBasedPodcastsLoading = false;
-      //     this.categoryBasedPodcasts = res.PodcastList;
-      //     console.log(res);
-      //   });
-      // }
-
-      this.playerService.getCurrentModule().subscribe( (current:any) =>{
-        console.log(current);
-        if(current){
-          if(current.id == this.episodeData.id){
-            this.playingThis = true;
-            this.audioService.getState()
-            .subscribe(state => {
-              this.state = state;
-            });
-          }
-        }
-      }); 
-      this.getComments();
-
-    } else {
-      this.activatedRoute.paramMap.subscribe(paramMap => {
-        this.episodeId = paramMap.get('episode_id');
-        this.episodeLoading = true;
-        this.commonService.getEpisode(this.episodeId).subscribe((res: any) => {
-          console.log(res);
-          this.episodeData = res.episode;
-          this.episodeLoading = false;
-          this.getOtherEpisodes(this.episodeData.podcast_id);
-          // let categoryIds = '';
-          // this.episodeData['Categories'].forEach(element => {
-          //   categoryIds += (element.id + '_');
-          // });
-          // if (categoryIds) {
-          //   this.categoryBasedPodcastsLoading = true;
-          //   this.commonService.categoryBasedPodcasts(0, 10, categoryIds).subscribe((res: any) => {
-          //     this.categoryBasedPodcastsLoading = false;
-          //     this.categoryBasedPodcasts = res.PodcastList;
-          //     console.log(res);
-          //   });
-          // }
-
-          this.playerService.getCurrentModule().subscribe( (current:any) =>{
-            console.log(current);
-            if(current){
-              if(current.id == this.episodeData.id){
-                this.playingThis = true;
-                this.audioService.getState()
-                .subscribe(state => {
-                  this.state = state;
-                });
-              }
-            }
-          }); 
-        });
-        this.getComments();
-      })
-    }
-
 
   }
 
@@ -130,6 +59,45 @@ export class EpisodeDetailsComponent implements OnInit {
       },100)
     }
 
+    this.playingThis = false;
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      this.episodeId = paramMap.get('episode_id');
+      this.episodeLoading = true;
+      this.commonService.getEpisode(this.episodeId).subscribe((res: any) => {
+        console.log(res);
+        this.episodeData = res.episode;
+        this.episodeLoading = false;
+        this.getOtherEpisodes(this.episodeData.podcast_id);
+        // let categoryIds = '';
+        // this.episodeData['Categories'].forEach(element => {
+        //   categoryIds += (element.id + '_');
+        // });
+        // if (categoryIds) {
+        //   this.categoryBasedPodcastsLoading = true;
+        //   this.commonService.categoryBasedPodcasts(0, 10, categoryIds).subscribe((res: any) => {
+        //     this.categoryBasedPodcastsLoading = false;
+        //     this.categoryBasedPodcasts = res.PodcastList;
+        //     console.log(res);
+        //   });
+        // }
+
+        this.playerService.getCurrentModule().subscribe( (current:any) =>{
+          console.log(current);
+          if(current){
+            if(current.id == this.episodeData.id){
+              this.playingThis = true;
+              this.subscription = this.audioService.getState()
+              .subscribe(state => {
+                this.state = state;
+              });
+            }else{
+              this.playingThis = false;
+            }
+          }
+        }); 
+      });
+      this.getComments();
+    })
   }
 
   getOtherEpisodes(podcast_id){
@@ -151,10 +119,15 @@ export class EpisodeDetailsComponent implements OnInit {
 
   formatDuration(seconds) {
     // return (Math.floor(moment.duration(seconds, 'seconds').asHours()) > 0 ? Math.floor(moment.duration(seconds, 'seconds').asHours()) + ':' : '') + moment.duration(seconds, 'seconds').minutes() + ':' + moment.duration(seconds, 'seconds').seconds();
-    if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
-      return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' min';
+    // if(Math.floor(moment.duration(seconds, 'seconds').minutes()) > 0){
+    //   return Math.floor(moment.duration(seconds, 'seconds').minutes()) + ' min';
+    // }else{
+    //   return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
+    // }
+    if((Math.floor(parseInt(seconds) / 60)) > 0){
+      return Math.floor(parseInt(seconds) / 60 ) + ' min';
     }else{
-      return Math.floor(moment.duration(seconds, 'seconds').seconds()) + ' secs';
+      return Math.floor(parseInt(seconds) / 60 ) + ' sec';
     }
   }
 
@@ -164,6 +137,20 @@ export class EpisodeDetailsComponent implements OnInit {
 
   gotoEpisode(episode) {
     this.router.navigateByUrl('episode/' + episode.id);
+    this.playerService.setCurrentModule(null);
+    this.audioService.playStream(null);
+    this.stop();
+    this.subscription.unsubscribe();
+    this.state = {
+      playing: false,
+      readableCurrentTime: '',
+      readableDuration: '',
+      duration: undefined,
+      currentTime: undefined,
+      canplay: false,
+      error: false,
+    };
+    this.ngOnInit();
   }
 
   addComment($event) {
@@ -275,7 +262,7 @@ export class EpisodeDetailsComponent implements OnInit {
     .subscribe(events => {
       // listening for fun here
     });
-    this.audioService.getState()
+    this.subscription = this.audioService.getState()
     .subscribe(state => {
       this.state = state;
     });
@@ -304,5 +291,13 @@ export class EpisodeDetailsComponent implements OnInit {
 
   replay() {
     this.audioService.seekTo(this.state?.currentTime - 10);
+  }
+
+ 
+  ngOnDestroy() {
+    // remove listener
+    // this.globalListenFunc();
+    if(this.subscription)
+      this.subscription.unsubscribe();
   }
 }
